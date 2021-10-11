@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DemandeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,6 +18,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('index');
 })->middleware(['auth'])->name('index');
+
+Route::get('demande', [DemandeController::class, 'index'])
+                    ->middleware(['auth'])->name('demande.index');
+
 
 Route::fallback(function () {
     return view('errors.404');
