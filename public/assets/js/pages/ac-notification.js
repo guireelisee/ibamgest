@@ -12,7 +12,7 @@ $(window).on('load', function() {
                 from: 'bottom',
                 align: 'right'
             },
-            delay: 2500,
+            delay: 1000,
             animate: {
                 enter: 'animated fadeInRight',
                 exit: 'animated fadeOutRight'
@@ -23,7 +23,6 @@ $(window).on('load', function() {
             }
         });
     };
-    notify('Welcome to Notification page', 'inverse');
 });
 
 $(document).ready(function() {
@@ -47,7 +46,7 @@ $(document).ready(function() {
             },
             spacing: 10,
             z_index: 999999,
-            delay: 2500,
+            delay: 1000,
             timer: 1000,
             url_target: '_blank',
             mouse_over: false,

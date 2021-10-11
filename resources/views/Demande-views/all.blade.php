@@ -1,19 +1,15 @@
 @extends(' layouts.master')
-
+@section('css')
+    <link rel="stylesheet" href="assets/css/plugins/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="assets/css/plugins/select.bootstrap4.min.css">
+@endsection
 @section('title')
 | Demandes
 @endsection
 
 @section('main-content')
 
-<!-- [ navigation menu ] start -->
-@include('partials.sidebar')
-@include('partials.navbar')
 
-<!-- [ navigation menu ] end -->
-<!-- [ Header ] start -->
-
-<!-- [ Header ] end --
 
 
 
@@ -42,9 +38,16 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="card">
-                    <div class="card-header">
-                        <h5>Scrolling DataTable</h5>
-                    </div>
+                    @if ($message = Session::get('success'))
+                        <div class="card-header">
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                <strong>Success !</strong> {{$message}}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                        </div>
+                    @endif
                     <div class="card-body">
                         <div class="dt-responsive table-responsive">
                             <table id="scroll-fill" class="table table-striped table-bordered nowrap">
@@ -66,63 +69,39 @@
                                                 <td>{{ $demande->tel }}</td>
                                                 <td>{{ $demande->date_demande }}</td>
                                                 <td>{{ $demande->motif }}</td>
-                                                @if ($demande->decision === 1)
+                                                @if ($demande->decision === 1 || $demande->decision === true)
                                                    <td>Accepter</td>
                                                 @endif
-                                                @if ($demande->decision === 0)
+                                                @if ($demande->decision === 0 || $demande->decision === false)
                                                    <td>Rejetter</td>
                                                 @endif
                                                 @if ($demande->decision === null)
                                                    <td>Pas encore traité</td>
                                                 @endif
                                                 <td>
-                                                    <button type="button"
-                                                        id="edit"
-                                                        data-type="edit"
-                                                        data-id="{{ $demande->idDemande }} "
-                                                        data-nom="{{ $demande->nomDemandeur }}"
-                                                        data-prenom="{{ $demande->prenomDemandeur }}"
-                                                        data-tel="{{ $demande->tel }}"
-                                                        data-service="{{ $demande->service }}"
-                                                        data-dated="{{ $demande->date_demande }}"
-                                                        data-dater="{{ $demande->date_reponse }}"
-                                                        data-datea="{{ $demande->date_audience }}"
-                                                        data-heurea="{{ $demande->heure_audience }}"
-                                                        data-motif="{{ $demande->motif }}"
-                                                        data-prof="{{ $demande->profession }}"
-                                                        data-toggle="modal"
-                                                        data-target="#personelmodal"
+                                                    <a type="button"
+                                                    href="{{ route('demande.show', ['id'=>$demande->idDemande]) }}"
+
                                                         class="btn btn-success btn-sm"><i class="fa fa-edit"></i>
-                                                </button>
+                                                </a>
                                                 @if ($demande->decision === null)
-                                                    <button type="button"
+                                                    <a type="button"
                                                         id="edit"
-                                                        data-type="edit"
-                                                        data-id="{{ $demande->idDemande }}"
-                                                        data-toggle="modal"
-                                                        data-target="#validitymodal"
+                                                        href="{{ route('demande.validate.view', ['id'=>$demande->idDemande]) }}"
                                                         class="btn btn-success btn-sm"><i class="fa fa-check"></i>
-                                                    </button>
+                                                    </a>
                                                 @endif
                                                 @if ($demande->decision === null)
-                                                    <button type="button"
-                                                            id="edit"
-                                                            data-type="edit"
-                                                            data-id="{{ $demande->idDemande }}"
-                                                            data-toggle="modal"
-                                                            data-target="#rejetermodal"
+                                                    <a type="button"
+                                                            href="{{ route('demande.rejetter.view', ['id'=>$demande->idDemande]) }}"
                                                             class="btn btn-danger btn-sm"><i class="fa fa-times"></i>
-                                                    </button>
+                                                    </a>
                                                 @endif
                                                 @if ($demande->decision === null)
-                                                    <button type="button"
-                                                            id="edit"
-                                                            data-type="edit"
-                                                            data-id="{{ $demande->idDemande }}"
-                                                            data-toggle="modal"
-                                                            data-target="#confirm-modal"
+                                                    <a type="button"
+                                                            href="{{ route('demande.suppression.view', ['id'=>$demande->idDemande]) }}"
                                                             class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>
-                                                    </button>
+                                                    </a>
                                                 @endif
                                                 </td>
                                             </tr>
@@ -138,17 +117,22 @@
         </div>
 
 
+           
 
 @endsection
+
 
 @section("javascript")
 
 
    <!-- datatable Js -->
 <script src="assets/js/plugins/jquery.dataTables.min.js"></script>
-<script src="assets/js/plugins/dataTables.bootstrap4.min.js"></script>
+<script src="assets/js/plugins/dataTables.bootstrap4.min.js"></>
 <script src="assets/js/plugins/select.bootstrap4.min.js"></script>
 <script src="assets/js/plugins/dataTables.select.min.js"></script>
 <script src="assets/js/pages/data-autofill-custom.js"></script>
+
+<script src="assets/js/plugins/bootstrap-notify.min.js"></script>
+<script src="assets/js/pages/ac-notification.js"></script>
 
 @endsection()

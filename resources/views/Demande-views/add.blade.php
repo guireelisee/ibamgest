@@ -6,14 +6,7 @@
 
 @section('main-content')
 
-<!-- [ navigation menu ] start -->
-@include('partials.sidebar')
-@include('partials.navbar')
 
-<!-- [ navigation menu ] end -->
-<!-- [ Header ] start -->
-
-<!-- [ Header ] end --
 
 
 
@@ -49,7 +42,6 @@
                         <div class="container">
                             <form id="form" method="post" action="{{ route('demande.store') }}">
                                 @csrf
-                                <input type="hidden" id="idD" name="idD">
                                 <div class="row">
 
                                       <div class="col-md-4">
@@ -109,7 +101,7 @@
                                       <div class="col-md-12">
                                           <div class="form-group">
                                             <label for="motif" class="floating-label">Motif</label>
-                                            <textarea rows="5" class="form-control" name="motif" id="motif"></textarea>
+                                            <textarea rows="5"  class="form-control" name="motif" id="motif"></textarea>
                                           </div>
                                       </div>
                                   </div>
@@ -117,7 +109,7 @@
 
                               <div class="modal-footer">
                                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                                  <button type="submit" name="envoyer" id="submit" class="btn btn-primary">Enregistrer</button>
+                                  <button type="submit" id="submit" class="btn btn-primary">Enregistrer</button>
                               </div>
                             </form>
                         </div>
@@ -125,7 +117,6 @@
                 </div>
             </div>
         </div>
-
 
 
 @endsection
