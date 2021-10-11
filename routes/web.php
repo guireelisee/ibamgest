@@ -22,6 +22,12 @@ Route::get('/', function () {
 Route::get('demande', [DemandeController::class, 'index'])
                     ->middleware(['auth'])->name('demande.index');
 
+Route::get('demande-create', [DemandeController::class, 'create'])
+                    ->middleware(['auth'])->name('demande.create');
+
+Route::post('demande-save', [DemandeController::class, 'store'])
+                    ->middleware(['auth'])->name('demande.store');
+
 
 Route::fallback(function () {
     return view('errors.404');

@@ -10,6 +10,8 @@
                     <a href="#" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Audiences</span></a>
                     <ul class="pcoded-submenu">
                         <li><a href="{{ route('demande.index') }}">Liste des demandes</a></li>
+                        <li><a href="{{ route('demande.create') }}">Nouvelle des demandes</a></li>
+
                     </ul>
                 </li>
                 <li class="nav-item pcoded-hasmenu">

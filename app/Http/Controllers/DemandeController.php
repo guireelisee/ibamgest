@@ -25,7 +25,8 @@ class DemandeController extends Controller
      */
     public function create()
     {
-        //
+        return view('Demande-views/add');
+
     }
 
     /**
@@ -36,7 +37,17 @@ class DemandeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        demande::create([
+            "nomDemandeur" => $request->nom,
+            "prenomDemandeur" => $request->prenom,
+            "tel" => $request->tel,
+            "service" => $request->service,
+            "profession" => $request->prof,
+            "motif" => $request->motif,
+            "date_demande" => $request->dateD
+        ]);
+        return redirect()->route('demande.index')
+                        ->with('success','Demande ajoutée.');
     }
 
     /**
