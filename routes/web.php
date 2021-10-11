@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DemandeController;
+use App\Http\Controllers\FicheController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,6 +28,7 @@ Route::get('demande-create', [DemandeController::class, 'create'])
 
 Route::post('demande-save', [DemandeController::class, 'store'])
                     ->middleware(['auth'])->name('demande.store');
+Route::resource('fiche', FicheController::class)->middleware(['auth']);
 
 
 Route::fallback(function () {

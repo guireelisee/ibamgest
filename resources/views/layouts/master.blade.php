@@ -21,6 +21,7 @@
 
         <!-- vendor css -->
         <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+        @yield('css')
 
     </head>
     <body class="">
@@ -31,6 +32,13 @@
             </div>
         </div>
         <!-- [ Pre-loader ] End -->
+
+        <!-- [ navigation menu ] start -->
+        @include('partials.sidebar')
+        <!-- [ navigation menu ] end -->
+        <!-- [ Header ] start -->
+        @include('partials.navbar')
+        <!-- [ Header ] end -->
 
         @yield('main-content')
 

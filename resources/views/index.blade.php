@@ -6,15 +6,6 @@
 
 @section('main-content')
 
-<!-- [ navigation menu ] start -->
-@include('partials.sidebar')
-<!-- [ navigation menu ] end -->
-<!-- [ Header ] start -->
-@include('partials.navbar')
-<!-- [ Header ] end -->
-
-
-
 <!-- [ Main Content ] start -->
 <div class="pcoded-main-container">
     <div class="pcoded-content">
