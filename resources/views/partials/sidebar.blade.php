@@ -16,7 +16,7 @@
                     <a href="#" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Salle</span></a>
                     <ul class="pcoded-submenu">
                         <li><a href="#">Enregistrement</a></li>
-                        <li><a href="#">Liste des demandes</a></li>
+                        <li><a href="{{ route('fiche.index') }}">Liste des demandes</a></li>
                     </ul>
                 </li>
             </ul>
