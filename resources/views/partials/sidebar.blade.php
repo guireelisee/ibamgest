@@ -15,7 +15,8 @@
                 <li class="nav-item pcoded-hasmenu">
                     <a href="#" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Salle</span></a>
                     <ul class="pcoded-submenu">
-                        <li><a href="#">Default</a></li>
+                        <li><a href="#">Enregistrement</a></li>
+                        <li><a href="#">Liste des demandes</a></li>
                     </ul>
                 </li>
             </ul>
