@@ -16,50 +16,42 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::middleware(['auth'])->group(function () {
 
-Route::get('/', function () {
-    return view('index');
-})->middleware(['auth'])->name('index');
+    Route::get('/', function () {
+        return view('index');
+    })->name('index');
 
-Route::get('demande', [DemandeController::class, 'index'])
-                    ->middleware(['auth'])->name('demande.index');
+    Route::get('demande', [DemandeController::class, 'index'])->name('demande.index');
 
-Route::get('demande-create', [DemandeController::class, 'create'])
-                    ->middleware(['auth'])->name('demande.create');
-                    
-Route::get('demande-show/{id}', [DemandeController::class, 'show'])
-                    ->middleware(['auth'])->name('demande.show');
+    Route::get('demande-create', [DemandeController::class, 'create'])->name('demande.create');
 
-Route::post('demande-save', [DemandeController::class, 'store'])
-                    ->middleware(['auth'])->name('demande.store');
-    
-Route::post('demande-update', [DemandeController::class, 'update'])
-                    ->middleware(['auth'])->name('demande.update');
+    Route::get('demande-show/{id}', [DemandeController::class, 'show'])->name('demande.show');
 
-Route::get('demande-valider-view/{id}', [DemandeController::class, 'validateView'])
-                    ->middleware(['auth'])->name('demande.validate.view');
+    Route::post('demande-save', [DemandeController::class, 'store'])->name('demande.store');
 
-Route::get('demande-rejetter-view/{id}', [DemandeController::class, 'rejetterView'])
-                    ->middleware(['auth'])->name('demande.rejetter.view');
+    Route::post('demande-update', [DemandeController::class, 'update'])->name('demande.update');
 
-Route::get('demande-suppression-view/{id}', [DemandeController::class, 'suppressionView'])
-                    ->middleware(['auth'])->name('demande.suppression.view');
+    Route::get('demande-valider-view/{id}', [DemandeController::class, 'validateView'])->name('demande.validate.view');
 
-Route::post('demande-valider', [DemandeController::class, 'valider'])
-                    ->middleware(['auth'])->name('demande.validate');
+    Route::get('demande-rejetter-view/{id}', [DemandeController::class, 'rejetterView'])->name('demande.rejetter.view');
 
-Route::post('demande-rejetter', [DemandeController::class, 'rejetter'])
-                    ->middleware(['auth'])->name('demande.rejetter');
+    Route::get('demande-suppression-view/{id}', [DemandeController::class, 'suppressionView'])->name('demande.suppression.view');
 
-Route::post('demande-suppression', [DemandeController::class, 'destroy'])
-                    ->middleware(['auth'])->name('demande.destroy');
-                    
-Route::resource('fiche', FicheController::class)->middleware(['auth']);
-Route::resource('user', UserController::class)->middleware(['auth']);
+    Route::post('demande-valider', [DemandeController::class, 'valider'])->name('demande.validate');
+
+    Route::post('demande-rejetter', [DemandeController::class, 'rejetter'])->name('demande.rejetter');
+
+    Route::post('demande-suppression', [DemandeController::class, 'destroy'])->name('demande.destroy');
+
+    Route::resource('fiche', FicheController::class);
+    Route::fallback(function () {
+        return view('errors.404');
+    });
+});
 
 
-Route::fallback(function () {
-    return view('errors.404');
-})->middleware(['auth']);
+Route::resource('user', UserController::class)->middleware(['auth','admin']);
+
 
 require __DIR__.'/auth.php';
