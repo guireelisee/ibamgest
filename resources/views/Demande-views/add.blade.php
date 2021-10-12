@@ -111,7 +111,7 @@
 
 
                               <div class="modal-footer">
-                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                                  <a type="button" href="{{ route('demande.index') }}" class="btn btn-secondary" data-dismiss="modal">Annuler</a>
                                   <button type="submit" id="submit" class="btn btn-primary">Enregistrer</button>
                               </div>
                             </form>
