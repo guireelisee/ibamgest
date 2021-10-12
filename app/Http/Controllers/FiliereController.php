@@ -84,7 +84,7 @@ class FiliereController extends Controller
         $idFiliere = $request->idFiliere;
         $demande = Filiere::where('idFiliere', $idFiliere);
         $demande->update([
-            "nomFiliere" => $request->nom
+            "nom_filiere" => $request->nom
         ]);
         return redirect()->route('filiere.index')
                         ->with('success','Filière mise à jour.');
