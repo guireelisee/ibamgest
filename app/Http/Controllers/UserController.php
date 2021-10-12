@@ -87,7 +87,6 @@ class UserController extends Controller
             'password' => $request->password,
             'role_id' => $request->role
         ]);
-        $users = User::all();
 
         event(new Registered($user));
 
