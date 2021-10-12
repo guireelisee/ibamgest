@@ -49,8 +49,15 @@
 
                             </ul>
                         </li>
+                        <li class="nav-item pcoded-hasmenu">
+                            <a href="#" class="nav-link "><span class="pcoded-micon"><i class="feather icon-settings"></i></span><span class="pcoded-mtext">Salles</span></a>
+                            <ul class="pcoded-submenu">
+                                <li><a href="{{ route('salle.index') }}">Liste des salles</a></li>
+                                <li><a href="{{ route('salle.create') }}">Nouvelle salle</a></li>
+
+                            </ul>
+                        </li>
                         <li><a href="{{ route('user.index') }}">Utilisateurs</a></li>
-                        <li><a href="{{ route('salle.index') }}">Salles</a></li>
                     </ul>
                 </li>
                 @endcan
