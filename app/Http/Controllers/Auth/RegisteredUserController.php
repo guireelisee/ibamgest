@@ -23,9 +23,6 @@ class RegisteredUserController extends Controller
     */
     public function create()
     {
-        if (!Gate::allows('admin')) {
-            abort(403);
-        }
         $roles = Role::orderBy('name')->get();
         return view('auth.register',['roles'=>$roles]);
     }

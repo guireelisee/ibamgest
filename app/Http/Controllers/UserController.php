@@ -21,9 +21,6 @@ class UserController extends Controller
      */
     public function index()
     {
-        if (!Gate::allows('admin')) {
-            abort(403);
-        }
         $users = User::all();
         return view('auth.all',['users'=>$users]);
     }
@@ -68,9 +65,6 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        if (!Gate::allows('admin')) {
-            abort(403);
-        }
         $roles = Role::all();
         return view('auth.edit',['user'=>$user, 'roles' =>$roles]);
     }
@@ -84,9 +78,6 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        if (!Gate::allows('admin')) {
-            abort(403);
-        }
         $request->validate([
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'role' => ['required']
