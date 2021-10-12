@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\DemandeController;
+use App\Http\Controllers\FiliereController;
+
 use App\Http\Controllers\FicheController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -48,6 +50,21 @@ Route::middleware(['auth'])->group(function () {
     Route::fallback(function () {
         return view('errors.404');
     });
+
+    Route::get('filiere', [FiliereController::class, 'index'])->name('filiere.index');
+
+    Route::get('filiere-create', [FiliereController::class, 'create'])->name('filiere.create');
+
+    Route::get('filiere-show/{id}', [FiliereController::class, 'show'])->name('filiere.show');
+
+    Route::post('filiere-save', [FiliereController::class, 'store'])->name('filiere.store');
+
+    Route::get('filiere-suppression-view/{id}', [FiliereController::class, 'suppressionView'])->name('filiere.suppression.view');
+
+    Route::post('filiere-update', [FiliereController::class, 'update'])->name('filiere.update');
+
+    Route::post('filiere-suppression', [FiliereController::class, 'destroy'])->name('filiere.destroy');
+
 });
 
 

@@ -14,7 +14,8 @@ class FiliereController extends Controller
      */
     public function index()
     {
-        //
+        $filiere = Filiere::all();
+        return view("Parametre/Filiere/all")->with('filieres',$filiere);
     }
 
     /**
@@ -24,7 +25,7 @@ class FiliereController extends Controller
      */
     public function create()
     {
-        //
+        return view('Parametre/Filiere/add');
     }
 
     /**
@@ -35,7 +36,14 @@ class FiliereController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nom' => 'required'
+        ]);
+        Filiere::create([
+            "nom_filiere" => $request->nom
+        ]);
+        return redirect()->route('filiere.index')
+                        ->with('success','Filière ajoutée.');
     }
 
     /**
@@ -44,9 +52,10 @@ class FiliereController extends Controller
      * @param  \App\Models\Filiere  $filiere
      * @return \Illuminate\Http\Response
      */
-    public function show(Filiere $filiere)
+    public function show($idFiliere)
     {
-        //
+        $filiere = Filiere::where('idFiliere', $idFiliere)->get();
+        return view('Parametre/Filiere/edit')->with('filiere', $filiere);
     }
 
     /**
@@ -67,9 +76,18 @@ class FiliereController extends Controller
      * @param  \App\Models\Filiere  $filiere
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Filiere $filiere)
+    public function update(Request $request)
     {
-        //
+        $request->validate([
+            'nom' => 'required'
+        ]);
+        $idFiliere = $request->idFiliere;
+        $demande = Filiere::where('idFiliere', $idFiliere);
+        $demande->update([
+            "nomFiliere" => $request->nom
+        ]);
+        return redirect()->route('filiere.index')
+                        ->with('success','Filière mise à jour.');
     }
 
     /**
@@ -78,8 +96,20 @@ class FiliereController extends Controller
      * @param  \App\Models\Filiere  $filiere
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Filiere $filiere)
+    public function destroy(Request $request)
     {
-        //
+        $id = $request->idFiliere;
+        $demande = Filiere::where('idFiliere', $id);
+        $demande->delete();
+
+        return redirect()->route('filiere.index')
+                        ->with('success','Filière supprimée.');
+    }
+
+    public function suppressionView($idFiliere)
+    {
+        $filiere = Filiere::where('idFiliere', $idFiliere)->get();
+        return view('Parametre/Filiere/delete')->with('filiere', $filiere);
+
     }
 }

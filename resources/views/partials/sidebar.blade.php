@@ -31,7 +31,15 @@
                     <a href="#" class="nav-link "><span class="pcoded-micon"><i class="feather icon-settings"></i></span><span class="pcoded-mtext">Paramètres</span></a>
                     <ul class="pcoded-submenu">
                         <li><a href="{{ route('register') }}">Inscription</a></li>
-                        <li><a href="{{ route('user.index') }}">Utilisateurs</a></li>
+                        <li><a href="{{ route('user.index') }}">Utilisateurs</a></li>                        
+                        <li class="nav-item pcoded-hasmenu">
+                            <a href="#" class="nav-link "><span class="pcoded-micon"><i class="feather icon-settings"></i></span><span class="pcoded-mtext">Filieres</span></a>
+                            <ul class="pcoded-submenu">
+                                <li><a href="{{ route('filiere.index') }}">Liste des filières</a></li>
+                                <li><a href="{{ route('filiere.create') }}">Nouvelle filière</a></li>                                
+        
+                            </ul>
+                        </li>
                     </ul>
                 </li>
                 @endcan

@@ -15,8 +15,7 @@ class MatiereController extends Controller
      */
     public function index()
     {
-        $filiere = Filiere::all();
-        return view("filieres")->with('filieres',$filiere);
+
     }
 
     /**
