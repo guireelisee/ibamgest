@@ -6,7 +6,10 @@
 
 @section('main-content')
 
-
+@include('partials.sidebar')
+<!-- [ navigation menu ] end -->
+<!-- [ Header ] start -->
+@include('partials.navbar')
 
 
 
@@ -99,7 +102,7 @@
                                                 <input type="text" class="form-control"  value="{{$demande[0]->date_demande}}" onblur="this.type='text'" onfocus="this.type='date'" name="dateD" id="dateD">
                                               </div>
                                           </div>
-                                          
+
                                           <div class="col-md-12">
                                               <div class="form-group">
                                                 <label for="motif" class="floating-label">Motif</label>
@@ -108,10 +111,10 @@
                                                 </textarea>
                                               </div>
                                           </div>
-                                          
+
                                       </div>
-    
-    
+
+
                                   <div class="modal-footer">
                                       <button type="submit" id="submit" class="btn btn-primary">Valider</button>
                                   </div>

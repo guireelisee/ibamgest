@@ -9,6 +9,10 @@
 
 @section('main-content')
 
+@include('partials.sidebar')
+<!-- [ navigation menu ] end -->
+<!-- [ Header ] start -->
+@include('partials.navbar')
 
 
 
@@ -59,7 +63,7 @@
                                     <button type="submit" class="btn btn-danger">Rejetter</button>
                                     <a href="{{route('demande.index')}}" class="btn btn-primary">Retour</a>
                                 </div>
-                                
+
                             </form>
                         </div>
                     </div>
@@ -68,7 +72,7 @@
         </div>
 
 
-           
+
 
 @endsection
 

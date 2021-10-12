@@ -9,6 +9,10 @@
 
 @section('main-content')
 
+@include('partials.sidebar')
+<!-- [ navigation menu ] end -->
+<!-- [ Header ] start -->
+@include('partials.navbar')
 
 
 
@@ -67,7 +71,7 @@
         </div>
 
 
-           
+
 
 @endsection
 
