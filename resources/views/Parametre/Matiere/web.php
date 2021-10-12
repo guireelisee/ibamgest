@@ -4,7 +4,6 @@ use App\Http\Controllers\DemandeController;
 use App\Http\Controllers\FiliereController;
 
 use App\Http\Controllers\FicheController;
-use App\Http\Controllers\MatiereController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -65,21 +64,6 @@ Route::middleware(['auth'])->group(function () {
     Route::post('filiere-update', [FiliereController::class, 'update'])->name('filiere.update');
 
     Route::post('filiere-suppression', [FiliereController::class, 'destroy'])->name('filiere.destroy');
-
-
-    Route::get('matiere', [MatiereController::class, 'index'])->name('matiere.index');
-
-    Route::get('matiere-create', [MatiereController::class, 'create'])->name('matiere.create');
-
-    Route::get('matiere-show/{id}', [MatiereController::class, 'show'])->name('matiere.show');
-
-    Route::post('matiere-save', [MatiereController::class, 'store'])->name('matiere.store');
-
-    Route::get('matiere-suppression-view/{id}', [MatiereController::class, 'suppressionView'])->name('matiere.suppression.view');
-
-    Route::post('matiere-update', [MatiereController::class, 'update'])->name('matiere.update');
-
-    Route::post('matiere-suppression', [MatiereController::class, 'destroy'])->name('matiere.destroy');
 
 });
 

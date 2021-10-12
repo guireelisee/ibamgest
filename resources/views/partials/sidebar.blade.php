@@ -40,6 +40,15 @@
         
                             </ul>
                         </li>
+
+                        <li class="nav-item pcoded-hasmenu">
+                            <a href="#" class="nav-link "><span class="pcoded-micon"><i class="feather icon-settings"></i></span><span class="pcoded-mtext">Matières</span></a>
+                            <ul class="pcoded-submenu">
+                                <li><a href="{{ route('matiere.index') }}">Liste des matières</a></li>
+                                <li><a href="{{ route('matiere.create') }}">Nouvelle matière</a></li>                                
+        
+                            </ul>
+                        </li>
                     </ul>
                 </li>
                 @endcan

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Filiere;
 use App\Models\Matiere;
 use Illuminate\Http\Request;
 
@@ -15,7 +14,8 @@ class MatiereController extends Controller
      */
     public function index()
     {
-
+        $matiere = Matiere::all();
+        return view("Parametre/Matiere/all")->with('matieres',$matiere);
     }
 
     /**
@@ -25,7 +25,7 @@ class MatiereController extends Controller
      */
     public function create()
     {
-        return view('Parametre/Filiere/add');
+        return view('Parametre/Matiere/add');
     }
 
     /**
@@ -36,7 +36,14 @@ class MatiereController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nom' => 'required'
+        ]);
+        Matiere::create([
+            "nom_matiere" => $request->nom
+        ]);
+        return redirect()->route('matiere.index')
+                        ->with('success','Matière ajoutée.');
     }
 
     /**
@@ -45,9 +52,10 @@ class MatiereController extends Controller
      * @param  \App\Models\Matiere  $matiere
      * @return \Illuminate\Http\Response
      */
-    public function show(Matiere $matiere)
+    public function show($idMatiere)
     {
-        //
+        $matiere = Matiere::where('idMatiere', $idMatiere)->get();
+        return view('Parametre/Matiere/edit')->with('matiere', $matiere);
     }
 
     /**
@@ -68,9 +76,18 @@ class MatiereController extends Controller
      * @param  \App\Models\Matiere  $matiere
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Matiere $matiere)
+    public function update(Request $request)
     {
-        //
+        $request->validate([
+            'nom' => 'required'
+        ]);
+        $idMatiere = $request->idMatiere;
+        $demande = Matiere::where('idMatiere', $idMatiere);
+        $demande->update([
+            "nom_matiere" => $request->nom
+        ]);
+        return redirect()->route('matiere.index')
+                        ->with('success','Matière mise à jour.');
     }
 
     /**
@@ -79,8 +96,20 @@ class MatiereController extends Controller
      * @param  \App\Models\Matiere  $matiere
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Matiere $matiere)
+    public function destroy(Request $request)
     {
-        //
+        $id = $request->idMatiere;
+        $demande = Matiere::where('idMatiere', $id);
+        $demande->delete();
+
+        return redirect()->route('matiere.index')
+                        ->with('success','Matière supprimée.');
+    }
+
+    public function suppressionView($idMatiere)
+    {
+        $matiere = Matiere::where('idMatiere', $idMatiere)->get();
+        return view('Parametre/Matiere/delete')->with('matiere', $matiere);
+
     }
 }
