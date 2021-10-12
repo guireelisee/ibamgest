@@ -20,6 +20,9 @@
                         @can('secretaire')
                         <li><a href="{{ route('fiche.create') }}">Enregistrement</a></li>
                         @endcan
+                        @can('admin')
+                        <li><a href="{{ route('fiche.create') }}">Enregistrement</a></li>
+                        @endcan
                         <li><a href="{{ route('fiche.index') }}">Liste des demandes</a></li>
                     </ul>
                 </li>
