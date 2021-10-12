@@ -72,7 +72,7 @@
                                             <a class="btn btn-secondary btn-sm" href="{{ route('salle.edit',$salle) }}"><i class="fas fa-edit"></i></a>
                                             @csrf
                                             @method('DELETE')
-                                            <button class="btn btn-danger btn-sm" type="submit"><i class="fas fa-trash"></i></button>
+                                            <button class="btn btn-danger btn-sm confirm-modal" type="submit" data-name="{{ $salle->nom }}"><i class="fas fa-trash"></i></button>
                                         </form>
                                     </td>
                                 </tr>
@@ -83,11 +83,10 @@
                 </div>
             </div>
         </div>
-
+        @include('layouts.confirm-modal')
         @endsection
 
         @section("javascript")
-
         <script src="assets/js/plugins/jquery.dataTables.min.js"></script>
         <script src="assets/js/plugins/dataTables.bootstrap4.min.js"></script>
         <script src="assets/js/plugins/select.bootstrap4.min.js"></script>
