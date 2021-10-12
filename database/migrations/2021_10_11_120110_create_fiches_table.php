@@ -16,12 +16,15 @@ class CreateFichesTable extends Migration
         Schema::create('fiches', function (Blueprint $table) {
             $table->id();
             $table->timestamp('date_arrivee');
+            $table->timestamp('date_validation')->nullable();
+            $table->string('motif')->nullable();
             $table->string('nom_exp');
             $table->string('prenom_exp');
-            $table->string('sp_instructions')->nullable();
-            $table->string('dir_instructions')->nullable();
-            $table->string('proposition')->nullable();
-            $table->boolean('delete')->nullable()->default(false);
+            $table->string('sp')->nullable();
+            $table->string('dir')->nullable();
+            $table->string('scolarite')->nullable();
+            $table->foreignId('salle_id')->constrained()->onDelete('cascade');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

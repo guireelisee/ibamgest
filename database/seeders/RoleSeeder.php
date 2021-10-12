@@ -19,7 +19,7 @@ class RoleSeeder extends Seeder
         ]);
 
         Role::create([
-            'name' => 'Directeur'
+            'name' => 'Secretaire'
         ]);
 
         Role::create([
@@ -27,9 +27,9 @@ class RoleSeeder extends Seeder
         ]);
 
         Role::create([
-            'name' => 'Secretaire'
+            'name' => 'Directeur'
         ]);
-
+        
         Role::create([
             'name' => 'Scolarité'
         ]);

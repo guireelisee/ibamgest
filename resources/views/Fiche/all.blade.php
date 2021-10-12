@@ -69,31 +69,31 @@
                                     <td>{{date('d/m/Y', strtotime($fiche->date_arrivee))}}</td>
                                     <td>{{$fiche->nom_exp }}</td>
 
-                                    @if ($fiche->sp_instructions == "")
+                                    @if ($fiche->sp == "")
                                     <td><a name="" class="btn btn-primary text-white" href="{{ route('fiche.edit', $fiche->id) }}">En attente</a></td>
                                     <td><a name="" id="" class="btn btn-warning text-white" href="#">NULL</a></td>
                                     <td><a name="" id="" class="btn btn-warning text-white" href="#">NULL</a></td>
                                     <td><a name="" id="" class="btn btn-warning text-white" href="#">En attente</a></td>
                                     @endif
 
-                                    @if ($fiche->sp_instructions != "" && $fiche->dir_instructions == "")
-                                    <td><a name="" id="" class="btn btn-success text-white" href="#">{{$fiche->sp_instructions}}</a></td>
+                                    @if ($fiche->sp != "" && $fiche->dir == "")
+                                    <td><a name="" id="" class="btn btn-success text-white" href="#">{{$fiche->sp}}</a></td>
                                     <td><a name="" id="" class="btn btn-primary text-white" href="{{ route('fiche.edit', $fiche->id) }}">En attente</a></td>
                                     <td><a name="" id="" class="btn btn-warning text-white" href="#">NULL</a></td>
                                     <td><a name="" id="" class="btn btn-warning text-white" href="#">En attente</a></td>
                                     @endif
 
-                                    @if ($fiche->sp_instructions != "" && $fiche->dir_instructions != "" && $fiche->proposition == "")
-                                    <td><a name="" id="" class="btn btn-success text-white" href="#">{{$fiche->sp_instructions}}</a></td>
-                                    <td><a name="" id="" class="btn btn-success text-white" href="#">{{$fiche->dir_instructions}}</a></td>
+                                    @if ($fiche->sp != "" && $fiche->dir != "" && $fiche->scolarite == "")
+                                    <td><a name="" id="" class="btn btn-success text-white" href="#">{{$fiche->sp}}</a></td>
+                                    <td><a name="" id="" class="btn btn-success text-white" href="#">{{$fiche->dir}}</a></td>
                                     <td><a name="" id="" class="btn btn-primary text-white" href="{{ route('fiche.edit', $fiche->id) }}">En attente</a></td>
                                     <td><a name="" id="" class="btn btn-warning text-white" href="#">En attente</a></td>
                                     @endif
 
-                                    @if ($fiche->sp_instructions != "" && $fiche->dir_instructions != "" && $fiche->proposition != "")
-                                    <td><a name="" id="" class="btn btn-success text-white" href="#">{{$fiche->sp_instructions}}</a></td>
-                                    <td><a name="" id="" class="btn btn-success text-white" href="#">{{$fiche->dir_instructions}}</a></td>
-                                    <td><a name="" id="" class="btn btn-success text-white" href="#">{{$fiche->proposition}}</a></td>
+                                    @if ($fiche->sp != "" && $fiche->dir != "" && $fiche->scolarite != "")
+                                    <td><a name="" id="" class="btn btn-success text-white" href="#">{{$fiche->sp}}</a></td>
+                                    <td><a name="" id="" class="btn btn-success text-white" href="#">{{$fiche->dir}}</a></td>
+                                    <td><a name="" id="" class="btn btn-success text-white" href="#">{{$fiche->scolarite}}</a></td>
                                     <td><a name="" id="" class="btn btn-success text-white" href="#">Terminé</a></td>
                                     @endif
 
@@ -184,7 +184,7 @@
                                     <td>{{$fiche->nom_exp . ' '. $fiche->prenom_exp}}</td>
                                     <td>
                                         @if (!$fiche->delete)
-                                        @if (empty($fiche->sp_instructions))
+                                        @if (empty($fiche->sp))
                                         <form method="POST" action="{{ route('fiche.destroy', $fiche->id)}}">
                                             @csrf()
                                             @method("DELETE")
@@ -193,7 +193,7 @@
                                             </button>
                                         </form>
                                         @else
-                                        {{$fiche->sp_instructions }}
+                                        {{$fiche->sp }}
                                         @endif
                                         @else
                                         <div class="badge badge-danger">Annulée</div>
@@ -201,12 +201,12 @@
                                     </td>
                                     <td>
                                         @if (!$fiche->delete)
-                                        @if (empty($fiche->dir_instructions))
+                                        @if (empty($fiche->dir))
                                         <button type="submit" class="col-sm-12 btn btn-sm" disabled>
                                             <span class="badge badge-primary"><i class="feather icon-edit">&nbsp;</i>En attente</span>
                                         </button>
                                         @else
-                                        {{$fiche->dir_instructions }}
+                                        {{$fiche->dir }}
                                         @endif
                                         @else
                                         <div class="badge badge-danger">Annulée</div>
@@ -214,11 +214,11 @@
                                     </td>
                                     <td>
                                         @if (!$fiche->delete)
-                                        @if (empty($fiche->proposition))
+                                        @if (empty($fiche->scolarite))
                                         <button type="submit" class="col-sm-12 btn btn-sm" disabled>
                                             <span class="badge badge-primary"><i class="feather icon-edit">&nbsp;</i>En attente</span>
                                         </button>                                        @else
-                                        {{$fiche->proposition }}
+                                        {{$fiche->scolarite }}
                                         @endif
                                         @else
                                         <div class="badge badge-danger">Annulée</div>
@@ -262,21 +262,21 @@
                                     <td>{{date('d/m/Y', strtotime($fiche->date_arrivee))}}</td>
                                     <td>{{$fiche->nom_exp . ' '. $fiche->prenom_exp}}</td>
                                     <td>
-                                        @if (empty($fiche->sp_instructions))
+                                        @if (empty($fiche->sp))
                                         <a href="{{ route('fiche.edit', $fiche->id) }}">
                                             <button type="submit" class="col-sm-12 btn btn-sm">
                                                 <span class="badge badge-primary"><i class="feather icon-edit">&nbsp;</i>En attente</span>
                                             </button>
                                         </a>
-                                        @elseif(empty($fiche->dir_instructions))
+                                        @elseif(empty($fiche->dir))
                                         <a href="{{ route('fiche.edit', $fiche->id) }}">
                                             <button type="submit" class="col-sm-12 btn btn-sm">
-                                                <span class="badge badge-primary"><i class="feather icon-edit">&nbsp;</i> {{$fiche->sp_instructions }}</span>
+                                                <span class="badge badge-primary"><i class="feather icon-edit">&nbsp;</i> {{$fiche->sp }}</span>
                                             </button>
                                         </a>
                                         @else
                                         <button type="submit" class="col-sm-12 btn btn-sm" disabled>
-                                            <span class="badge badge-primary"><i class="feather icon-edit">&nbsp;</i> {{$fiche->sp_instructions }}</span>
+                                            <span class="badge badge-primary"><i class="feather icon-edit">&nbsp;</i> {{$fiche->sp }}</span>
                                         </button>
                                         @endif
                                     </td>
@@ -320,36 +320,36 @@
                                     <td>{{date('d/m/Y', strtotime($fiche->date_arrivee))}}</td>
                                     <td>{{$fiche->nom_exp . ' '. $fiche->prenom_exp}}</td>
                                     <td>
-                                        @if (empty($fiche->sp_instructions))
+                                        @if (empty($fiche->sp))
                                         <button type="submit" class="col-sm-12 btn btn-sm" disabled>
                                             <span class="badge badge-primary"><i class="feather icon-edit">&nbsp;</i>En attente</span>
                                         </button>
                                         @else
                                         <button type="submit" class="col-sm-12 btn btn-sm" disabled>
-                                            <span class="badge badge-primary"><i class="feather icon-edit">&nbsp;</i> {{$fiche->sp_instructions }}</span>
+                                            <span class="badge badge-primary"><i class="feather icon-edit">&nbsp;</i> {{$fiche->sp }}</span>
                                         </button>
                                         @endif
                                     </td>
                                     <td>
-                                        @if (empty($fiche->sp_instructions))
+                                        @if (empty($fiche->sp))
                                         <button type="submit" class="col-sm-12 btn btn-sm" disabled>
                                             <span class="badge badge-primary"><i class="feather icon-edit">&nbsp;</i>En attente</span>
                                         </button>
-                                        @elseif (empty($fiche->dir_instructions) && !empty($fiche->sp_instructions))
+                                        @elseif (empty($fiche->dir) && !empty($fiche->sp))
                                         <a href="{{ route('fiche.edit', $fiche->id) }}">
                                             <button type="submit" class="col-sm-12 btn btn-sm">
                                                 <span class="badge badge-primary"><i class="feather icon-edit">&nbsp;</i>En attente</span>
                                             </button>
                                         </a>
-                                        @elseif(empty($fiche->proposition))
+                                        @elseif(empty($fiche->scolarite))
                                         <a href="{{ route('fiche.edit', $fiche->id) }}">
                                             <button type="submit" class="col-sm-12 btn btn-sm">
-                                                <span class="badge badge-primary"><i class="feather icon-edit">&nbsp;</i> {{$fiche->dir_instructions }}</span>
+                                                <span class="badge badge-primary"><i class="feather icon-edit">&nbsp;</i> {{$fiche->dir }}</span>
                                             </button>
                                         </a>
                                         @else
                                         <button type="submit" class="col-sm-12 btn btn-sm" disabled>
-                                            <span class="badge badge-primary"><i class="feather icon-edit">&nbsp;</i> {{$fiche->dir_instructions }}</span>
+                                            <span class="badge badge-primary"><i class="feather icon-edit">&nbsp;</i> {{$fiche->dir }}</span>
                                         </button>
                                         @endif
                                     </td>
@@ -394,34 +394,34 @@
                                     <td>{{date('d/m/Y', strtotime($fiche->date_arrivee))}}</td>
                                     <td>{{$fiche->nom_exp . ' '. $fiche->prenom_exp}}</td>
                                     <td>
-                                        @if (empty($fiche->sp_instructions))
+                                        @if (empty($fiche->sp))
                                         <button type="submit" class="col-sm-12 btn btn-sm" disabled>
                                             <span class="badge badge-primary"><i class="feather icon-edit">&nbsp;</i>En attente</span>
                                         </button>
                                         @else
                                         <button type="submit" class="col-sm-12 btn btn-sm" disabled>
-                                            <span class="badge badge-primary">{{$fiche->sp_instructions }}</span>
+                                            <span class="badge badge-primary">{{$fiche->sp }}</span>
                                         </button>
                                         @endif
                                     </td>
                                     <td>
-                                        @if (empty($fiche->dir_instructions))
+                                        @if (empty($fiche->dir))
                                         <button type="submit" class="col-sm-12 btn btn-sm" disabled >
                                             <span class="badge badge-primary"><i class="feather icon-edit">&nbsp;</i>En attente</span>
                                         </button>
                                         @else
                                         <button type="submit" class="col-sm-12 btn btn-sm" disabled>
-                                            <span class="badge badge-primary">{{$fiche->dir_instructions }}</span>
+                                            <span class="badge badge-primary">{{$fiche->dir }}</span>
                                         </button>
                                         @endif
 
                                     </td>
                                     <td>
-                                        @if (empty($fiche->dir_instructions))
+                                        @if (empty($fiche->dir))
                                         <button type="submit" class="col-sm-12 btn btn-sm" disabled>
                                             <span class="badge badge-primary"><i class="feather icon-edit">&nbsp;</i>En attente</span>
                                         </button>
-                                        @elseif(!empty($fiche->dir_instructions) && empty($fiche->proposition))
+                                        @elseif(!empty($fiche->dir) && empty($fiche->scolarite))
                                         <a href="{{ route('fiche.edit', $fiche->id) }}">
                                             <button type="submit" class="col-sm-12 btn btn-sm">
                                                 <span class="badge badge-primary"><i class="feather icon-edit">&nbsp;</i> En attente</span>
@@ -430,7 +430,7 @@
                                         @else
                                         <a href="{{ route('fiche.edit', $fiche->id) }}">
                                             <button type="submit" class="col-sm-12 btn btn-sm">
-                                                <span class="badge badge-primary"><i class="feather icon-edit">&nbsp;</i> {{$fiche->proposition}}</span>
+                                                <span class="badge badge-primary"><i class="feather icon-edit">&nbsp;</i> {{$fiche->scolarite}}</span>
                                             </button>
                                         </a>
                                         @endif

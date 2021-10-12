@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-| Demandes de salle
+| Gestion des salles
 @endsection
 
 @section('main-content')
@@ -21,11 +21,11 @@
                 <div class="row align-items-center">
                     <div class="col-md-12">
                         <div class="page-header-title">
-                            <h5 class="m-b-10">Demandes de salle</h5>
+                            <h5 class="m-b-10">Gestion des salles</h5>
                         </div>
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('index') }}"><i class="feather icon-home"></i></a></li>
-                            <li class="breadcrumb-item"><a href="#">Instructions</a></li>
+                            <li class="breadcrumb-item"><a href="#">Modification</a></li>
                         </ul>
                     </div>
                 </div>
@@ -64,10 +64,10 @@
                                             <tr>
                                                 <th>Expéditeur</th>
                                                 <th>Date d'arrivée</th>
-                                                @if (!empty($fiche->sp_instructions))
+                                                @if (!empty($fiche->sp))
                                                 <th>Secretaire Permanent</th>
                                                 @endif
-                                                @if (!empty($fiche->dir_instructions))
+                                                @if (!empty($fiche->dir))
                                                 <th>Directeur</th>
                                                 @endif
                                             </tr>
@@ -76,11 +76,11 @@
                                             <tr>
                                                 <td>{{$fiche->nom_exp . ' ' . $fiche->prenom_exp}}</td>
                                                 <td>{{date('d/m/Y', strtotime($fiche->date_arrivee))}}</td>
-                                                @if (!empty($fiche->sp_instructions))
-                                                <th>{{$fiche->sp_instructions}}</th>
+                                                @if (!empty($fiche->sp))
+                                                <th>{{$fiche->sp}}</th>
                                                 @endif
-                                                @if (!empty($fiche->dir_instructions))
-                                                <th>{{$fiche->dir_instructions}}</th>
+                                                @if (!empty($fiche->dir))
+                                                <th>{{$fiche->dir}}</th>
                                                 @endif
                                             </tr>
                                         </tbody>
@@ -92,7 +92,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="" class="floating-label">Instructions du Sécrétaire Permanent</label>
-                                    <select class="form-control" name="sp_instructions">
+                                    <select class="form-control" name="sp">
                                         <option value="" disabled>--- SELECTIONNEZ UNE INSTRUCTION ---</option>
                                         <option value="Pour avis du Directeur">Pour avis du Directeur</option>
                                         <option value="Pour décision du Directeur" selected>Pour décision du Directeur</option>
@@ -107,7 +107,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="" class="floating-label">Instructions du Directeur</label>
-                                    <select name="dir_instructions" class="form-control" name="dir_instructions">
+                                    <select name="dir" class="form-control" name="dir">
                                         <optgroup label="Remettre à SP">
                                             <option value="Pour nécessaire à faire">Pour nécessaire à faire</option>
                                             <option value="Pour étude">Pour étude</option>
@@ -156,8 +156,8 @@
                             @can('scolarite')
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label class="floating-label" for="proposition">Décision de la directrice de la scolarité</label>
-                                    <input type="text" name="proposition" class="form-control" id="proposition" value="{{$fiche->proposition}}">
+                                    <label class="floating-label" for="scolarite">Décision de la directrice de la scolarité</label>
+                                    <input type="text" name="scolarite" class="form-control" id="scolarite" value="{{$fiche->scolarite}}">
                                 </div>
                             </div>
                             @endcan

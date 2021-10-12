@@ -5,6 +5,7 @@ use App\Http\Controllers\FiliereController;
 
 use App\Http\Controllers\FicheController;
 use App\Http\Controllers\MatiereController;
+use App\Http\Controllers\SalleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -48,6 +49,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('demande-suppression', [DemandeController::class, 'destroy'])->name('demande.destroy');
 
     Route::resource('fiche', FicheController::class);
+
     Route::fallback(function () {
         return view('errors.404');
     });
@@ -85,6 +87,8 @@ Route::middleware(['auth'])->group(function () {
 
 
 Route::resource('user', UserController::class)->middleware(['auth','admin']);
+
+Route::resource('salle', SalleController::class)->middleware(['auth', 'admin']);
 
 
 require __DIR__.'/auth.php';

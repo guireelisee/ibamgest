@@ -25,7 +25,7 @@
                         </div>
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('index') }}"><i class="feather icon-home"></i></a></li>
-                            <li class="breadcrumb-item"><a href="#">Enregistrement d'une demande</a></li>
+                            <li class="breadcrumb-item"><a href="#">Instructions</a></li>
                         </ul>
                     </div>
                 </div>
@@ -48,52 +48,32 @@
                     </div>
                     @endif
                     <div class="card-body">
-                        <form method="POST" action="{{ route('fiche.store') }}">
+                        <form method="POST" action="{{ route('salle.update',$salle) }}">
                             @csrf
-                            @php
-                            date_default_timezone_set("Africa/Abidjan");
-                            $date = date("Y-m-d", time());
-                            @endphp
+                            @method('PUT')
                             <div class="row">
                                 <div class="col-sm-4">
                                     <div class="form-group">
-                                        <label class="floating-label" for="date_arrivee">Date d'arrivée</label>
-                                        <input type="text" name="date_arrivee" class="form-control" id="date_arrivee" value="@php echo $date @endphp" max="@php echo $date @endphp" onblur="this.type='text'" onfocus="this.type='date'">
+                                        <label class="floating-label" for="nom">Nom de la salle<span class="text-c-red">*</span></label>
+                                        <input type="text" name="nom" class="form-control" id="nom" value="{{$salle->nom}}">
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="form-group">
-                                        <label class="floating-label" for="nom_exp">Nom de l'expéditeur</label>
-                                        <input type="text" name="nom_exp" class="form-control" id="nom_exp">
+                                        <label class="floating-label" for="place">Nombre de places<span class="text-c-red">*</span></label>
+                                        <input type="number" name="place" class="form-control" id="place" min="0" value="{{$salle->place}}">
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="form-group">
-                                        <label class="floating-label" for="prenom_exp">Prénom(s) de l'expéditeur</label>
-                                        <input type="text" name="prenom_exp" class="form-control" id="prenom_exp">
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="form-group">
-                                        <label class="floating-label" for="prenom_exp">Salle</label>
-                                        <select name="salle" id="" class="form-control">
-                                            <option value="" disabled>--- SELECTIONNEZ UNE SALLE ---</option>
-                                            @foreach ($salles as $salle)
-                                            <option value="{{$salle->id}}">{{$salle->nom}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="form-group">
-                                        <label class="floating-label" for="motif">Motif</label>
-                                        <input type="text" name="motif" class="form-control" id="motif">
+                                        <label class="floating-label" for="caracteristique">Caractéristiques <span class="text-muted">(facultatif)</span> </label>
+                                        <input type="text" name="caracteristique" class="form-control" id="caracteristique" value="{{$salle->caracteristique}}">
                                     </div>
                                 </div>
                             </div>
                             <div class="row float-right">
                                 <div class="col-sm-12">
-                                    <a name="" id="" class="btn btn-primary" href="{{ route('fiche.index') }}" role="button">Retour</a>
+                                    <a name="" id="" class="btn btn-primary" href="{{ route('salle.index') }}" role="button">Retour</a>
                                     <button type="submit" class="btn btn-success">Enregistrez</button>
                                 </div>
                             </div>
@@ -111,10 +91,9 @@
     var oldInput = <?= json_encode(session()->getOldInput()); ?>;
     console.log(oldInput);
     if (!(oldInput.length === 0)) {
-        document.getElementById("date_arrivee").value = oldInput['date_arrivee'];
-        document.getElementById("nom_exp").value = oldInput['nom_exp'];
-        document.getElementById("prenom_exp").value = oldInput['prenom_exp'];
-        document.getElementById("motif").value = oldInput['motif'];
+        document.getElementById("nom").value = oldInput['nom'];
+        document.getElementById("place").value = oldInput['place'];
+        document.getElementById("caracteristique").value = oldInput['caracteristique'];
     }
 
 

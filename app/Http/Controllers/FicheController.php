@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Fiche;
+use App\Models\Salle;
 use Illuminate\Http\Request;
 
 class FicheController extends Controller
@@ -14,9 +15,10 @@ class FicheController extends Controller
     */
     public function index()
     {
-        $fiches = Fiche::all();
+        $fiches = Fiche::withTrashed()->get();
+        $salles = Salle::all();
         $compteurs = FicheController::compteur();
-        return view('Fiche.all', compact('fiches', 'compteurs'));
+        return view('Fiche.all', compact('fiches', 'compteurs','salles'));
     }
 
     /**
@@ -26,7 +28,8 @@ class FicheController extends Controller
     */
     public function create()
     {
-        return view('Fiche.add');
+        $salles = Salle::all();
+        return view('Fiche.add', compact('salles'));
     }
 
     /**
@@ -40,8 +43,15 @@ class FicheController extends Controller
         $request->validate([
             'nom_exp' => 'required',
             'prenom_exp' => 'required',
+            'salle' => 'required',
+            'motif' => 'required',
         ]);
-        Fiche::create($request->all());
+        Fiche::create([
+            'nom_exp' => $request->nom_exp,
+            'prenom_exp' => $request->prenom_exp,
+            'salle_id' => $request->salle,
+            'motif' => $request->motif,
+        ]);
         return redirect()->route('fiche.index')->with('success', 'Demande de salle enregistrée avec succès.');
     }
 
@@ -77,15 +87,15 @@ class FicheController extends Controller
     public function update(Request $request, Fiche $fiche)
     {
 
-        if (!empty($request->sp_instructions)) {
-            $fiche->update(['sp_instructions' => $request->sp_instructions]);
-        } elseif (!empty($request->dir_instructions)) {
-            $fiche->update(['dir_instructions' => $request->dir_instructions]);
-        } elseif(!empty($request->proposition)) {
+        if (!empty($request->sp)) {
+            $fiche->update(['sp' => $request->sp]);
+        } elseif (!empty($request->dir)) {
+            $fiche->update(['dir' => $request->dir]);
+        } elseif(!empty($request->scolarite)) {
             $request->validate([
-                "proposition" => "required"
+                "scolarite" => "required"
             ]);
-            $fiche->update(['proposition' => $request->proposition]);
+            $fiche->update(['scolarite' => $request->scolarite]);
         }
 
         return redirect()->route('fiche.index')->with('success', 'Validation réussie.');
@@ -99,7 +109,7 @@ class FicheController extends Controller
     */
     public function destroy(Fiche $fiche)
     {
-        $fiche->update(["delete" => true]);
+        $fiche->delete();
         return redirect()->route('fiche.index')->with('success', 'Annulation réussie.');
     }
 
@@ -112,13 +122,13 @@ class FicheController extends Controller
         $en_cours_scolarite = 0;
 
         foreach ($fiches as $fiche) {
-            if (empty($fiche->sp_instructions)) {
+            if (empty($fiche->sp)) {
                 $en_cours_sp++;
-            } elseif (!empty($fiche->sp_instructions) && empty($fiche->dir_instructions)) {
+            } elseif (!empty($fiche->sp) && empty($fiche->dir)) {
                 $en_cours_dir++;
-            } elseif (!empty($fiche->sp_instructions) && !empty($fiche->dir_instructions) && empty($fiche->proposition)) {
+            } elseif (!empty($fiche->sp) && !empty($fiche->dir) && empty($fiche->scolarite)) {
                 $en_cours_scolarite++;
-            } elseif (!empty($fiche->sp_instructions) && !empty($fiche->dir_instructions) && !empty($fiche->proposition)) {
+            } elseif (!empty($fiche->sp) && !empty($fiche->dir) && !empty($fiche->scolarite)) {
                 $validate++;
             }
         }

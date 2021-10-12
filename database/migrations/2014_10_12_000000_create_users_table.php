@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->foreignId('role_id')->constrained()->onDelete('cascade');
             $table->mediumText('avatar')->default('avatars/default.png');
             $table->rememberToken();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
