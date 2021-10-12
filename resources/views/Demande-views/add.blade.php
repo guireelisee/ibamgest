@@ -38,6 +38,19 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="card">
+                    @if ($errors->any())
+                    <div class="card-header">
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>Oups!</strong> Il y a un problème.<br><br>
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                        </div>
+                    </div>
+                    @endif
                     <div class="card-header">
                         <h5>Nouvelle demande d'audience</h5>
                     </div>
@@ -50,37 +63,37 @@
                                       <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="nom" class="floating-label">Nom</label>
-                                            <input type="text" class="form-control" name="nom" id="nom">
+                                            <input type="text" class="form-control" value="{{ old('nom') }}" name="nom" id="nom">
                                         </div>
                                       </div>
                                       <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="prenom" class="floating-label">Prénom (s)</label>
-                                            <input type="text" class="form-control" name="prenom" id="prenom">
+                                            <input type="text" class="form-control" value="{{ old('prenom') }}"  name="prenom" id="prenom">
                                         </div>
                                       </div>
                                       <div class="col-md-4">
                                           <div class="form-group">
                                             <label for="tel" class="floating-label">Téléphone</label>
-                                            <input type="tel" class="form-control" name="tel" id="tel">
+                                            <input type="tel" class="form-control" value="{{ old('tel') }}"  name="tel" id="tel">
                                           </div>
                                       </div>
                                       <div class="col-md-4">
                                           <div class="form-group">
                                             <label for="service" class="floating-label">Adresse/Service</label>
-                                            <input type="service" class="form-control" name="service" id="service">
+                                            <input type="service" class="form-control" value="{{ old('service') }}"  name="service" id="service">
                                           </div>
                                       </div>
                                       <div class="col-md-4">
                                           <div class="form-group">
                                             <label for="prof" class="floating-label">Profession</label>
-                                            <input type="text" class="form-control" name="prof" id="prof">
+                                            <input type="text" class="form-control" value="{{ old('prof') }}"  name="prof" id="prof">
                                           </div>
                                       </div>
                                       <div class="col-md-4">
                                           <div class="form-group">
                                             <label for="dateD" class="floating-label">Date demande</label>
-                                            <input type="text" class="form-control" onblur="this.type='text'" onfocus="this.type='date'" name="dateD" id="dateD">
+                                            <input type="text" class="form-control" value="{{ old('dateD') }}"  onblur="this.type='text'" onfocus="this.type='date'" name="dateD" id="dateD">
                                           </div>
                                       </div>
                                       <div class="col-md-4">
@@ -104,7 +117,7 @@
                                       <div class="col-md-12">
                                           <div class="form-group">
                                             <label for="motif" class="floating-label">Motif</label>
-                                            <textarea rows="5"  class="form-control" name="motif" id="motif"></textarea>
+                                            <textarea rows="5"  class="form-control" value="{{ old('motif') }}" name="motif" id="motif"></textarea>
                                           </div>
                                       </div>
                                   </div>

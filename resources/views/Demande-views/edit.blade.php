@@ -27,8 +27,11 @@
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
                             <li class="breadcrumb-item"><a href="#">Demandes d'audience</a></li>
-                            <li class="breadcrumb-item"><a href="#">Modification d'une demande </a></li>
-
+                            @if ($demande[0]->decision !== true && $demande[0]->decision !== false)
+                                <li class="breadcrumb-item"><a href="#">Modification d'une demande </a></li>
+                            @else
+                                <li class="breadcrumb-item"><a href="#">Détails de la demande d'audience</a></li>
+                            @endif
                         </ul>
                     </div>
                 </div>
@@ -38,8 +41,26 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="card">
+                    @if ($errors->any())
                     <div class="card-header">
-                        <h5>Nouvelle demande d'audience</h5>
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>Oups!</strong> Il y a un problème.<br><br>
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                        </div>
+                    </div>
+                    @endif
+                    <div class="card-header">
+
+                       @if ($demande[0]->decision !== true && $demande[0]->decision !== false)
+                            <h5>Modification de demande d'audience</h5>
+                       @else
+                            <h5>Détails de la demande d'audience</h5>
+                       @endif
                     </div>
                     <div class="card-body">
                         <div class="container">
@@ -117,7 +138,9 @@
 
                                   <div class="modal-footer">
                                     <a type="button" href="{{ route('demande.index') }}" class="btn btn-secondary" data-dismiss="modal">Annuler</a>
-                                      <button type="submit" id="submit" class="btn btn-primary">Valider</button>
+                                    @if ($demande[0]->decision !== true and $demande[0]->decision !== false)
+                                        <button type="submit" id="submit" class="btn btn-primary">Valider</button>
+                                    @endif
                                   </div>
                                     </div>
                                 </div>

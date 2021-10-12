@@ -39,6 +39,13 @@ class DemandeController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'nom' => 'required',
+            'prenom' => 'required',
+            'tel' => 'required',
+            'motif' => 'required',
+            'dateD' => 'required',
+        ]);
         Demande::create([
             "nomDemandeur" => $request->nom,
             "prenomDemandeur" => $request->prenom,
@@ -65,7 +72,7 @@ class DemandeController extends Controller
 
     }
 
-   
+
     public function update(Request $request)
     {
         $idDemande = $request->idDemande;
@@ -97,12 +104,12 @@ class DemandeController extends Controller
         $response = Http::withHeaders([
             'X-AUTH-TOKEN" => "b5fb79ba-a89e-44e2-93e2-5b95ce2a631e'
         ])->post('https://www.aqilas.com/api/v1/sms', [
-            "from"=>"SUIVI-NOTIF", 
+            "from"=>"SUIVI-NOTIF",
             "to"=>["+22673897492"],
             "text"=>"Bonjour ! Mr/Mme $request->nom. Votre demande d'audience auprès du Directeur a été acceptée et programmée pour le $request->dateA, à $request->heureA."
         ]);
 
-         
+
 
         dd($response);
 
