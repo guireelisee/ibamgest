@@ -17,10 +17,21 @@
                 <li class="nav-item pcoded-hasmenu">
                     <a href="#" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Salle</span></a>
                     <ul class="pcoded-submenu">
-                        <li><a href="#">Enregistrement</a></li>
+                        @can('secretaire')
+                        <li><a href="{{ route('fiche.create') }}">Enregistrement</a></li>
+                        @endcan
                         <li><a href="{{ route('fiche.index') }}">Liste des demandes</a></li>
                     </ul>
                 </li>
+                @can('admin')
+                <li class="nav-item pcoded-hasmenu">
+                    <a href="#" class="nav-link "><span class="pcoded-micon"><i class="feather icon-settings"></i></span><span class="pcoded-mtext">Paramètres</span></a>
+                    <ul class="pcoded-submenu">
+                        <li><a href="{{ route('register') }}">Inscription</a></li>
+                        <li><a href="{{ route('user.index') }}">Utilisateurs</a></li>
+                    </ul>
+                </li>
+                @endcan
             </ul>
         </div>
     </div>

@@ -1,9 +1,9 @@
 <header class="navbar pcoded-header navbar-expand-lg navbar-light header-blue">
     <div class="m-header">
         <a class="mobile-menu" id="mobile-collapse" href="#"><span></span></a>
-        <a href="#" class="b-brand">
+        <a href="{{ route('index') }}" class="b-brand">
             <!-- ========   change your logo hear   ============ -->
-            <img src="assets/images/logo.png" alt="" class="logo">
+            <h4 class="text-white">IBAM<span style="color: red; font-size: 2rem">.</span>GEST</h4>
         </a>
         <a href="#" class="mob-toggler">
             <i class="feather icon-more-vertical"></i>
@@ -65,7 +65,7 @@
                             <li><a href="email_inbox.html" class="dropdown-item"><i class="feather icon-mail"></i> Mes messages</a></li>
                             <!-- Authentication -->
                             <form method="POST" action="{{ route('logout') }}">
-                                @csrf<li><a href="route('logout')" class="dropdown-item" onclick="event.preventDefault();this.closest('form').submit();"><i class="feather icon-lock"></i> Verrouiller</a></li>
+                                @csrf<li><a href="logout" class="dropdown-item" onclick="event.preventDefault();this.closest('form').submit();"><i class="feather icon-power"></i> Se déconnecter</a></li>
                             </form>
                         </ul>
                     </div>

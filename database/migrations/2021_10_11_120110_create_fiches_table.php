@@ -21,6 +21,7 @@ class CreateFichesTable extends Migration
             $table->string('sp_instructions')->nullable();
             $table->string('dir_instructions')->nullable();
             $table->string('proposition')->nullable();
+            $table->boolean('delete')->nullable()->default(false);
             $table->timestamps();
         });
     }

@@ -33,13 +33,6 @@
         </div>
         <!-- [ Pre-loader ] End -->
 
-        <!-- [ navigation menu ] start -->
-        @include('partials.sidebar')
-        <!-- [ navigation menu ] end -->
-        <!-- [ Header ] start -->
-        @include('partials.navbar')
-        <!-- [ Header ] end -->
-
         @yield('main-content')
 
         <!-- Warning Section start -->

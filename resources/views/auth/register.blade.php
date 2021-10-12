@@ -41,6 +41,16 @@
         <label class="floating-label" for="email">Email</label>
         <input id="email" class="form-control" type="email" name="email"/>
     </div>
+
+    <!-- Phone -->
+    <div class="mb-3">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroupPrepend">(+226)</span>
+            </div>
+            <input type="text" class="form-control mob_no" id="phone" name="phone" placeholder="Téléphone">
+        </div>
+    </div>
     <!-- Password -->
     <div class="form-group mb-3">
         <label class="floating-label" for="password">Mot de passe</label>
@@ -53,13 +63,17 @@
         <input class="form-control" id="password_confirmation" type="password"
         name="password_confirmation" />
     </div>
-    <button class="btn btn-block btn-primary mb-4">S'inscrire</button>
+    <div class="float-right">
+        <a name="" id="" class="btn btn-danger mb-4 text-white" href="{{ route('user.index') }}" role="button">Retour</a>
+        <button class="btn btn-primary mb-4">S'inscrire</button>
+    </div>
 
 </form>
 
 @endsection
 
 @section('javascript')
+
 <script>
     $(document).ready(function(){
         // Prepare the preview for profile picture
@@ -83,6 +97,7 @@
         document.getElementById("role").value = oldInput['role'];
         document.getElementById("name").value = oldInput['name'];
         document.getElementById("email").value = oldInput['email'];
+        document.getElementById("phone").value = oldInput['phone'];
     }
 
 

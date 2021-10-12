@@ -11,6 +11,7 @@
 |
 */
 
+
 return [
     'accepted'             => 'Le champ :attribute doit être accepté.',
     'active_url'           => 'Le champ :attribute n\'est pas une URL valide.',
@@ -158,5 +159,8 @@ return [
         'title'                 => 'titre',
         'username'              => 'nom d\'utilisateur',
         'year'                  => 'année',
+        'nom_exp'               => 'nom',
+        'prenom_exp'            => 'prénom',
     ],
+
 ];

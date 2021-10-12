@@ -18,6 +18,7 @@ class UserSeeder extends Seeder
         User::create([
             'name' => 'Admin',
             'email' => 'admin@admin.com',
+            'phone' => '73916210',
             'role_id' => 1,
             'email_verified_at' =>  now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
@@ -27,6 +28,7 @@ class UserSeeder extends Seeder
         User::create([
             'name' => 'Utilisateur 1',
             'email' => 'user@user1.com',
+            'phone' => '66594866',
             'role_id' => 2,
             'email_verified_at' =>  now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',

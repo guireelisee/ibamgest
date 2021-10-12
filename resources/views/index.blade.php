@@ -5,6 +5,12 @@
 @endsection
 
 @section('main-content')
+<!-- [ navigation menu ] start -->
+@include('partials.sidebar')
+<!-- [ navigation menu ] end -->
+<!-- [ Header ] start -->
+@include('partials.navbar')
+<!-- [ Header ] end -->
 
 <!-- [ Main Content ] start -->
 <div class="pcoded-main-container">
@@ -18,7 +24,7 @@
                             <h5 class="m-b-10">Tableau de bord</h5>
                         </div>
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('index') }}"><i class="feather icon-home"></i></a></li>
                             <li class="breadcrumb-item"><a href="#">Tableau de bord</a></li>
                         </ul>
                     </div>

@@ -23,7 +23,7 @@ class RegisteredUserController extends Controller
     */
     public function create()
     {
-        if (!Gate::allows('access-admin')) {
+        if (!Gate::allows('admin')) {
             abort(403);
         }
         $roles = Role::orderBy('name')->get();
@@ -43,6 +43,7 @@ class RegisteredUserController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'phone' => ['required', 'string', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'role' => ['required']
         ]);
@@ -53,6 +54,7 @@ class RegisteredUserController extends Controller
             $user = User::create([
                 'name' => $request->name,
                 'email' => $request->email,
+                'phone' => $request->phone,
                 'password' => Hash::make($request->password),
                 'role_id' => $request->role,
                 'avatar' => $path
@@ -61,6 +63,7 @@ class RegisteredUserController extends Controller
             $user = User::create([
                 'name' => $request->name,
                 'email' => $request->email,
+                'phone' => $request->phone,
                 'password' => Hash::make($request->password),
                 'role_id' => $request->role
             ]);

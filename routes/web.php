@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DemandeController;
 use App\Http\Controllers\FicheController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -54,6 +55,7 @@ Route::post('demande-suppression', [DemandeController::class, 'destroy'])
                     ->middleware(['auth'])->name('demande.destroy');
                     
 Route::resource('fiche', FicheController::class)->middleware(['auth']);
+Route::resource('user', UserController::class)->middleware(['auth']);
 
 
 Route::fallback(function () {
