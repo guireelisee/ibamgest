@@ -29,7 +29,7 @@
                             <h5 class="m-b-10">Demandes d'audience</h5>
                         </div>
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('index') }}"><i class="feather icon-home"></i></a></li>
                             <li class="breadcrumb-item"><a href="#">Demandes d'audience</a></li>
                             <li class="breadcrumb-item"><a href="#">Liste des audiences</a></li>
 

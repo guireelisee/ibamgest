@@ -75,6 +75,13 @@ class DemandeController extends Controller
 
     public function update(Request $request)
     {
+        $request->validate([
+            'nom' => 'required',
+            'prenom' => 'required',
+            'tel' => 'required',
+            'motif' => 'required',
+            'dateD' => 'required',
+        ]);
         $idDemande = $request->idDemande;
         $demande = demande::where('idDemande', $idDemande);
         $demande->update([
