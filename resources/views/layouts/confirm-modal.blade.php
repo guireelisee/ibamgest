@@ -7,7 +7,7 @@
         var form =  $(this).closest("form");
         event.preventDefault();
         swal({
-            title: "Êts-vous sûr ?",
+            title: "Êtes-vous sûr ?",
             text: "Cette opération est irreversible !",
             icon: "warning",
             buttons: true,
