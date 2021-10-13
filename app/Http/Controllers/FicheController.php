@@ -45,12 +45,14 @@ class FicheController extends Controller
             'prenom_exp' => 'required',
             'salle' => 'required',
             'motif' => 'required',
+            'date_arrivee' => 'required',
         ]);
         Fiche::create([
             'nom_exp' => $request->nom_exp,
             'prenom_exp' => $request->prenom_exp,
             'salle_id' => $request->salle,
             'motif' => $request->motif,
+            'date_arrivee' => $request->date_arrivee,
         ]);
         return redirect()->route('fiche.index')->with('success', 'Demande de salle enregistrée avec succès.');
     }
@@ -74,7 +76,8 @@ class FicheController extends Controller
     */
     public function edit(Fiche $fiche)
     {
-        return view('Fiche.edit', compact('fiche'));
+        $salles = Salle::all();
+        return view('Fiche.edit', compact('fiche','salles'));
     }
 
     /**
@@ -86,19 +89,39 @@ class FicheController extends Controller
     */
     public function update(Request $request, Fiche $fiche)
     {
-
-        if (!empty($request->sp)) {
+        $success = 'Validation réussie.';
+        if(!$fiche->secretaire) {
+            $request->validate([
+                'nom_exp' => 'required',
+                'prenom_exp' => 'required',
+                'salle' => 'required',
+                'motif' => 'required',
+                'date_arrivee' => 'required',
+            ]);
+            $fiche->update([
+                'nom_exp' => $request->nom_exp,
+                'prenom_exp' => $request->prenom_exp,
+                'salle_id' => $request->salle,
+                'motif' => $request->motif,
+                'date_arrivee' => $request->date_arrivee,
+            ]);
+            $success = 'Modification réussie.';
+        } elseif (!empty($request->sp)) {
             $fiche->update(['sp' => $request->sp]);
         } elseif (!empty($request->dir)) {
             $fiche->update(['dir' => $request->dir]);
-        } elseif(!empty($request->scolarite)) {
+        } elseif(empty($request->scolarite)) {
             $request->validate([
                 "scolarite" => "required"
             ]);
-            $fiche->update(['scolarite' => $request->scolarite]);
+        } elseif(!empty($request->scolarite)) {
+            $fiche->update([
+                'scolarite' => $request->scolarite,
+                'date_validation' => now()
+            ]);
         }
 
-        return redirect()->route('fiche.index')->with('success', 'Validation réussie.');
+        return redirect()->route('fiche.index')->with('success', $success);
     }
 
     /**
@@ -139,4 +162,13 @@ class FicheController extends Controller
             "validate" => $validate
         ];
     }
+
+    public function valider(Fiche $fiche)
+    {
+        $fiche->update([
+            'secretaire' => true
+        ]);
+        return redirect()->route('fiche.index')->with('success', 'Validation réussie.');
+    }
+
 }

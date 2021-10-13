@@ -15,8 +15,8 @@ class CreateFichesTable extends Migration
     {
         Schema::create('fiches', function (Blueprint $table) {
             $table->id();
-            $table->timestamp('date_arrivee');
-            $table->timestamp('date_validation')->nullable();
+            $table->dateTime('date_arrivee');
+            $table->dateTime('date_validation')->nullable();
             $table->string('motif')->nullable();
             $table->string('nom_exp');
             $table->string('prenom_exp');

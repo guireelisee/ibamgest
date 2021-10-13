@@ -50,6 +50,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('fiche', FicheController::class);
 
+    Route::get('fiche/validate/{fiche}', [FicheController::class,'valider'])->name('fiche.validate');
+
     Route::fallback(function () {
         return view('errors.404');
     });
@@ -88,7 +90,7 @@ Route::middleware(['auth'])->group(function () {
 
 Route::resource('user', UserController::class)->middleware(['auth','admin']);
 
-Route::resource('salle', SalleController::class)->middleware(['auth', 'admin']);
+Route::resource('salle', SalleController::class)->middleware(['auth']);
 
 
 require __DIR__.'/auth.php';

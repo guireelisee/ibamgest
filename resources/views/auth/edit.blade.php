@@ -34,21 +34,21 @@
                     </div>
                     <!-- Name -->
                     <div class="form-group mb-3">
-                        <input id="name" class="form-control" type="name" name="name" value="{{$user->name}}" readonly/>
+                        <input id="name" class="form-control" type="name" name="name" value="{{$user->name}}"/>
                     </div>
                     <div class="form-group mb-3">
-                        <input id="email" class="form-control" type="email" name="email"  value="{{$user->email}}" readonly/>
+                        <input id="email" class="form-control" type="email" name="email"  value="{{$user->email}}"/>
                     </div>
 
                     <!-- Phone -->
-                    {{-- <div class="mb-3">
+                    <div class="mb-3">
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="inputGroupPrepend">(+226)</span>
                             </div>
-                            <input type="text" class="form-control mob_no" id="phone" name="phone" placeholder="Téléphone"  value="{{$user->phone}}" readonly>
+                            <input type="text" class="form-control mob_no" id="phone" name="phone" placeholder="Téléphone"  value="{{$user->phone}}">
                         </div>
-                    </div> --}}
+                    </div>
                     <!-- Role -->
                     <div class="form-group mb-3">
                         <label class="floating-label" for="name">Rôle</label>

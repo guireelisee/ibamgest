@@ -83,7 +83,6 @@
                 </div>
             </div>
         </div>
-        @include('layouts.confirm-modal')
         @endsection
 
         @section("javascript")
@@ -92,4 +91,6 @@
         <script src="assets/js/plugins/select.bootstrap4.min.js"></script>
         <script src="assets/js/plugins/dataTables.select.min.js"></script>
         <script src="assets/js/pages/data-autofill-custom.js"></script>
+        @include('layouts.confirm-modal')
+        
         @endsection()

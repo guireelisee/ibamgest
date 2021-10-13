@@ -9,6 +9,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 
 class UserController extends Controller
@@ -79,13 +80,17 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $request->validate([
+            'email' => ['required','unique:users,email,'.$user->id],
+            'phone' => ['required','unique:users,phone,'.$user->id],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'role' => ['required']
         ]);
 
         $user->update([
-            'password' => $request->password,
-            'role_id' => $request->role
+            'password' => Hash::make($request->password),
+            'role_id' => $request->role,
+            'email' => $request->email,
+            'phone' => $request->phone,
         ]);
 
         event(new Registered($user));

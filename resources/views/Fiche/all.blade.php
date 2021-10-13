@@ -53,48 +53,48 @@
                         <table id="scroll-fill" class="table table-striped table-bordered nowrap">
                             <thead>
                                 <tr>
-                                    <th>N°</th>
+
                                     <th>Date d'arrivée</th>
+                                    <th>Salle</th>
+                                    <th>Motif</th>
                                     <th>Expéditeur</th>
                                     <th>SP</th>
                                     <th>Directeur</th>
                                     <th>Scolarité</th>
-                                    <th>Statut</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($fiches as $fiche)
                                 <tr>
-                                    <td>{{$fiche->id}}</td>
-                                    <td>{{date('d/m/Y', strtotime($fiche->date_arrivee))}}</td>
+                                    <td>Le {{date('d/m/Y à H:i', strtotime($fiche->date_arrivee))}}</td>
+                                    <td>{{$fiche->salle->nom}}</td>
+                                    <td>{{$fiche->motif}}</td>
                                     <td>{{$fiche->nom_exp }}</td>
 
-                                    @if ($fiche->sp == "")
-                                    <td><a name="" class="btn btn-primary text-white" href="{{ route('fiche.edit', $fiche->id) }}">En attente</a></td>
-                                    <td><a name="" id="" class="btn btn-warning text-white" href="#">NULL</a></td>
-                                    <td><a name="" id="" class="btn btn-warning text-white" href="#">NULL</a></td>
-                                    <td><a name="" id="" class="btn btn-warning text-white" href="#">En attente</a></td>
+                                    @if (empty($fiche->sp))
+                                    <td><div name="" class="btn btn-primary btn-sm text-white">En attente</div></td>
+                                    <td><div name="" id="" class="btn btn-warning btn-sm text-white">En attente</div></td>
+                                    <td><div name="" id="" class="btn btn-warning btn-sm text-white">En attente</div></td>
                                     @endif
 
-                                    @if ($fiche->sp != "" && $fiche->dir == "")
-                                    <td><a name="" id="" class="btn btn-success text-white" href="#">{{$fiche->sp}}</a></td>
-                                    <td><a name="" id="" class="btn btn-primary text-white" href="{{ route('fiche.edit', $fiche->id) }}">En attente</a></td>
-                                    <td><a name="" id="" class="btn btn-warning text-white" href="#">NULL</a></td>
-                                    <td><a name="" id="" class="btn btn-warning text-white" href="#">En attente</a></td>
+                                    @if (!empty($fiche->sp) && empty($fiche->dir))
+                                    <td><div name="" id="" class="btn btn-success btn-sm text-white">{{$fiche->sp}}</div></td>
+                                    <td><div name="" id="" class="btn btn-primary btn-sm text-white">En attente</div></td>
+                                    <td><div name="" id="" class="btn btn-warning btn-sm text-white">En attente</div></td>
                                     @endif
 
-                                    @if ($fiche->sp != "" && $fiche->dir != "" && $fiche->scolarite == "")
-                                    <td><a name="" id="" class="btn btn-success text-white" href="#">{{$fiche->sp}}</a></td>
-                                    <td><a name="" id="" class="btn btn-success text-white" href="#">{{$fiche->dir}}</a></td>
-                                    <td><a name="" id="" class="btn btn-primary text-white" href="{{ route('fiche.edit', $fiche->id) }}">En attente</a></td>
-                                    <td><a name="" id="" class="btn btn-warning text-white" href="#">En attente</a></td>
+                                    @if (!empty($fiche->sp) && !empty($fiche->dir) && empty($fiche->scolarite))
+                                    <td><div name="" id="" class="btn btn-success btn-sm text-white">{{$fiche->sp}}</div></td>
+                                    <td><div name="" id="" class="btn btn-success btn-sm text-white">{{$fiche->dir}}</div></td>
+                                    <td><div name="" id="" class="btn btn-primary btn-sm text-white">En attente</div></td>
                                     @endif
 
-                                    @if ($fiche->sp != "" && $fiche->dir != "" && $fiche->scolarite != "")
-                                    <td><a name="" id="" class="btn btn-success text-white" href="#">{{$fiche->sp}}</a></td>
-                                    <td><a name="" id="" class="btn btn-success text-white" href="#">{{$fiche->dir}}</a></td>
-                                    <td><a name="" id="" class="btn btn-success text-white" href="#">{{$fiche->scolarite}}</a></td>
-                                    <td><a name="" id="" class="btn btn-success text-white" href="#">Terminé</a></td>
+                                    @if (!empty($fiche->sp) && !empty($fiche->dir) && !empty($fiche->scolarite))
+                                    <td><div name="" id="" class="btn btn-success btn-sm text-white">{{$fiche->sp}}</div></td>
+                                    <td><div name="" id="" class="btn btn-success btn-sm text-white">{{$fiche->dir}}</div></td>
+                                    <td><div name="" id="" class="btn btn-success btn-sm text-white">{{$fiche->scolarite}}
+                                    le {{date('d/m/Y à H:i', strtotime($fiche->date_validation))}}
+                                    </div></td>
                                     @endif
 
                                 </tr>
@@ -170,58 +170,64 @@
                         <table id="scroll-fill" class="table table-bordered nowrap">
                             <thead>
                                 <tr>
-                                    <th>Date d'arrivée</th>
-                                    <th>Expéditeur</th>
-                                    <th>Secretaire Permanent</th>
-                                    <th>Directeur</th>
-                                    <th>Scolarité</th>
+                                    <tr>
+
+                                        <th>Date d'arrivée</th>
+                                        <th>Salle</th>
+                                        <th>Motif</th>
+                                        <th>Expéditeur</th>
+                                        <th>Secretaire</th>
+                                        <th>Statut</th>
+                                    </tr>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($fiches as $fiche)
                                 <tr>
-                                    <td>{{date('d/m/Y', strtotime($fiche->date_arrivee))}}</td>
-                                    <td>{{$fiche->nom_exp . ' '. $fiche->prenom_exp}}</td>
+                                    <td>Le {{date('d/m/Y à H:i', strtotime($fiche->date_arrivee))}}</td>
+                                    <td>{{$fiche->salle->nom}}</td>
+                                    <td>{{$fiche->motif}}</td>
+                                    <td>{{$fiche->nom_exp . ' '. $fiche->prenom_exp }}</td>
+
                                     <td>
-                                        @if (!$fiche->delete)
-                                        @if (empty($fiche->sp))
-                                        <form method="POST" action="{{ route('fiche.destroy', $fiche->id)}}">
-                                            @csrf()
-                                            @method("DELETE")
-                                            <button type="submit" class="col-sm-12 btn btn-sm">
-                                                <span class="badge badge-danger"><i class="feather icon-trash">&nbsp;</i>En attente</span>
-                                            </button>
+                                        @if(!$fiche->secretaire && empty($fiche->deleted_at))
+                                        <a class="btn btn-secondary btn-sm" href="{{ route('fiche.edit',$fiche) }}"><i class="fas fa-edit"></i></a>
+                                        <a class="btn btn-success btn-sm" href="{{ route('fiche.validate',$fiche) }}"><i class="fas fa-check"></i></a>
+                                        <form action="{{ route('fiche.destroy', $fiche)}}" method="POST" class="d-inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn btn-danger btn-sm confirm-modal" type="submit" data-name=""><i class="fas fa-trash"></i></button>
                                         </form>
-                                        @else
-                                        {{$fiche->sp }}
                                         @endif
-                                        @else
-                                        <div class="badge badge-danger">Annulée</div>
+                                        @if($fiche->secretaire && empty($fiche->deleted_at))
+                                        <div name="" class="btn btn-success btn-sm text-white">Validé</div>
                                         @endif
-                                    </td>
-                                    <td>
-                                        @if (!$fiche->delete)
-                                        @if (empty($fiche->dir))
-                                        <button type="submit" class="col-sm-12 btn btn-sm" disabled>
-                                            <span class="badge badge-primary"><i class="feather icon-edit">&nbsp;</i>En attente</span>
-                                        </button>
-                                        @else
-                                        {{$fiche->dir }}
-                                        @endif
-                                        @else
-                                        <div class="badge badge-danger">Annulée</div>
+                                        @if(!empty($fiche->deleted_at))
+                                        <div name="" class="btn btn-danger btn-sm text-white">Annulée</div>
                                         @endif
                                     </td>
                                     <td>
-                                        @if (!$fiche->delete)
-                                        @if (empty($fiche->scolarite))
-                                        <button type="submit" class="col-sm-12 btn btn-sm" disabled>
-                                            <span class="badge badge-primary"><i class="feather icon-edit">&nbsp;</i>En attente</span>
-                                        </button>                                        @else
-                                        {{$fiche->scolarite }}
+                                        @if(!$fiche->secretaire && empty($fiche->deleted_at))
+                                        <div name="" class="btn btn-warning btn-sm text-white">En attente de la validation</div>
                                         @endif
-                                        @else
-                                        <div class="badge badge-danger">Annulée</div>
+                                        @if(empty($fiche->sp) && $fiche->secretaire && empty($fiche->deleted_at))
+                                        <div name="" class="btn btn-warning btn-sm text-white">En attente chez le SP</div>
+                                        @endif
+                                        @if(!empty($fiche->sp) && empty($fiche->dir) && empty($fiche->deleted_at))
+                                        <div name="" class="btn btn-warning btn-sm text-white">En attente chez le directeur</div>
+                                        @endif
+                                        @if(!empty($fiche->sp) && !empty($fiche->dir) && empty($fiche->scolarite) && empty($fiche->deleted_at))
+                                        <div name="" class="btn btn-warning btn-sm text-white">En attente à la scolarité</div>
+                                        @endif
+                                        @if(!empty($fiche->scolarite))
+                                        <div name="" class="btn btn-success btn-sm text-white">{{$fiche->scolarite}}
+                                            @if (!empty($fiche->sp) && !empty($fiche->dir) && !empty($fiche->scolarite))
+                                            le {{date('d/m/Y à H:i', strtotime($fiche->date_validation))}}
+                                            @endif
+                                        </div>
+                                        @endif
+                                        @if(!empty($fiche->deleted_at))
+                                        <div name="" class="btn btn-danger btn-sm text-white">Annulée</div>
                                         @endif
                                     </td>
                                 </tr>
@@ -250,38 +256,53 @@
                         <table id="scroll-fill" class="table table-bordered nowrap">
                             <thead>
                                 <tr>
-                                    <th>Date d'arrivée</th>
-                                    <th>Expéditeur</th>
-                                    <th>Secretaire Permanent</th>
+                                    <tr>
+
+                                        <th>Date d'arrivée</th>
+                                        <th>Salle</th>
+                                        <th>Motif</th>
+                                        <th>Expéditeur</th>
+                                        <th>SP</th>
+                                        <th>Statut</th>
+                                    </tr>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($fiches as $fiche)
-                                @if (!$fiche->delete)
+                                @if ($fiche->secretaire && empty($fiche->deleted_at))
                                 <tr>
-                                    <td>{{date('d/m/Y', strtotime($fiche->date_arrivee))}}</td>
-                                    <td>{{$fiche->nom_exp . ' '. $fiche->prenom_exp}}</td>
+                                    <td>Le {{date('d/m/Y à H:i', strtotime($fiche->date_arrivee))}}</td>
+                                    <td>{{$fiche->salle->nom}}</td>
+                                    <td>{{$fiche->motif}}</td>
+                                    <td>{{$fiche->nom_exp . ' '. $fiche->prenom_exp }}</td>
+
                                     <td>
-                                        @if (empty($fiche->sp))
-                                        <a href="{{ route('fiche.edit', $fiche->id) }}">
-                                            <button type="submit" class="col-sm-12 btn btn-sm">
-                                                <span class="badge badge-primary"><i class="feather icon-edit">&nbsp;</i>En attente</span>
-                                            </button>
-                                        </a>
-                                        @elseif(empty($fiche->dir))
-                                        <a href="{{ route('fiche.edit', $fiche->id) }}">
-                                            <button type="submit" class="col-sm-12 btn btn-sm">
-                                                <span class="badge badge-primary"><i class="feather icon-edit">&nbsp;</i> {{$fiche->sp }}</span>
-                                            </button>
-                                        </a>
+                                        @if(empty($fiche->sp))
+                                        <a class="btn btn-success btn-sm" href="{{ route('fiche.edit',$fiche) }}"><i class="fas fa-check"></i>&ensp;Valider</a>
                                         @else
-                                        <button type="submit" class="col-sm-12 btn btn-sm" disabled>
-                                            <span class="badge badge-primary"><i class="feather icon-edit">&nbsp;</i> {{$fiche->sp }}</span>
-                                        </button>
+                                        <div name="" class="btn btn-success btn-sm text-white">{{$fiche->sp}}</div>
                                         @endif
                                     </td>
+                                    <td>
+                                        @if(empty($fiche->sp))
+                                        <div name="" class="btn btn-warning btn-sm text-white">En attente de validation</div>
+                                        @endif
+                                        @if(!empty($fiche->sp) && empty($fiche->dir))
+                                        <div name="" class="btn btn-warning btn-sm text-white">En attente chez le directeur</div>
+                                        @endif
+                                        @if(!empty($fiche->dir) && empty($fiche->scolarite))
+                                        <div name="" class="btn btn-warning btn-sm text-white">En attente à la scolarité</div>
+                                        @endif
+                                        @if(!empty($fiche->scolarite))
+                                        <div name="" class="btn btn-success btn-sm text-white">{{$fiche->scolarite}}
+                                            @if (!empty($fiche->sp) && !empty($fiche->dir) && !empty($fiche->scolarite))
+                                            le {{date('d/m/Y à H:i', strtotime($fiche->date_validation))}}
+                                            @endif
+                                        </div>
+                                        @endif
+                                    </td>
+                                    @endif
                                 </tr>
-                                @endif
                                 @endforeach
                             </tbody>
                         </table>
@@ -307,54 +328,50 @@
                         <table id="scroll-fill" class="table table-bordered nowrap">
                             <thead>
                                 <tr>
-                                    <th>Date d'arrivée</th>
-                                    <th>Expéditeur</th>
-                                    <th>Secretaire Permanent</th>
-                                    <th>Directeur</th>
+                                    <tr>
+
+                                        <th>Date d'arrivée</th>
+                                        <th>Salle</th>
+                                        <th>Motif</th>
+                                        <th>Expéditeur</th>
+                                        <th>Directeur</th>
+                                        <th>Statut</th>
+                                    </tr>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($fiches as $fiche)
-                                @if (!$fiche->delete)
+                                @if (!empty($fiche->sp) && empty($fiche->deleted_at))
                                 <tr>
-                                    <td>{{date('d/m/Y', strtotime($fiche->date_arrivee))}}</td>
-                                    <td>{{$fiche->nom_exp . ' '. $fiche->prenom_exp}}</td>
+                                    <td>Le {{date('d/m/Y à H:i', strtotime($fiche->date_arrivee))}}</td>
+                                    <td>{{$fiche->salle->nom}}</td>
+                                    <td>{{$fiche->motif}}</td>
+                                    <td>{{$fiche->nom_exp . ' '. $fiche->prenom_exp }}</td>
+
                                     <td>
-                                        @if (empty($fiche->sp))
-                                        <button type="submit" class="col-sm-12 btn btn-sm" disabled>
-                                            <span class="badge badge-primary"><i class="feather icon-edit">&nbsp;</i>En attente</span>
-                                        </button>
+                                        @if(empty($fiche->dir))
+                                        <a class="btn btn-success btn-sm" href="{{ route('fiche.edit',$fiche) }}"><i class="fas fa-check"></i>&ensp;Valider</a>
                                         @else
-                                        <button type="submit" class="col-sm-12 btn btn-sm" disabled>
-                                            <span class="badge badge-primary"><i class="feather icon-edit">&nbsp;</i> {{$fiche->sp }}</span>
-                                        </button>
+                                        <div name="" class="btn btn-success btn-sm text-white">{{$fiche->dir}}</div>
                                         @endif
                                     </td>
                                     <td>
-                                        @if (empty($fiche->sp))
-                                        <button type="submit" class="col-sm-12 btn btn-sm" disabled>
-                                            <span class="badge badge-primary"><i class="feather icon-edit">&nbsp;</i>En attente</span>
-                                        </button>
-                                        @elseif (empty($fiche->dir) && !empty($fiche->sp))
-                                        <a href="{{ route('fiche.edit', $fiche->id) }}">
-                                            <button type="submit" class="col-sm-12 btn btn-sm">
-                                                <span class="badge badge-primary"><i class="feather icon-edit">&nbsp;</i>En attente</span>
-                                            </button>
-                                        </a>
-                                        @elseif(empty($fiche->scolarite))
-                                        <a href="{{ route('fiche.edit', $fiche->id) }}">
-                                            <button type="submit" class="col-sm-12 btn btn-sm">
-                                                <span class="badge badge-primary"><i class="feather icon-edit">&nbsp;</i> {{$fiche->dir }}</span>
-                                            </button>
-                                        </a>
-                                        @else
-                                        <button type="submit" class="col-sm-12 btn btn-sm" disabled>
-                                            <span class="badge badge-primary"><i class="feather icon-edit">&nbsp;</i> {{$fiche->dir }}</span>
-                                        </button>
+                                        @if(empty($fiche->dir))
+                                        <div name="" class="btn btn-warning btn-sm text-white">En attente de validation</div>
+                                        @endif
+                                        @if(!empty($fiche->dir) && empty($fiche->scolarite))
+                                        <div name="" class="btn btn-warning btn-sm text-white">En attente à la scolarité</div>
+                                        @endif
+                                        @if(!empty($fiche->scolarite))
+                                        <div name="" class="btn btn-success btn-sm text-white">{{$fiche->scolarite}}
+                                            @if (!empty($fiche->sp) && !empty($fiche->dir) && !empty($fiche->scolarite))
+                                            le {{date('d/m/Y à H:i', strtotime($fiche->date_validation))}}
+                                            @endif
+                                        </div>
                                         @endif
                                     </td>
+                                    @endif
                                 </tr>
-                                @endif
                                 @endforeach
                             </tbody>
                         </table>
@@ -380,63 +397,46 @@
                         <table id="scroll-fill" class="table table-bordered nowrap">
                             <thead>
                                 <tr>
-                                    <th>Date d'arrivée</th>
-                                    <th>Expéditeur</th>
-                                    <th>Secretaire Permanent</th>
-                                    <th>Directeur</th>
-                                    <th>Scolarité</th>
+                                    <tr>
+
+                                        <th>Date d'arrivée</th>
+                                        <th>Salle</th>
+                                        <th>Motif</th>
+                                        <th>Expéditeur</th>
+                                        <th>Scolarité</th>
+                                        <th>Statut</th>
+                                    </tr>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($fiches as $fiche)
-                                @if (!$fiche->delete)
+                                @if (!empty($fiche->dir) && empty($fiche->deleted_at))
                                 <tr>
-                                    <td>{{date('d/m/Y', strtotime($fiche->date_arrivee))}}</td>
-                                    <td>{{$fiche->nom_exp . ' '. $fiche->prenom_exp}}</td>
-                                    <td>
-                                        @if (empty($fiche->sp))
-                                        <button type="submit" class="col-sm-12 btn btn-sm" disabled>
-                                            <span class="badge badge-primary"><i class="feather icon-edit">&nbsp;</i>En attente</span>
-                                        </button>
-                                        @else
-                                        <button type="submit" class="col-sm-12 btn btn-sm" disabled>
-                                            <span class="badge badge-primary">{{$fiche->sp }}</span>
-                                        </button>
-                                        @endif
-                                    </td>
-                                    <td>
-                                        @if (empty($fiche->dir))
-                                        <button type="submit" class="col-sm-12 btn btn-sm" disabled >
-                                            <span class="badge badge-primary"><i class="feather icon-edit">&nbsp;</i>En attente</span>
-                                        </button>
-                                        @else
-                                        <button type="submit" class="col-sm-12 btn btn-sm" disabled>
-                                            <span class="badge badge-primary">{{$fiche->dir }}</span>
-                                        </button>
-                                        @endif
+                                    <td>Le {{date('d/m/Y à H:i', strtotime($fiche->date_arrivee))}}</td>
+                                    <td>{{$fiche->salle->nom}}</td>
+                                    <td>{{$fiche->motif}}</td>
+                                    <td>{{$fiche->nom_exp . ' '. $fiche->prenom_exp }}</td>
 
-                                    </td>
                                     <td>
-                                        @if (empty($fiche->dir))
-                                        <button type="submit" class="col-sm-12 btn btn-sm" disabled>
-                                            <span class="badge badge-primary"><i class="feather icon-edit">&nbsp;</i>En attente</span>
-                                        </button>
-                                        @elseif(!empty($fiche->dir) && empty($fiche->scolarite))
-                                        <a href="{{ route('fiche.edit', $fiche->id) }}">
-                                            <button type="submit" class="col-sm-12 btn btn-sm">
-                                                <span class="badge badge-primary"><i class="feather icon-edit">&nbsp;</i> En attente</span>
-                                            </button>
-                                        </a>
+                                        @if(empty($fiche->scolarite))
+                                        <a class="btn btn-success btn-sm" href="{{ route('fiche.edit',$fiche) }}"><i class="fas fa-check"></i>&ensp;Valider</a>
                                         @else
-                                        <a href="{{ route('fiche.edit', $fiche->id) }}">
-                                            <button type="submit" class="col-sm-12 btn btn-sm">
-                                                <span class="badge badge-primary"><i class="feather icon-edit">&nbsp;</i> {{$fiche->scolarite}}</span>
-                                            </button>
-                                        </a>
+                                        <div name="" class="btn btn-success btn-sm text-white">{{$fiche->scolarite}}</div>
                                         @endif
                                     </td>
+                                    <td>
+                                        @if(empty($fiche->scolarite))
+                                        <div name="" class="btn btn-warning btn-sm text-white">En attente de validation</div>
+                                        @else
+                                        <div name="" class="btn btn-success btn-sm text-white">Validé
+                                            @if (!empty($fiche->sp) && !empty($fiche->dir) && !empty($fiche->scolarite))
+                                            le {{date('d/m/Y à H:i', strtotime($fiche->date_validation))}}
+                                            @endif
+                                        </div>
+                                        @endif
+                                    </td>
+                                    @endif
                                 </tr>
-                                @endif
                                 @endforeach
                             </tbody>
                         </table>
@@ -445,10 +445,6 @@
             </div>
         </div>
         @endcan
-
-
-
-
 
 
 
@@ -461,4 +457,6 @@
         <script src="assets/js/plugins/select.bootstrap4.min.js"></script>
         <script src="assets/js/plugins/dataTables.select.min.js"></script>
         <script src="assets/js/pages/data-autofill-custom.js"></script>
+        @include('layouts.confirm-modal')
+
         @endsection()

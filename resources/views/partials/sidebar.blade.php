@@ -10,28 +10,25 @@
                     <a href="#" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Audiences</span></a>
                     <ul class="pcoded-submenu">
                         <li><a href="{{ route('demande.index') }}">Liste des demandes</a></li>
-                        <li><a href="{{ route('demande.create') }}">Nouvelle des demandes</a></li>
+                        <li><a href="{{ route('demande.create') }}">Nouvelle demande</a></li>
 
                     </ul>
                 </li>
                 <li class="nav-item pcoded-hasmenu">
-                    <a href="#" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Salle</span></a>
+                    <a href="#" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Salles</span></a>
                     <ul class="pcoded-submenu">
+                        <li><a href="{{ route('fiche.index') }}">Liste des demandes</a></li>
                         @can('secretaire')
-                        <li><a href="{{ route('fiche.create') }}">Enregistrement</a></li>
+                        <li><a href="{{ route('fiche.create') }}">Nouvelle demande</a></li>
                         @endcan
                         @can('admin')
-                        <li><a href="{{ route('fiche.create') }}">Enregistrement</a></li>
+                        <li><a href="{{ route('fiche.create') }}">Nouvelle demande</a></li>
                         @endcan
-                        <li><a href="{{ route('fiche.index') }}">Liste des demandes</a></li>
                     </ul>
                 </li>
-                @can('admin')
                 <li class="nav-item pcoded-hasmenu">
                     <a href="#" class="nav-link "><span class="pcoded-micon"><i class="feather icon-settings"></i></span><span class="pcoded-mtext">Paramètres</span></a>
                     <ul class="pcoded-submenu">
-                        <li><a href="{{ route('register') }}">Inscription</a></li>
-                        <li><a href="{{ route('user.index') }}">Utilisateurs</a></li>
                         <li class="nav-item pcoded-hasmenu">
                             <a href="#" class="nav-link "><span class="pcoded-micon"><i class="feather icon-settings"></i></span><span class="pcoded-mtext">Filieres</span></a>
                             <ul class="pcoded-submenu">
@@ -57,10 +54,17 @@
 
                             </ul>
                         </li>
-                        <li><a href="{{ route('user.index') }}">Utilisateurs</a></li>
+                        @can('admin')
+                        <li class="nav-item pcoded-hasmenu">
+                            <a href="#" class="nav-link "><span class="pcoded-micon"><i class="feather icon-users"></i></span><span class="pcoded-mtext">Utilisateurs</span></a>
+                            <ul class="pcoded-submenu">
+                                <li><a href="{{ route('register') }}">Nouvel utilisateur</a></li>
+                                <li><a href="{{ route('user.index') }}">Liste des utilisateurs</a></li>
+                            </ul>
+                        </li>
+                        @endcan
                     </ul>
                 </li>
-                @endcan
             </ul>
         </div>
     </div>

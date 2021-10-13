@@ -52,13 +52,13 @@
                             @csrf
                             @php
                             date_default_timezone_set("Africa/Abidjan");
-                            $date = date("Y-m-d", time());
+                            $date = date("Y-m-d H:i", time());
                             @endphp
                             <div class="row">
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label class="floating-label" for="date_arrivee">Date d'arrivée</label>
-                                        <input type="text" name="date_arrivee" class="form-control" id="date_arrivee" value="@php echo $date @endphp" max="@php echo $date @endphp" onblur="this.type='text'" onfocus="this.type='date'">
+                                        <input type="text" name="date_arrivee" class="form-control" id="date_arrivee" value="@php echo $date @endphp" onblur="this.type='text'" onfocus="this.type='datetime-local'">
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
