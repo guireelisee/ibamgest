@@ -54,7 +54,7 @@ class MatiereController extends Controller
      */
     public function show($idMatiere)
     {
-        $matiere = Matiere::where('idMatiere', $idMatiere)->get();
+        $matiere = Matiere::where('id', $idMatiere)->get();
         return view('Parametre/Matiere/edit')->with('matiere', $matiere);
     }
 
@@ -81,8 +81,8 @@ class MatiereController extends Controller
         $request->validate([
             'nom' => 'required'
         ]);
-        $idMatiere = $request->idMatiere;
-        $demande = Matiere::where('idMatiere', $idMatiere);
+        $idMatiere = $request->id;
+        $demande = Matiere::where('id', $idMatiere);
         $demande->update([
             "nom_matiere" => $request->nom
         ]);
@@ -98,8 +98,8 @@ class MatiereController extends Controller
      */
     public function destroy(Request $request)
     {
-        $id = $request->idMatiere;
-        $demande = Matiere::where('idMatiere', $id);
+        $id = $request->id;
+        $demande = Matiere::where('id', $id);
         $demande->delete();
 
         return redirect()->route('matiere.index')
@@ -108,7 +108,7 @@ class MatiereController extends Controller
 
     public function suppressionView($idMatiere)
     {
-        $matiere = Matiere::where('idMatiere', $idMatiere)->get();
+        $matiere = Matiere::where('id', $idMatiere)->get();
         return view('Parametre/Matiere/delete')->with('matiere', $matiere);
 
     }

@@ -15,7 +15,7 @@ class ProfesseurController extends Controller
     public function index()
     {
         $professeurs = Professeur::all();
-        return view('Professeur.all', ['professeurs' => $professeurs]);
+        return view('Parametre.Professeur.all', ['professeurs' => $professeurs]);
     }
 
     /**
@@ -25,7 +25,7 @@ class ProfesseurController extends Controller
     */
     public function create()
     {
-        return view('Professeur.add');
+        return view('Parametre.Professeur.add');
     }
 
     /**
@@ -69,7 +69,7 @@ class ProfesseurController extends Controller
     */
     public function edit(Professeur $professeur)
     {
-        return view('Professeur.edit', compact('professeur'));
+        return view('Parametre.Professeur.edit', compact('professeur'));
     }
 
     /**

@@ -54,7 +54,7 @@ class FiliereController extends Controller
      */
     public function show($idFiliere)
     {
-        $filiere = Filiere::where('idFiliere', $idFiliere)->get();
+        $filiere = Filiere::where('id', $idFiliere)->get();
         return view('Parametre/Filiere/edit')->with('filiere', $filiere);
     }
 
@@ -81,8 +81,8 @@ class FiliereController extends Controller
         $request->validate([
             'nom' => 'required'
         ]);
-        $idFiliere = $request->idFiliere;
-        $demande = Filiere::where('idFiliere', $idFiliere);
+        $idFiliere = $request->id;
+        $demande = Filiere::where('id', $idFiliere);
         $demande->update([
             "nom_filiere" => $request->nom
         ]);
@@ -98,8 +98,8 @@ class FiliereController extends Controller
      */
     public function destroy(Request $request)
     {
-        $id = $request->idFiliere;
-        $demande = Filiere::where('idFiliere', $id);
+        $id = $request->id;
+        $demande = Filiere::where('id', $id);
         $demande->delete();
 
         return redirect()->route('filiere.index')
@@ -108,7 +108,7 @@ class FiliereController extends Controller
 
     public function suppressionView($idFiliere)
     {
-        $filiere = Filiere::where('idFiliere', $idFiliere)->get();
+        $filiere = Filiere::where('id', $idFiliere)->get();
         return view('Parametre/Filiere/delete')->with('filiere', $filiere);
 
     }

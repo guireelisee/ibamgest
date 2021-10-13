@@ -58,7 +58,7 @@
                         <div class="container">
                             <form id="form" method="post" action="{{ route('filiere.update') }}">
                                 @csrf
-                                <input type="hidden" value="{{$filiere[0]->idFiliere}}" name="idFiliere">
+                                <input type="hidden" value="{{$filiere[0]->id}}" name="id">
 
                                 <div class="row">
 

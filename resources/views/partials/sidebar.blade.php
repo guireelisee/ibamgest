@@ -15,6 +15,14 @@
                     </ul>
                 </li>
                 <li class="nav-item pcoded-hasmenu">
+                    <a href="#" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Devoirs</span></a>
+                    <ul class="pcoded-submenu">
+                        <li><a href="{{ route('devoir.index') }}">Liste des devoirs</a></li>
+                        <li><a href="{{ route('devoir.create') }}">Nouveau devoir</a></li>
+
+                    </ul>
+                </li>
+                <li class="nav-item pcoded-hasmenu">
                     <a href="#" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Salles</span></a>
                     <ul class="pcoded-submenu">
                         <li><a href="{{ route('fiche.index') }}">Liste des demandes</a></li>

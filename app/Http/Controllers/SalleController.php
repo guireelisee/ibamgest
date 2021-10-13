@@ -15,7 +15,7 @@ class SalleController extends Controller
     public function index()
     {
         $salles = Salle::all();
-        return view('Salle.all',['salles'=>$salles]);
+        return view('Parametre.Salle.all',['salles'=>$salles]);
     }
 
     /**
@@ -25,7 +25,7 @@ class SalleController extends Controller
      */
     public function create()
     {
-        return view('Salle.add');
+        return view('Parametre.Salle.add');
     }
 
     /**
@@ -68,7 +68,7 @@ class SalleController extends Controller
      */
     public function edit(Salle $salle)
     {
-        return view('Salle.edit',compact('salle'));
+        return view('Parametre.Salle.edit',compact('salle'));
     }
 
     /**

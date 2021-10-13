@@ -57,7 +57,7 @@
                         <div class="container">
                             <form action="{{route('filiere.destroy')}}" method="POST">
                                 @csrf
-                                <input type="hidden" value="{{$filiere[0]->idFiliere}}" name="idFiliere">
+                                <input type="hidden" value="{{$filiere[0]->id}}" name="id">
                                 <div class="container" style="text-align: center">
                                     <p style="font-size: 17px">Confirmez-vous la suppression de la filière ?</p>
                                     <button type="submit" class="btn btn-danger">Supprimer</button>

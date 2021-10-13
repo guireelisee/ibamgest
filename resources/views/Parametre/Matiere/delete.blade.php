@@ -57,7 +57,7 @@
                         <div class="container">
                             <form action="{{route('matiere.destroy')}}" method="POST">
                                 @csrf
-                                <input type="hidden" value="{{$matiere[0]->idMatiere}}" name="idMatiere">
+                                <input type="hidden" value="{{$matiere[0]->id}}" name="id">
                                 <div class="container" style="text-align: center">
                                     <p style="font-size: 17px">Confirmez-vous la suppression de la matière ?</p>
                                     <button type="submit" class="btn btn-danger">Supprimer</button>

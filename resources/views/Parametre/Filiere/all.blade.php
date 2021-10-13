@@ -68,13 +68,13 @@
                                                 <td>{{ $filiere->nom_filiere }}</td>
                                                 <td>
                                                     <a type="button"
-                                                    href="{{ route('filiere.show', ['id'=>$filiere->idFiliere]) }}"
+                                                    href="{{ route('filiere.show', ['id'=>$filiere->id]) }}"
 
                                                         class="btn btn-success btn-sm"><i class="fa fa-edit"></i>
                                                     </a>
-                                    
+
                                                     <a type="button"
-                                                        href="{{ route('filiere.suppression.view', ['id'=>$filiere->idFiliere]) }}"
+                                                        href="{{ route('filiere.suppression.view', ['id'=>$filiere->id]) }}"
                                                         class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>
                                                     </a>
                                                 </td>

@@ -68,13 +68,13 @@
                                                 <td>{{ $matiere->nom_matiere }}</td>
                                                 <td>
                                                     <a type="button"
-                                                    href="{{ route('matiere.show', ['id'=>$matiere->idMatiere]) }}"
+                                                    href="{{ route('matiere.show', ['id'=>$matiere->id]) }}"
 
                                                         class="btn btn-success btn-sm"><i class="fa fa-edit"></i>
                                                     </a>
-                                    
+
                                                     <a type="button"
-                                                        href="{{ route('matiere.suppression.view', ['id'=>$matiere->idMatiere]) }}"
+                                                        href="{{ route('matiere.suppression.view', ['id'=>$matiere->id]) }}"
                                                         class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>
                                                     </a>
                                                 </td>

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFilieresTable extends Migration
+class CreateDevoirSurveillant extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateFilieresTable extends Migration
      */
     public function up()
     {
-        Schema::create('filieres', function (Blueprint $table) {
+        Schema::create('devoir_surveillant', function (Blueprint $table) {
             $table->id();
-            $table->string("nom_filiere");
-            $table->softDeletes();
+            $table->foreignId('devoir_id')->constrained()->onDelete('cascade');
+            $table->foreignId('surveillant_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateFilieresTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('filieres');
+        Schema::dropIfExists('devoir_surveillant');
     }
 }

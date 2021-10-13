@@ -15,7 +15,7 @@ class SurveillantController extends Controller
     public function index()
     {
         $surveillants = Surveillant::all();
-        return view('Surveillant.all', ['surveillants' => $surveillants]);
+        return view('Parametre.Surveillant.all', ['surveillants' => $surveillants]);
     }
 
     /**
@@ -25,7 +25,7 @@ class SurveillantController extends Controller
     */
     public function create()
     {
-        return view('Surveillant.add');
+        return view('Parametre.Surveillant.add');
     }
 
     /**
@@ -67,7 +67,7 @@ class SurveillantController extends Controller
     */
     public function edit(Surveillant $surveillant)
     {
-        return view('Surveillant.edit', compact('surveillant'));
+        return view('Parametre.Surveillant.edit', compact('surveillant'));
     }
 
     /**

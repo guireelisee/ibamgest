@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DemandeController;
+use App\Http\Controllers\DevoirController;
 use App\Http\Controllers\FiliereController;
 
 use App\Http\Controllers\FicheController;
@@ -52,6 +53,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('fiche', FicheController::class);
 
+    Route::resource('devoir', DevoirController::class);
+
     Route::get('fiche/validate/{fiche}', [FicheController::class,'valider'])->name('fiche.validate');
 
     Route::fallback(function () {
@@ -88,9 +91,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('matiere-suppression', [MatiereController::class, 'destroy'])->name('matiere.destroy');
 
     Route::resource('salle', SalleController::class);
-    
+
     Route::resource('professeur', ProfesseurController::class);
-    
+
     Route::resource('surveillant', SurveillantController::class);
 
 });

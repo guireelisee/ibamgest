@@ -4,11 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Filiere extends Model
 {
-    use HasFactory;
-    protected $guarded = ['idFiliere'];
-    protected $primaryKey = 'idFiliere';
+    use HasFactory, SoftDeletes;
+    protected $guarded = ['id'];
 
 }

@@ -7,19 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Surveillant extends Model
+class Devoir extends Model
 {
     use HasFactory, SoftDeletes;
     protected $guarded = ['id'];
 
     /**
-     * The devoirs that belong to the Surveillant
+     * The surveillants that belong to the Devoir
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function devoirs(): BelongsToMany
+    public function surveillants(): BelongsToMany
     {
-        return $this->belongsToMany(Devoir::class);
+        return $this->belongsToMany(Surveillant::class);
     }
-
 }
