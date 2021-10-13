@@ -51,7 +51,20 @@
                             <ul class="pcoded-submenu">
                                 <li><a href="{{ route('salle.index') }}">Liste des salles</a></li>
                                 <li><a href="{{ route('salle.create') }}">Nouvelle salle</a></li>
-
+                            </ul>
+                        </li>
+                        <li class="nav-item pcoded-hasmenu">
+                            <a href="#" class="nav-link "><span class="pcoded-micon"><i class="feather icon-settings"></i></span><span class="pcoded-mtext">Professeurs</span></a>
+                            <ul class="pcoded-submenu">
+                                <li><a href="{{ route('professeur.index') }}">Liste des professeurs</a></li>
+                                <li><a href="{{ route('professeur.create') }}">Nouveau professeur</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item pcoded-hasmenu">
+                            <a href="#" class="nav-link "><span class="pcoded-micon"><i class="feather icon-settings"></i></span><span class="pcoded-mtext">Surveillant</span></a>
+                            <ul class="pcoded-submenu">
+                                <li><a href="{{ route('surveillant.index') }}">Liste des surveillants</a></li>
+                                <li><a href="{{ route('surveillant.create') }}">Nouveau surveillant</a></li>
                             </ul>
                         </li>
                         @can('admin')

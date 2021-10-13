@@ -5,7 +5,9 @@ use App\Http\Controllers\FiliereController;
 
 use App\Http\Controllers\FicheController;
 use App\Http\Controllers\MatiereController;
+use App\Http\Controllers\ProfesseurController;
 use App\Http\Controllers\SalleController;
+use App\Http\Controllers\SurveillantController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -85,12 +87,16 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('matiere-suppression', [MatiereController::class, 'destroy'])->name('matiere.destroy');
 
+    Route::resource('salle', SalleController::class);
+    
+    Route::resource('professeur', ProfesseurController::class);
+    
+    Route::resource('surveillant', SurveillantController::class);
+
 });
 
 
 Route::resource('user', UserController::class)->middleware(['auth','admin']);
-
-Route::resource('salle', SalleController::class)->middleware(['auth']);
 
 
 require __DIR__.'/auth.php';

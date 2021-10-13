@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-| Demandes de salle
+| Demandes de surveillant
 @endsection
 
 @section('main-content')
@@ -21,7 +21,7 @@
                 <div class="row align-items-center">
                     <div class="col-md-12">
                         <div class="page-header-title">
-                            <h5 class="m-b-10">Demandes de salle</h5>
+                            <h5 class="m-b-10">Demandes de surveillant</h5>
                         </div>
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('index') }}"><i class="feather icon-home"></i></a></li>
@@ -48,32 +48,51 @@
                     </div>
                     @endif
                     <div class="card-body">
-                        <form method="POST" action="{{ route('salle.update',$salle) }}">
+                        <form method="POST" action="{{ route('surveillant.update',$surveillant) }}">
                             @csrf
                             @method('PUT')
                             <div class="row">
                                 <div class="col-sm-4">
                                     <div class="form-group">
-                                        <label class="floating-label" for="nom">Nom de la salle<span class="text-c-red">*</span></label>
-                                        <input type="text" name="nom" class="form-control" id="nom" value="{{$salle->nom}}">
+                                        <label class="floating-label" for="civilite">Civilité<span class="text-c-red">*</span></label>
+                                        <select name="civilite" id="civilite" class="form-control">
+                                            <option value="" disabled>--- SELECTIONNEZ UNE CIVILITÉ ---</option>
+                                            <option value="Mr">Monsieur</option>
+                                            <option value="Mme">Madame</option>
+                                            <option value="Mlle">Mademoiselle</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="form-group">
-                                        <label class="floating-label" for="place">Nombre de places<span class="text-c-red">*</span></label>
-                                        <input type="number" name="place" class="form-control" id="place" min="0" value="{{$salle->place}}">
+                                        <label class="floating-label" for="nom">Nom<span class="text-c-red">*</span></label>
+                                        <input type="text" name="nom" class="form-control" id="nom" value="{{$surveillant->nom}}">
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="form-group">
-                                        <label class="floating-label" for="caracteristique">Caractéristiques <span class="text-muted">(facultatif)</span> </label>
-                                        <input type="text" name="caracteristique" class="form-control" id="caracteristique" value="{{$salle->caracteristique}}">
+                                        <label class="floating-label" for="prenom">Prénom(s)<span class="text-c-red">*</span></label>
+                                        <input type="text" name="prenom" class="form-control" id="prenom" value="{{$surveillant->prenom}}">
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="inputGroupPrepend">(+226)</span>
+                                        </div>
+                                        <input type="text" class="form-control mob_no" id="phone" name="phone" placeholder="Téléphone" value="{{$surveillant->phone}}">
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label class="floating-label" for="email">Email<span class="text-c-red">*</span></label>
+                                        <input type="email" name="email" class="form-control" id="email" value="{{$surveillant->email}}">
                                     </div>
                                 </div>
                             </div>
                             <div class="row float-right">
                                 <div class="col-sm-12">
-                                    <a name="" id="" class="btn btn-primary" href="{{ route('salle.index') }}" role="button">Retour</a>
+                                    <a name="" id="" class="btn btn-primary" href="{{ route('surveillant.index') }}" role="button">Retour</a>
                                     <button type="submit" class="btn btn-success">Enregistrez</button>
                                 </div>
                             </div>
@@ -92,8 +111,10 @@
     console.log(oldInput);
     if (!(oldInput.length === 0)) {
         document.getElementById("nom").value = oldInput['nom'];
-        document.getElementById("place").value = oldInput['place'];
-        document.getElementById("caracteristique").value = oldInput['caracteristique'];
+        document.getElementById("prenom").value = oldInput['prenom'];
+        document.getElementById("phone").value = oldInput['phone'];
+        document.getElementById("email").value = oldInput['email'];
+        document.getElementById("civilite").value = oldInput['civilite'];
     }
 
 
