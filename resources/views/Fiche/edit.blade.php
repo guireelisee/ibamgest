@@ -1,5 +1,10 @@
 @extends('layouts.master')
 
+@section('css')
+<!-- select2 css -->
+<link rel="stylesheet" href="{{ asset('assets/css/plugins/select2.min.css') }}">
+@endsection
+
 @section('title')
 | Gestion des salles
 @endsection
@@ -61,26 +66,26 @@
                             <div class="row">
                                 <div class="col-sm-4">
                                     <div class="form-group">
-                                        <label class="floating-label" for="date_arrivee">Date d'arrivée</label>
+                                        <label class="floating-label" for="date_arrivee">Date d'arrivée<span class="text-c-red">*</span></label>
                                         <input type="text" name="date_arrivee" class="form-control" id="date_arrivee" onblur="this.type='text'" onfocus="this.type='datetime-local'" value="{{$fiche->date_arrivee}}">
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="form-group">
-                                        <label class="floating-label" for="nom_exp">Nom de l'expéditeur</label>
+                                        <label class="floating-label" for="nom_exp">Nom de l'expéditeur<span class="text-c-red">*</span></label>
                                         <input type="text" name="nom_exp" class="form-control" id="nom_exp" value="{{$fiche->nom_exp}}">
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="form-group">
-                                        <label class="floating-label" for="prenom_exp">Prénom(s) de l'expéditeur</label>
+                                        <label class="floating-label" for="prenom_exp">Prénom(s) de l'expéditeur<span class="text-c-red">*</span></label>
                                         <input type="text" name="prenom_exp" class="form-control" id="prenom_exp" value="{{$fiche->prenom_exp}}">
                                     </div>
                                 </div>
-                                <div class="col-sm-4">
+                                <div class="col-sm-4 mt-2">
                                     <div class="form-group">
-                                        <label class="floating-label" for="prenom_exp">Salle</label>
-                                        <select name="salle" id="" class="form-control">
+                                        <select name="salle" id="salle" class="form-control js-example-basic-single">
+                                            <option disabled>--- SELECTIONNEZ UNE SALLE ---</option>
                                             <option value="{{$fiche->salle->id}}" selected>{{$fiche->salle->nom}}</option>
                                             @foreach ($salles as $salle)
                                             @if ($salle->id !== $fiche->salle->id)
@@ -92,7 +97,7 @@
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="form-group">
-                                        <label class="floating-label" for="motif">Motif</label>
+                                        <label class="floating-label" for="motif">Motif<span class="text-c-red">*</span></label>
                                         <input type="text" name="motif" class="form-control" id="motif" value="{{$fiche->motif}}">
                                     </div>
                                 </div>
@@ -139,9 +144,8 @@
                             @can('secretaire_permanent')
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label for="" class="floating-label">Instructions du Sécrétaire Permanent</label>
-                                    <select class="form-control" name="sp">
-                                        <option value="" disabled>--- SELECTIONNEZ UNE INSTRUCTION ---</option>
+                                    <select class="form-control js-example-basic-single" name="sp">
+                                        <option disabled>--- SELECTIONNEZ UNE INSTRUCTION ---</option>
                                         <option value="Pour avis du Directeur">Pour avis du Directeur</option>
                                         <option value="Pour décision du Directeur" selected>Pour décision du Directeur</option>
                                         <option value="Pour l'interessé">Pour l'interessé</option>
@@ -154,8 +158,8 @@
                             @can('directeur')
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label for="" class="floating-label">Instructions du Directeur</label>
-                                    <select name="dir" class="form-control" name="dir">
+                                    <select name="dir" class="form-control js-example-basic-single" name="dir">
+                                        <option disabled>--- SELECTIONNEZ UNE INSTRUCTION ---</option>
                                         <optgroup label="Remettre au SP">
                                             <option value="Remettre au SP pour nécessaire à faire">Pour nécessaire à faire</option>
                                             <option value="Remettre au SP pour étude">Pour étude</option>
@@ -204,7 +208,7 @@
                             @can('scolarite')
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label class="floating-label" for="scolarite">Décision de la directrice de la scolarité</label>
+                                    <label class="floating-label" for="scolarite">Décision de la directrice de la scolarité<span class="text-c-red">*</span></label>
                                     <input type="text" name="scolarite" class="form-control" id="scolarite" value="{{$fiche->scolarite}}">
                                 </div>
                             </div>
@@ -224,7 +228,10 @@
             @endsection
 
             @section('javascript')
-
+            <!-- select2 Js -->
+            <script src="{{ asset('assets/js/plugins/select2.full.min.js') }}"></script>
+            <!-- form-select-custom Js -->
+            <script src="{{ asset('assets/js/pages/form-select-custom.js') }}"></script>
             <script>
                 var oldInput = <?= json_encode(session()->getOldInput()); ?>;
                 console.log(oldInput);
