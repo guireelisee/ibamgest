@@ -54,21 +54,30 @@
                             <thead>
                                 <tr>
                                     <th scope="col">Matière</th>
-                                    <th scope="col">Filière</th>
                                     <th scope="col">Professeur</th>
+                                    <th scope="col">Classe</th>
                                     <th scope="col">Salle</th>
-                                    <th scope="col">Niveau</th>
+                                    <th scope="col">Date et heure</th>
+                                    <th scope="col">Durée</th>
+                                    <th scope="col">Surveillants</th>
                                     <th scope="col">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($devoirs as $devoir)
                                 <tr>
-                                    <td>{{$devoir->matricule}}</td>
-                                    <td>{{$devoir->civilite.' '.$devoir->nom . ' '. $devoir->prenom}}</td>
-                                    <td>{{$devoir->titre}}</td>
-                                    <td><a href="tel:+226{{$devoir->phone}}">{{$devoir->phone}}</a></td>
-                                    <td><a href="mailto:{{$devoir->email}}">{{$devoir->email}}</a></td>
+                                    <td>{{$devoir->matiere->nom_matiere}}</td>
+                                    <td>{{$devoir->professeur->titre . ' '.$devoir->professeur->nom.' '.$devoir->professeur->prenom}}</td>
+                                    <td>{{$devoir->filiere->nom_filiere . ' ' .$devoir->niveau}}</td>
+                                    <td>{{$devoir->salle->nom}}</td>
+                                    <td>{{date('d/m/Y à H:i',strtotime($devoir->date))}}</td>
+                                    <td>{{$devoir->duree}}</td>
+                                    <td>
+                                        @foreach ($devoir->surveillants as $surveillant)
+                                        {{$surveillant->nom . ' '. $surveillant->prenom}}
+                                        <br>
+                                        @endforeach
+                                    </td>
                                     <td class="">
                                         <form action="{{ route('devoir.destroy', $devoir)}}" method="POST">
                                             <a class="btn btn-secondary btn-sm" href="{{ route('devoir.edit',$devoir) }}"><i class="fas fa-edit"></i></a>
@@ -88,11 +97,11 @@
         @endsection
 
         @section("javascript")
+        @include('layouts.confirm-modal')
         <script src="assets/js/plugins/jquery.dataTables.min.js"></script>
         <script src="assets/js/plugins/dataTables.bootstrap4.min.js"></script>
         <script src="assets/js/plugins/select.bootstrap4.min.js"></script>
         <script src="assets/js/plugins/dataTables.select.min.js"></script>
         <script src="assets/js/pages/data-autofill-custom.js"></script>
-        @include('layouts.confirm-modal')
 
         @endsection()

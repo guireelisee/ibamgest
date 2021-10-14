@@ -19,9 +19,10 @@
         <!-- Favicon icon -->
         <link rel="icon" href="{{ asset('assets/images/favicon.ico') }}" type="image/x-icon">
 
+        @yield('css')
+        
         <!-- vendor css -->
         <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
-        @yield('css')
 
     </head>
     <body class="">

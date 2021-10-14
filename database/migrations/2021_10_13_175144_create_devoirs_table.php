@@ -20,8 +20,8 @@ class CreateDevoirsTable extends Migration
             $table->foreignId('filiere_id')->constrained()->onDelete('cascade');
             $table->foreignId('salle_id')->constrained()->onDelete('cascade');
             $table->string('niveau', 100);
-            $table->dateTime('heure');
-            $table->bigInteger('duree');
+            $table->dateTime('date');
+            $table->string('duree',20);
             $table->softDeletes();
             $table->timestamps();
         });
