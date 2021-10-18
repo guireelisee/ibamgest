@@ -108,53 +108,6 @@
         @endcan
 
         @can('secretaire')
-        {{-- <div class="row">
-            <div class="col-sm-4">
-                <div class="card statustic-card">
-                    <div class="card-body text-center">
-                        <h5 class="text-left">Demandes en attente</h5>
-                        <span class="d-block text-c-blue f-36">{{$compteurs['en_cours_sp']+$compteurs['en_cours_dir']+$compteurs['en_cours_scolarite']}}</span>
-                        <p class="m-b-0">Total</p>
-                        <div class="progress">
-                            <div class="progress-bar bg-c-blue" style="width:56%"></div>
-                        </div>
-                    </div>
-                    <div class="card-footer bg-c-blue border-0">
-                        <h6 class="text-white m-b-0"></h6>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="card statustic-card">
-                    <div class="card-body text-center">
-                        <h5 class="text-left">Demandes annulées</h5>
-                        <span class="d-block text-c-blue f-36">0</span>
-                        <p class="m-b-0">Total</p>
-                        <div class="progress">
-                            <div class="progress-bar bg-c-red" style="width:56%"></div>
-                        </div>
-                    </div>
-                    <div class="card-footer bg-c-red border-0">
-                        <h6 class="text-white m-b-0"></h6>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="card statustic-card">
-                    <div class="card-body text-center">
-                        <h5 class="text-left">Demandes validées</h5>
-                        <span class="d-block text-c-blue f-36">{{$compteurs['validate']}}</span>
-                        <p class="m-b-0">Total</p>
-                        <div class="progress">
-                            <div class="progress-bar bg-c-green" style="width:56%"></div>
-                        </div>
-                    </div>
-                    <div class="card-footer bg-c-green border-0">
-                        <h6 class="text-white m-b-0"></h6>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
         <div class="col-sm-12">
             <div class="card">
                 @if ($message = Session::get('success'))

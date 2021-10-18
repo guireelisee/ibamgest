@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DemandeController;
 use App\Http\Controllers\DevoirController;
 use App\Http\Controllers\FiliereController;
@@ -25,9 +26,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth'])->group(function () {
 
-    Route::get('/', function () {
-        return view('index');
-    })->name('index');
+    Route::get('/', [DashboardController::class, 'index'])->name('index');
 
     Route::get('demande', [DemandeController::class, 'index'])->name('demande.index');
 

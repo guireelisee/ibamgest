@@ -18,8 +18,7 @@ class FicheController extends Controller
     {
         $fiches = Fiche::withTrashed()->get();
         $salles = Salle::all();
-        $compteurs = FicheController::compteur();
-        return view('Fiche.all', compact('fiches', 'compteurs','salles'));
+        return view('Fiche.all', compact('fiches','salles'));
     }
 
     /**
@@ -151,33 +150,6 @@ class FicheController extends Controller
     {
         $fiche->delete();
         return redirect()->route('fiche.index')->with('success', 'Annulation réussie.');
-    }
-
-    public static function compteur()
-    {
-        $fiches = Fiche::all();
-        $validate = 0;
-        $en_cours_sp = 0;
-        $en_cours_dir = 0;
-        $en_cours_scolarite = 0;
-
-        foreach ($fiches as $fiche) {
-            if (empty($fiche->sp)) {
-                $en_cours_sp++;
-            } elseif (!empty($fiche->sp) && empty($fiche->dir)) {
-                $en_cours_dir++;
-            } elseif (!empty($fiche->sp) && !empty($fiche->dir) && empty($fiche->scolarite)) {
-                $en_cours_scolarite++;
-            } elseif (!empty($fiche->sp) && !empty($fiche->dir) && !empty($fiche->scolarite)) {
-                $validate++;
-            }
-        }
-        return $data = [
-            'en_cours_sp' => $en_cours_sp,
-            'en_cours_dir' => $en_cours_dir,
-            "en_cours_scolarite" => $en_cours_scolarite,
-            "validate" => $validate
-        ];
     }
 
     public function valider(Fiche $fiche)
