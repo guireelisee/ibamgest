@@ -52,7 +52,7 @@
                                 <div class="col"></div>
                                 <div class="col">
                                     <div class="position-relative d-inline-block">
-                                        <img class="img-radius img-fluid wid-80" src="{{Storage::url($user->avatar)}}" alt="User image">
+                                        <img class="img-radius img-fluid wid-80" src="{{ asset(Storage::url($user->avatar)) }}" alt="User image">
                                     </div>
                                 </div>
                                 <div class="col"></div>
