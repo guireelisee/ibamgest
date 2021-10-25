@@ -23,33 +23,6 @@
         </ul>
         <ul class="navbar-nav ml-auto">
             <li>
-                <div class="dropdown">
-                    <a class="dropdown-toggle" href="#" data-toggle="dropdown"><i class="icon feather icon-bell"></i></a>
-                    <div class="dropdown-menu dropdown-menu-right notification">
-                        <div class="noti-head">
-                            <h6 class="d-inline-block m-b-0">Notifications</h6>
-                        </div>
-                        <ul class="noti-body">
-                            <li class="n-title">
-                                <p class="m-b-0">Nouveau</p>
-                            </li>
-                            <li class="notification">
-                                <div class="media">
-                                    <img class="img-radius" src="assets/images/user/avatar-1.jpg" alt="Generic placeholder image">
-                                    <div class="media-body">
-                                        <p><strong>John Doe</strong><span class="n-time text-muted"><i class="icon feather icon-clock m-r-10"></i>5 min</span></p>
-                                        <p>New ticket Added</p>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                        <div class="noti-footer">
-                            <a href="#">show all</a>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li>
                 <div class="dropdown drp-user">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="feather icon-user"></i>
