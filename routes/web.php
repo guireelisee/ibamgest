@@ -11,7 +11,6 @@ use App\Http\Controllers\ProfesseurController;
 use App\Http\Controllers\SalleController;
 use App\Http\Controllers\SurveillantController;
 use App\Http\Controllers\UserController;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,10 +23,6 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/linkstorage', function () {
-    Artisan::call('storage:link'); // this will do the command line job
-});
 
 Route::middleware(['auth'])->group(function () {
 
