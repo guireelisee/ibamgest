@@ -112,7 +112,7 @@ class DemandeController extends Controller
 
         $smsContent=[
             "from"=>"IBAM-INFOS",
-            "to"=>["$request->nom"],
+            "to"=>["$request->tel"],
             "text"=>"Bonjour ! Mr/Mme $request->nom. Votre demande d'audience auprès du Directeur a été acceptée et programmée pour le $request->dateA, à $request->heureA."
         ];
         $jsonContent = json_encode($smsContent);
@@ -178,7 +178,7 @@ class DemandeController extends Controller
 
         $smsContent=[
             "from"=>"IBAM-INFOS",
-            "to"=>["$request->nom"],
+            "to"=>["$request->tel"],
             "text"=>"Bonjour ! Mr/Mme $request->nom. Votre demande d'audience auprès du Directeur a été rejettée."
         ];
         $jsonContent = json_encode($smsContent);
