@@ -15,7 +15,8 @@
         </div>
         <div class="auth-side-form">
             <div class=" auth-content">
-                <img src="{{ asset('assets/images/auth/auth-logo-dark.png') }}" alt="" class="img-fluid mb-4 d-block d-xl-none d-lg-none">
+                <h4 class="">IBAM<span style="color: red; font-size: 2rem">.</span>GEST</h4>
+                {{-- <img src="{{ asset('assets/images/auth/auth-logo-dark.png') }}" alt="" class="img-fluid mb-4 d-block d-xl-none d-lg-none"> --}}
                 <!-- Session Status -->
                 @if ($errors->any())
                 <div class="alert alert-danger">
