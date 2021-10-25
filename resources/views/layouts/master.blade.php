@@ -2,7 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-    <title>Laravel Project @yield('title')</title>
+    <title>IBAM GEST @yield('title')</title>
     <!-- HTML5 Shim and Respond.js IE11 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 11]>
@@ -20,7 +20,7 @@
         <link rel="icon" href="{{ asset('assets/images/favicon.ico') }}" type="image/x-icon">
 
         @yield('css')
-        
+
         <!-- vendor css -->
         <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 
