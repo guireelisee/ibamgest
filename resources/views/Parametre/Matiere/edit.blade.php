@@ -61,7 +61,12 @@
                                 <input type="hidden" value="{{$matiere[0]->id}}" name="id">
 
                                 <div class="row">
-
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="nom" class="floating-label">Code de la matière</label>
+                                            <input type="text" class="form-control" value="{{ $matiere[0]->code_matiere }}" name="code_matiere" id="code_matiere">
+                                        </div>
+                                      </div>
                                       <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="nom" class="floating-label">Nom de la filière</label>

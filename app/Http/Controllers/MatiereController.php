@@ -37,9 +37,11 @@ class MatiereController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            "code_matiere" => 'required',
             'nom' => 'required'
         ]);
         Matiere::create([
+            "code_matiere" => $request->code_matiere,
             "nom_matiere" => $request->nom
         ]);
         return redirect()->route('matiere.index')
@@ -79,11 +81,13 @@ class MatiereController extends Controller
     public function update(Request $request)
     {
         $request->validate([
+            "code_matiere" => 'required',
             'nom' => 'required'
         ]);
         $idMatiere = $request->id;
         $demande = Matiere::where('id', $idMatiere);
         $demande->update([
+            "code_matiere" => $request->code_matiere,
             "nom_matiere" => $request->nom
         ]);
         return redirect()->route('matiere.index')

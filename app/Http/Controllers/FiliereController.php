@@ -37,9 +37,11 @@ class FiliereController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'code_filiere' => 'required',
             'nom' => 'required'
         ]);
         Filiere::create([
+            "code_filiere" => $request->code_filiere,
             "nom_filiere" => $request->nom
         ]);
         return redirect()->route('filiere.index')
@@ -79,11 +81,13 @@ class FiliereController extends Controller
     public function update(Request $request)
     {
         $request->validate([
+            "code_filiere" => 'required',
             'nom' => 'required'
         ]);
         $idFiliere = $request->id;
         $demande = Filiere::where('id', $idFiliere);
         $demande->update([
+            "code_filiere" => $request->code_filiere,
             "nom_filiere" => $request->nom
         ]);
         return redirect()->route('filiere.index')

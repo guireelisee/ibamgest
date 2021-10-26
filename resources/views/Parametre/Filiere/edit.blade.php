@@ -62,7 +62,13 @@
 
                                 <div class="row">
 
-                                      <div class="col-md-12">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="nom" class="floating-label">Code de la filière</label>
+                                            <input type="text" class="form-control" value="{{ $filiere[0]->code_filiere }}" name="code_filiere" id="code_filiere">
+                                        </div>
+                                      </div>
+                                      <div class="col-md-9">
                                         <div class="form-group">
                                             <label for="nom" class="floating-label">Nom de la filière</label>
                                             <input type="text" class="form-control" value="{{ $filiere[0]->nom_filiere }}" name="nom" id="nom">

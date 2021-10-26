@@ -57,6 +57,7 @@
                             <table id="scroll-fill" class="table table-striped table-bordered nowrap">
                                 <thead>
                                     <tr>
+                                      <th>Code de la filière</th>
                                       <th>Nom de la filière</th>
                                       <th>Actions</th>
                                     </tr>
@@ -65,6 +66,7 @@
 
                                         @foreach ($filieres as $filiere)
                                             <tr>
+                                                <td>{{ $filiere->code_filiere }}</td>
                                                 <td>{{ $filiere->nom_filiere }}</td>
                                                 <td>
                                                     <a type="button"
