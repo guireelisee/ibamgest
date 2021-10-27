@@ -12,6 +12,9 @@
     @csrf
     <input type="hidden" name="avatar" value="{{$request->avatar}}">
     <input type="hidden" name="email" value="{{$request->email}}">
+    <input type="hidden" name="name" value="{{$request->name}}">
+    <input type="hidden" name="firstname" value="{{$request->firstname}}">
+
     <input type="hidden" name="phone" value="{{$request->phone}}">
     <input type="hidden" name="password" value="{{$request->password}}">
 
@@ -70,7 +73,7 @@ inputElements.forEach((ele,index)=>{
       inputElements[index+1].dispatchEvent(new Event('input'))
     }
   })
-  
+
 })
 
 
@@ -94,7 +97,7 @@ function onSubmit(e){
             })
   }
 
-  
+
 }
     $(document).ready(function(){
         // Prepare the preview for profile picture

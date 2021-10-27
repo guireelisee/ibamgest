@@ -66,6 +66,8 @@ class DevoirController extends Controller
             'duree' => $request->duree,
             'date' => $request->date,
         ]);
+
+
         $devoir->surveillants()->sync($request->input('surveillant'));
         return redirect()->route('devoir.index')->with('success', 'Nouveau devoir enregistré.');
     }

@@ -21,8 +21,16 @@
             <h6 class="mt-1">Avatar</h6>
         </div>
     </div>
-    
-    
+    <div class="form-group mb-3">
+        <label class="floating-label" for="email">Nom</label>
+        <input id="name" class="form-control" type="text" name="name"/>
+    </div>
+
+    <div class="form-group mb-3">
+        <label class="floating-label" for="email">Prénom</label>
+        <input id="firstname" class="form-control" type="text" name="firstname"/>
+    </div>
+
     <!-- Email Address -->
     <div class="form-group mb-3">
         <label class="floating-label" for="email">Email</label>

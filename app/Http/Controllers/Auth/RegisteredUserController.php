@@ -92,16 +92,18 @@ class RegisteredUserController extends Controller
             $filename = time() . '.' . $request->avatar->extension();
             $path = $request->avatar->storeAs('avatars', $filename, 'public');
             $user = User::create([
-                'name' => "Demandeur",
+                'name' => $request->name,
+                'firstname' => $request->firstname,
                 'email' => $request->email,
-                'phone' => $request->phone,
+                'phone' => "+226".$request->phone,
                 'password' => Hash::make($request->password),
                 'role_id' => 6,
                 'avatar' => $path
             ]);
             } else {
                 $user = User::create([
-                    'name' => "Demandeur",
+                    'name' => $request->name,
+                    'firstname' => $request->firstname,
                     'email' => $request->email,
                     'phone' => $request->phone,
                     'password' => Hash::make($request->password),
@@ -112,11 +114,11 @@ class RegisteredUserController extends Controller
 
             Auth::login($user);
 
-            return redirect(RouteServiceProvider::HOME);
+            return redirect('/mes-demande');
         } else {
             return view('auth.register-demandeur');
         }
-        
+
     }
 
     public function inscription_demandeur(Request $request)
