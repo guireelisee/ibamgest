@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Demande;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Http;
 
@@ -20,6 +21,12 @@ class DemandeController extends Controller
         return view('Demande-views/all')->with('demandes',$demandes);
     }
 
+    public function auth_index()
+    {
+        $demandes = Demande::where('id_demandeur', Auth::user()->id)->orderByDesc('date_demande')->get()->values();
+        return view('Demande-views/user-all')->with('demandes',$demandes);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -28,6 +35,12 @@ class DemandeController extends Controller
     public function create()
     {
         return view('Demande-views/add');
+
+    }
+
+    public function auth_create()
+    {
+        return view('Demande-views/auth-add');
 
     }
 
@@ -57,6 +70,25 @@ class DemandeController extends Controller
         ]);
         return redirect()->route('demande.index')
                         ->with('success','Demande ajoutée.');
+    }
+
+    public function auth_store(Request $request)
+    {
+        $request->validate([
+            'motif' => 'required',
+            'dateD' => 'required',
+        ]);
+        Demande::create([
+            "nomDemandeur" => Auth::user()->name,
+            "prenomDemandeur" => Auth::user()->firstname,
+            "tel" => Auth::user()->phone,
+            "motif" => $request->motif,
+            "date_demande" => $request->dateD,
+            "id_demandeur" => Auth::user()->id
+
+        ]);
+        return redirect()->route('demande.auth.index')
+                        ->with('success','Demande soumis.');
     }
 
     /**
@@ -222,7 +254,13 @@ class DemandeController extends Controller
         $demande = Demande::where('idDemande', $id);
         $demande->delete();
 
-        return redirect()->route('demande.index')
+        if (Auth::user()->role_id === 6) {
+            return redirect()->route('demande.auth.index')
                         ->with('success','Demande supprimée.');
+        } else {
+            return redirect()->route('demande.index')
+                        ->with('success','Demande supprimée.');
+        }
+
     }
 }

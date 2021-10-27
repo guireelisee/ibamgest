@@ -206,12 +206,24 @@
                             @endcan
 
                             @can('scolarite')
-                            <div class="col-sm-12">
-                                <div class="form-group">
-                                    <label class="floating-label" for="scolarite">Décision de la directrice de la scolarité<span class="text-c-red">*</span></label>
-                                    <input type="text" name="scolarite" class="form-control" id="scolarite" value="{{$fiche->scolarite}}">
+                                <div class="row">
+                                    <div class="col-sm-5">
+                                        <div class="form-group">
+                                            <select class="form-control" name="valide" id="valide">
+                                                <option disabled>--- SELECTIONNEZ UNE DECISION ---</option>
+                                                <option value="accorde">Salle accordée</option>
+                                                <option value="reffuse">Demande réjettée</option>
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-7">
+                                        <div class="form-group">
+                                            <label class="floating-label" for="scolarite">Décision de la directrice de la scolarité<span class="text-c-red">*</span></label>
+                                            <input type="text" name="scolarite" class="form-control" id="scolarite" value="{{$fiche->scolarite}}">
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
                             @endcan
 
 

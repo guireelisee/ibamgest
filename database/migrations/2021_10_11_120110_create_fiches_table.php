@@ -23,6 +23,7 @@ class CreateFichesTable extends Migration
             $table->string('sp')->nullable();
             $table->string('dir')->nullable();
             $table->string('scolarite')->nullable();
+            $table->boolean('accepte')->nullable();
             $table->foreignId('salle_id')->constrained()->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();

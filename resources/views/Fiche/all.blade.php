@@ -381,7 +381,12 @@
                                         @if(empty($fiche->scolarite))
                                         <div name="" class="btn btn-warning btn-sm text-white">En attente de validation</div>
                                         @else
-                                        <div name="" class="btn btn-success btn-sm text-white">Validé
+                                        <div name="" class="btn btn-success btn-sm text-white">
+                                            @if ($fiche->accepte == true)
+                                                Validé
+                                            @else
+                                                Refusé
+                                            @endif
                                             @if (!empty($fiche->sp) && !empty($fiche->dir) && !empty($fiche->scolarite))
                                             le {{date('d/m/Y à H:i', strtotime($fiche->date_validation))}}
                                             @endif

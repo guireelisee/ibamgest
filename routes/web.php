@@ -31,6 +31,12 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('demande', [DemandeController::class, 'index'])->name('demande.index');
 
+    Route::get('mes-demande', [DemandeController::class, 'auth_index'])->name('demande.auth.index');
+
+    Route::post('mes-demande', [DemandeController::class, 'auth_store'])->name('demande.auth.store');
+    Route::get('demande-auth-create', [DemandeController::class, 'auth_create'])->name('demande.auth.create');
+
+
     Route::get('demande-create', [DemandeController::class, 'create'])->name('demande.create');
 
     Route::get('demande-show/{id}', [DemandeController::class, 'show'])->name('demande.show');

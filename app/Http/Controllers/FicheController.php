@@ -110,7 +110,7 @@ class FicheController extends Controller
             $fiche->update(['sp' => $request->sp]);
 
             $message = "Bonjour, vous avez une demande de salle en cours de validation.\nCi-dessous les details:\n----------------------------\nExpediteur: " . $fiche->nom_exp . ' ' . $fiche->prenom_exp . "\nSalle demandee: " . $fiche->salle->nom . "\nMotif: " . $fiche->motif . "\nInstructions du SP: ".$request->sp."\n----------------------------\nMerci de vous connecter pour effectuer la validation.";
-            $status = SmsController::sendSms($message, "73916210");
+            $status = SmsController::sendSms($message, "73916210", "IBAM-SALLE");
 
             $notif = ( $status === 200 || $status === 201) ? 'Notification envoyée au Directeur' : 'Rechargez votre compte';
 
@@ -118,21 +118,29 @@ class FicheController extends Controller
             $fiche->update(['dir' => $request->dir]);
 
             $message = "Bonjour, vous avez une demande de salle en cours de validation.\nCi-dessous les details:\n----------------------------\nExpediteur: " . $fiche->nom_exp . ' ' . $fiche->prenom_exp . "\nSalle demandee: " . $fiche->salle->nom . "\nMotif: " . $fiche->motif . "\nInstructions du Directeur: " . $fiche->dir . "\n----------------------------\nMerci de vous connecter pour effectuer la validation.";
-            $status = SmsController::sendSms($message, "73916210");
+            $status = SmsController::sendSms($message, "73916210", "IBAM-SALLE");
 
             $notif = ( $status === 200 || $status === 201) ? 'Notification envoyée à la scolarité' : 'Rechargez votre compte';
 
         } elseif(empty($request->scolarite)) {
             $request->validate([
+                "valide" => "required",
                 "scolarite" => "required"
             ]);
         } elseif(!empty($request->scolarite)) {
+            if ($request->valide == "accorde") {
+                $vali = true;
+            } else {
+                $vali = false;
+            }
+
             $fiche->update([
+                "accepte" => $vali,
                 'scolarite' => $request->scolarite,
                 'date_validation' => now()
             ]);
             $message = "Bonjour, vous avez une demande de salle en cours de validation.\nCi-dessous les details:\n----------------------------\nExpediteur: " . $fiche->nom_exp . ' ' . $fiche->prenom_exp . "\nSalle demandee: " . $fiche->salle->nom . "\nMotif: " . $fiche->motif . "\nInstructions de la scolarité: " . $fiche->dir . "\n----------------------------\nStatut: Demande traitee.";
-            $status = SmsController::sendSms($message, "73916210");
+            $status = SmsController::sendSms($message, "73916210", "IBAM-SALLE");
 
             $notif = ( $status === 200 || $status === 201) ? 'Notification envoyée à la secretaire' : 'Rechargez votre compte';
         }
@@ -158,7 +166,7 @@ class FicheController extends Controller
             'secretaire' => true
         ]);
         $message = "Bonjour, vous avez une demande de salle en cours de validation.\nCi-dessous les details:\n----------------------------\nExpediteur: " . $fiche->nom_exp . ' ' . $fiche->prenom_exp . "\nSalle demandee: " . $fiche->salle->nom . "\nMotif: " . $fiche->motif."\n----------------------------\nMerci de vous connecter pour effectuer la validation.";
-        $status = SmsController::sendSms($message, "73916210");
+        $status = SmsController::sendSms($message, "73916210", "IBAM-SALLE");
         $notif = ( $status === 200 || $status === 201) ? 'Notification envoyée au SP' : 'Rechargez votre compte';
 
         return redirect()->route('fiche.index')->with('success', "Validation réussie. $notif");

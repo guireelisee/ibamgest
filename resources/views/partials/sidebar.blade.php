@@ -98,12 +98,12 @@
                 <li class="nav-item pcoded-hasmenu">
                     <a href="#" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Audiences</span></a>
                     <ul class="pcoded-submenu">
-                        <li><a href="{{ route('demande.index') }}">Mes demandes</a></li>
-                        <li><a href="{{ route('demande.create') }}">Nouvelle demande</a></li>
+                        <li><a href="{{ route('demande.auth.index') }}">Mes demandes</a></li>
+                        <li><a href="{{ route('demande.auth.create') }}">Nouvelle demande</a></li>
 
                     </ul>
                 </li>
-                
+
                 <li class="nav-item pcoded-hasmenu">
                     <a href="#" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Salles</span></a>
                     <ul class="pcoded-submenu">
@@ -111,10 +111,10 @@
                         <li><a href="{{ route('fiche.create') }}">Nouvelle demande</a></li>
                     </ul>
                 </li>
-                
+
             </ul>
             @endcan
-            
+
         </div>
     </div>
 </nav>

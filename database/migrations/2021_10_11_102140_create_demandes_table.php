@@ -26,6 +26,8 @@ class CreateDemandesTable extends Migration
             $table->date("date_reponse")->nullable();
             $table->date("date_audience")->nullable();
             $table->time("heure_audience")->nullable();
+            $table->bigInteger("id_demandeur");
+
             $table->timestamps();
         });
     }
