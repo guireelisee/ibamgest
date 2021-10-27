@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DemandeController;
 use App\Http\Controllers\DevoirController;
@@ -111,6 +112,10 @@ Route::middleware(['auth'])->group(function () {
 
 
 Route::resource('user', UserController::class)->middleware(['auth','admin']);
+Route::get('inscription', [RegisteredUserController::class, 'inscription_demandeur_index'])->name('user.inscription.index');
+Route::post('inscription', [RegisteredUserController::class, 'inscription_demandeur'])->name('user.inscription.save');
+Route::get('confirm-code', [RegisteredUserController::class, 'confirm_code_view'])->name('user.inscription.confirm-code-index');
+Route::post('verifier-code', [RegisteredUserController::class, 'verifier_code'])->name('user.inscription.verifier-code');
 
 
 require __DIR__.'/auth.php';

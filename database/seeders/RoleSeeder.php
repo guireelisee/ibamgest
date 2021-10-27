@@ -33,5 +33,9 @@ class RoleSeeder extends Seeder
         Role::create([
             'name' => 'Scolarité'
         ]);
+        
+        Role::create([
+            'name' => 'Demandeur'
+        ]);
     }
 }

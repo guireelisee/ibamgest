@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\SmsController;
 use App\Models\Role;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
+use Faker\Core\Number;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -71,5 +73,65 @@ class RegisteredUserController extends Controller
         Auth::login($user);
 
         return redirect(RouteServiceProvider::HOME);
+    }
+
+    public function inscription_demandeur_index()
+    {
+        return view('auth.register-demandeur');
+    }
+
+    public function confirm_code_view()
+    {
+        return view('auth.confirm-code');
+    }
+
+    public function verifier_code(Request $request)
+    {
+        if ($request->code_envoye == $request->code_saisie) {
+            if ($request->avatar) {
+            $filename = time() . '.' . $request->avatar->extension();
+            $path = $request->avatar->storeAs('avatars', $filename, 'public');
+            $user = User::create([
+                'name' => "Demandeur",
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'password' => Hash::make($request->password),
+                'role_id' => 6,
+                'avatar' => $path
+            ]);
+            } else {
+                $user = User::create([
+                    'name' => "Demandeur",
+                    'email' => $request->email,
+                    'phone' => $request->phone,
+                    'password' => Hash::make($request->password),
+                    'role_id' => 6
+                ]);
+            }
+            event(new Registered($user));
+
+            Auth::login($user);
+
+            return redirect(RouteServiceProvider::HOME);
+        } else {
+            return view('auth.register-demandeur');
+        }
+        
+    }
+
+    public function inscription_demandeur(Request $request)
+    {
+        $request->validate([
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'phone' => ['required', 'string', 'max:255', 'unique:users'],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ]);
+        $code = mt_rand(0, 9).''.mt_rand(0, 9).''.mt_rand(0, 9).''.mt_rand(0, 9);
+
+        if (SmsController::sendSms("IBAM-INFOS", "Code de validation : ".$code.". Saisissez le pour valider votre inscription", $request->phone)) {
+            return view("auth.confirm-code", ['code'=>$code, 'request'=>$request]);
+        } else {
+            echo "Une erreur est survenue !";
+        }
     }
 }

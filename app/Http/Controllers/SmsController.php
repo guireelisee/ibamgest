@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 class SmsController extends Controller
 {
-    public static function sendSms($message, $to)
+    public static function sendSms($sender_id,$message, $to)
     {
 
-        $apiKey = "5e186c6d-0b7d-4be0-9131-c7d6e3477a0a";
-        $from = "IBAM-NOTIF";
+        $apiKey = "b5fb79ba-a89e-44e2-93e2-5b95ce2a631e";
+        $from = "$sender_id";
 
         $smsContent = [
             "from" => $from,

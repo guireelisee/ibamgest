@@ -25,6 +25,7 @@
         <label class="custom-control-label" for="customCheck1">Se souvenir de moi</label>
     </div>
     <button class="btn btn-block btn-primary mb-4">Se connecter</button>
+    
     <div class="text-center">
         {{-- <div class="saprator my-4"><span>OU</span></div>
         <button class="btn text-white bg-facebook mb-2 mr-2  wid-40 px-0 hei-40 rounded-circle"><i class="fab fa-facebook-f"></i></button>
@@ -34,6 +35,8 @@
         <p class="mb-2 mt-4 text-muted">Mot de passe oublié ? <a  href="{{ route('password.request') }}" class="f-w-400">Réinitialiser</a></p>
         @endif
     </div>
+    <a  href="{{ route('user.inscription.index') }}" class="btn btn-block btn-primary mb-4 text-white">S'inscrire</a>
+
 </form>
 
 @endsection
