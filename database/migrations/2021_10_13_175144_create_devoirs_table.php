@@ -23,17 +23,23 @@ class CreateDevoirsTable extends Migration
             $table->dateTime('date');
             $table->string('duree',20);
 
-            $table->dateTime('date_depot_sujet')->default(null);
-            $table->string('sujet_depose_par')->default(null);
+            $table->dateTime('date_depot_sujet')->nullable();
+            $table->string('sujet_depose_par')->nullable();
 
-            $table->dateTime('date_prise_sujet');
-            $table->string('sujet_pris_par');
+            $table->dateTime('date_prise_sujet')->nullable();
+            $table->string('sujet_pris_par')->nullable();
 
-            $table->dateTime('date_retour_copie');
-            $table->string('copie_envoye_par');
+            $table->dateTime('date_retour_copie')->nullable();
+            $table->string('copie_envoye_par')->nullable();
 
-            $table->dateTime('date_prise_copie_professeur');
-            $table->string('copie_prise_par');
+            $table->dateTime('date_prise_copie_professeur')->nullable();
+            $table->string('copie_prise_par')->nullable();
+
+            $table->dateTime('date_retour_copie_apres_correction')->nullable();
+            $table->string('copie_retourne_par')->nullable();
+
+            $table->dateTime('date_prise_copie_etudiants')->nullable();
+            $table->string('copie_prise_par_etudiant')->nullable();
 
             $table->softDeletes();
             $table->timestamps();

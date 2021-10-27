@@ -54,6 +54,18 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('devoir', DevoirController::class);
 
+    Route::post('depot-sujet', [DevoirController::class, 'depot_sujet'])->name('devoir.depot-sujet');
+
+    Route::post('prise-sujet', [DevoirController::class, 'prise_sujet'])->name('devoir.prise-sujet');
+
+    Route::post('retour-copies', [DevoirController::class, 'retour_copies'])->name('devoir.retour-copies');
+
+    Route::post('prise-copies-prof', [DevoirController::class, 'prise_copies_prof'])->name('devoir.prise-copies-prof');
+
+    Route::post('retour-copie-apres-correction', [DevoirController::class, 'retour_copie_apres_correction'])->name('devoir.retour-copie-apres-correction');
+
+    Route::post('prise-copie-etudiants', [DevoirController::class, 'prise_copie_etudiants'])->name('devoir.prise-copie-etudiants');
+
     Route::get('fiche/validate/{fiche}', [FicheController::class,'valider'])->name('fiche.validate');
 
     Route::fallback(function () {

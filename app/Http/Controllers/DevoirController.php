@@ -135,6 +135,89 @@ class DevoirController extends Controller
         return redirect()->route('devoir.index')->with('success', 'Modification du devoir réussie.');
     }
 
+    public function depot_sujet(Request $request)
+    {
+        $request->validate([
+            'date_depot_sujet' => ['required'],
+            'sujet_depose_par' => ['required'],
+        ]);
+        $devoir = Devoir::where('id', $request->id);
+        $devoir->update([
+            'date_depot_sujet' => $request->date_depot_sujet,
+            'sujet_depose_par' => $request->sujet_depose_par,
+        ]);
+        return redirect()->route('devoir.index')->with('success', 'Modification du devoir réussie.');
+    }
+
+    public function prise_sujet(Request $request)
+    {
+        $request->validate([
+            'date_prise_sujet' => ['required'],
+            'sujet_pris_par' => ['required'],
+        ]);
+        $devoir = Devoir::where('id', $request->id);
+        $devoir->update([
+            'date_prise_sujet' => $request->date_prise_sujet,
+            'sujet_pris_par' => $request->sujet_pris_par,
+        ]);
+        return redirect()->route('devoir.index')->with('success', 'Modification du devoir réussie.');
+    }
+
+    public function retour_copies(Request $request)
+    {
+        $request->validate([
+            'date_retour_copie' => ['required'],
+            'copie_envoye_par' => ['required'],
+        ]);
+        $devoir = Devoir::where('id', $request->id);
+        $devoir->update([
+            'date_retour_copie' => $request->date_retour_copie,
+            'copie_envoye_par' => $request->copie_envoye_par,
+        ]);
+        return redirect()->route('devoir.index')->with('success', 'Modification du devoir réussie.');
+    }
+
+    public function prise_copies_prof(Request $request)
+    {
+        $request->validate([
+            'date_prise_copie_professeur' => ['required'],
+            'copie_prise_par' => ['required'],
+        ]);
+        $devoir = Devoir::where('id', $request->id);
+        $devoir->update([
+            'date_prise_copie_professeur' => $request->date_prise_copie_professeur,
+            'copie_prise_par' => $request->copie_prise_par,
+        ]);
+        return redirect()->route('devoir.index')->with('success', 'Modification du devoir réussie.');
+    }
+
+    public function retour_copie_apres_correction(Request $request)
+    {
+        $request->validate([
+            'date_retour_copie_apres_correction' => ['required'],
+            'copie_retourne_par' => ['required'],
+        ]);
+        $devoir = Devoir::where('id', $request->id);
+        $devoir->update([
+            'date_retour_copie_apres_correction' => $request->date_retour_copie_apres_correction,
+            'copie_retourne_par' => $request->copie_retourne_par,
+        ]);
+        return redirect()->route('devoir.index')->with('success', 'Modification du devoir réussie.');
+    }
+
+    public function prise_copie_etudiants(Request $request)
+    {
+        $request->validate([
+            'date_prise_copie_etudiants' => ['required'],
+            'copie_prise_par_etudiant' => ['required'],
+        ]);
+        $devoir = Devoir::where('id', $request->id);
+        $devoir->update([
+            'date_prise_copie_etudiants' => $request->date_prise_copie_etudiants,
+            'copie_prise_par_etudiant' => $request->copie_prise_par_etudiant,
+        ]);
+        return redirect()->route('devoir.index')->with('success', 'Modification du devoir réussie.');
+    }
     /**
     * Remove the specified resource from storage.
     *
