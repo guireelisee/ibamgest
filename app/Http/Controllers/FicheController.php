@@ -6,6 +6,7 @@ use App\Models\Fiche;
 use App\Models\Salle;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FicheController extends Controller
 {
@@ -16,9 +17,16 @@ class FicheController extends Controller
     */
     public function index()
     {
-        $fiches = Fiche::withTrashed()->get();
-        $salles = Salle::all();
-        return view('Fiche.all', compact('fiches','salles'));
+        if (Auth::user()->role_id == 6) {
+            $fiches = Fiche::Where('id_demandeur', Auth::user()->id)->get();
+            $salles = Salle::all();
+            return view('Fiche.all', compact('fiches','salles'));
+        } else {
+            $fiches = Fiche::withTrashed()->get();
+            $salles = Salle::all();
+            return view('Fiche.all', compact('fiches','salles'));
+        }
+
     }
 
     /**
@@ -32,6 +40,12 @@ class FicheController extends Controller
         return view('Fiche.add', compact('salles'));
     }
 
+    public function auth_create()
+    {
+        $salles = Salle::all();
+        return view('Fiche.auth-add', compact('salles'));
+    }
+
     /**
     * Store a newly created resource in storage.
     *
@@ -40,21 +54,49 @@ class FicheController extends Controller
     */
     public function store(Request $request)
     {
-        $request->validate([
-            'nom_exp' => 'required',
-            'prenom_exp' => 'required',
-            'salle' => 'required',
-            'motif' => 'required',
-            'date_arrivee' => 'required',
-        ]);
-        Fiche::create([
-            'nom_exp' => $request->nom_exp,
-            'prenom_exp' => $request->prenom_exp,
-            'salle_id' => $request->salle,
-            'motif' => $request->motif,
-            'date_arrivee' => $request->date_arrivee,
-        ]);
-        return redirect()->route('fiche.index')->with('success', 'Demande de salle enregistrée avec succès.');
+        if (Auth::user()->role_id == 6) {
+            $request->validate([
+                'salle' => 'required',
+                'motif' => 'required',
+                'date_arrivee' => 'required',
+                'date_debut_occupation' => 'required',
+                'date_fin_occupation' => 'required',
+
+            ]);
+
+            Fiche::create([
+                'nom_exp' => Auth::user()->name,
+                'prenom_exp' => Auth::user()->firstname,
+                'id_demandeur' => Auth::user()->id,
+                'salle_id' => $request->salle,
+                'motif' => $request->motif,
+                'date_arrivee' => $request->date_arrivee,
+                'date_debut_occupation' => $request->date_debut_occupation,
+                'date_fin_occupation' => $request->date_fin_occupation,
+            ]);
+
+            return redirect()->route('fiche.index')->with('success', 'Demande de salle enregistrée avec succès.');
+
+        } else {
+            $request->validate([
+                'nom_exp' => 'required',
+                'prenom_exp' => 'required',
+                'salle' => 'required',
+                'motif' => 'required',
+                'date_arrivee' => 'required',
+                'date_debut_occupation' => 'required',
+                'date_fin_occupation' => 'required',
+            ]);
+            Fiche::create([
+                'nom_exp' => $request->nom_exp,
+                'prenom_exp' => $request->prenom_exp,
+                'salle_id' => $request->salle,
+                'motif' => $request->motif,
+                'date_arrivee' => $request->date_arrivee,
+            ]);
+            return redirect()->route('fiche.index')->with('success', 'Demande de salle enregistrée avec succès.');
+        }
+
     }
 
     /**

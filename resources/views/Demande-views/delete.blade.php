@@ -61,7 +61,11 @@
                                 <div class="container" style="text-align: center">
                                     <p style="font-size: 17px">Confirmez-vous la suppression de la demande d'audience ?</p>
                                     <button type="submit" class="btn btn-danger">Supprimer</button>
-                                    <a href="{{route('demande.index')}}" class="btn btn-primary">Retour</a>
+                                    @if (Auth::user()->role_id == 6)
+                                        <a href="{{route('demande.auth.index')}}" class="btn btn-primary">Retour</a>
+                                    @else
+                                        <a href="{{route('demande.index')}}" class="btn btn-primary">Retour</a>
+                                    @endif
                                 </div>
                             </form>
                         </div>

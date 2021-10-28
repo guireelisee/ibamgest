@@ -404,6 +404,80 @@
         </div>
         @endcan
 
+        @can('demandeur')
+        <div class="row">
+            @foreach ($fiches as $fiche)
+                <div class="col-md-4">
+                    <div class="card user-card user-card-1">
+                        <div class="card-header border-0 p-2 pb-0">
+                            <div class="cover-img-block" style="text-align: center">
+                                <img src="{{asset('assets/images/demande.png')}}" width="55px" alt="" class="img-fluid">
+                            </div>
+                        </div>
+
+                        <div class="card-body pt-0">
+                            <h6>Demande soumis le : <span style="color: rgb(131, 131, 131)">{{date('d/m/Y', strtotime($fiche->date_arrivee))}}</span> </h6>
+                            <h6>Salle demandée :<span style="color: rgb(131, 131, 131)"> {{ $fiche->salle->nom }}</span></h6>
+
+                            <h6>Motif :<span style="color: rgb(131, 131, 131)">{{ $fiche->motif }}</span></h6>
+                            <h6>Début de l'occupation :
+                                <span style="color: rgb(131, 131, 131)">{{date('d/m/Y', strtotime($fiche->date_debut_occupation))}} à {{date('H:i', strtotime($fiche->date_fin_occupation))}}</span>
+
+                            </h6>
+
+                            <h6>Fin de l'occupation :
+                                <span style="color: rgb(131, 131, 131)">{{date('d/m/Y', strtotime($fiche->date_fin_occupation))}} à {{date('H:i', strtotime($fiche->date_fin_occupation))}}</span>
+
+                            </h6>
+
+                            @if ($fiche->accepte === 1 || $fiche->accepte === true)
+                                <button class="btn btn-block btn-success">Salle accordée</button>
+                            @endif
+                            @if ($fiche->accepte === 0 || $fiche->accepte === false)
+                                <button class="btn btn-block btn-danger">Salle refusée</button>
+                            @endif
+                            @if ($fiche->accepte === null)
+                                <button class="btn btn-block btn-warning">En attente de reponse</button>
+                            @endif
+
+                        </div>
+
+                        <div class="card-body hover-data text-white">
+                            <div class="">
+                                @if ($fiche->accepte === 0 || $fiche->accepte === false)
+                                    <h6 class="text-white">Motif de refus : {{ $fiche->scolarite }}</h6>
+                                @endif
+
+                                @if ($fiche->accepte === null)
+                                <h4 class="text-white">Actions</h4>
+
+                                <form action="{{ route('fiche.destroy', $fiche)}}" method="POST" class="d-inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-danger btn-sm confirm-modal" type="submit" data-name=""><i class="fas fa-trash"></i></button>
+                                </form>
+                                @endif
+
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+                </div>
+
+
+            @endforeach
+
+            <div class="card user-card user-card-1">
+                <br>
+
+        </div>
+        @endcan
+
 
 
         @endsection

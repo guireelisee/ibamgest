@@ -59,6 +59,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('fiche', FicheController::class);
 
+    Route::get('fiche-auth-create', [FicheController::class, 'auth_create'])->name('fiche.auth.create');
+
+
     Route::resource('devoir', DevoirController::class);
 
     Route::post('depot-sujet', [DevoirController::class, 'depot_sujet'])->name('devoir.depot-sujet');

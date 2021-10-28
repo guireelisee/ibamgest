@@ -108,7 +108,7 @@
                     <a href="#" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Salles</span></a>
                     <ul class="pcoded-submenu">
                         <li><a href="{{ route('fiche.index') }}">Mes demandes</a></li>
-                        <li><a href="{{ route('fiche.create') }}">Nouvelle demande</a></li>
+                        <li><a href="{{ route('fiche.auth.create') }}">Nouvelle demande</a></li>
                     </ul>
                 </li>
 

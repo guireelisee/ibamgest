@@ -61,18 +61,7 @@
                                         <input type="text" name="date_arrivee" class="form-control" id="date_arrivee" value="@php echo $date @endphp" onblur="this.type='text'" onfocus="this.type='datetime-local'">
                                     </div>
                                 </div>
-                                <div class="col-sm-4">
-                                    <div class="form-group">
-                                        <label class="floating-label" for="nom_exp">Nom de l'expéditeur</label>
-                                        <input type="text" name="nom_exp" class="form-control" id="nom_exp">
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="form-group">
-                                        <label class="floating-label" for="prenom_exp">Prénom(s) de l'expéditeur</label>
-                                        <input type="text" name="prenom_exp" class="form-control" id="prenom_exp">
-                                    </div>
-                                </div>
+
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label class="floating-label" for="prenom_exp">Salle</label>

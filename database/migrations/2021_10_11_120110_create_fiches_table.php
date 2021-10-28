@@ -17,6 +17,8 @@ class CreateFichesTable extends Migration
             $table->id();
             $table->dateTime('date_arrivee');
             $table->dateTime('date_validation')->nullable();
+            $table->dateTime('date_debut_occupation')->nullable();
+            $table->dateTime('date_fin_occupation')->nullable();
             $table->string('motif')->nullable();
             $table->string('nom_exp');
             $table->string('prenom_exp');
@@ -25,6 +27,8 @@ class CreateFichesTable extends Migration
             $table->string('scolarite')->nullable();
             $table->boolean('accepte')->nullable();
             $table->foreignId('salle_id')->constrained()->onDelete('cascade');
+            $table->bigInteger('id_demandeur')->nullable();;
+
             $table->softDeletes();
             $table->timestamps();
         });
