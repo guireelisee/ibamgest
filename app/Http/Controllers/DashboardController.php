@@ -6,16 +6,25 @@ use App\Models\Demande;
 use App\Models\Devoir;
 use App\Models\Fiche;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
+    public function __construct() {
+        
+    }
 
     public function index()
     {
-        $audiences = $this->audiences();
-        $fiches = $this->fiches();
-        $devoirs = $this->devoirs();
-        return view('index', compact('audiences', 'fiches','devoirs'));
+        if (Auth::user()->role_id == 6) {
+            return redirect()->route('demande.auth.index');
+        } else{
+            $audiences = $this->audiences();
+            $fiches = $this->fiches();
+            $devoirs = $this->devoirs();
+            return view('index', compact('audiences', 'fiches','devoirs'));
+        }
+        
     }
 
     public function audiences()

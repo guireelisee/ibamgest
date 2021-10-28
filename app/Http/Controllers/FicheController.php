@@ -8,6 +8,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use function PHPUnit\Framework\isEmpty;
+
 class FicheController extends Controller
 {
     /**
@@ -22,7 +24,7 @@ class FicheController extends Controller
             $salles = Salle::all();
             return view('Fiche.all', compact('fiches','salles'));
         } else {
-            $fiches = Fiche::withTrashed()->get();
+            $fiches = Fiche::all();
             $salles = Salle::all();
             return view('Fiche.all', compact('fiches','salles'));
         }
@@ -108,6 +110,21 @@ class FicheController extends Controller
     public function show(Fiche $fiche)
     {
         //
+    }
+
+    public function verifier_disponibilite(Request $request)
+    {
+        $id_salle = $request->id_salle;
+        $fiche = Fiche::where('accepte', '=', true)->where('salle_id', '=', $id_salle)
+                                          ->where('date_fin_occupation', '>=', $request->date_debut_occupation)
+                                          ->get();
+        if ($fiche->count() === 0) {
+            return redirect()->route('fiche.index')->with('success','La salle est disponible dans cette période !');
+        } else {
+            return redirect()->route('fiche.index')->with('warning','La salle est indisponible dans cette période !');
+
+        }
+        
     }
 
     /**

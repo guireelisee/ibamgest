@@ -60,6 +60,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('fiche', FicheController::class);
 
     Route::get('fiche-auth-create', [FicheController::class, 'auth_create'])->name('fiche.auth.create');
+    
+    Route::post('verifier-disponibilite', [FicheController::class, 'verifier_disponibilite'])->name('fiche.verifier.disponibilite');
 
 
     Route::resource('devoir', DevoirController::class);

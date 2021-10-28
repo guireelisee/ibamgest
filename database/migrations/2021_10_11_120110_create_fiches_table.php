@@ -27,7 +27,7 @@ class CreateFichesTable extends Migration
             $table->string('scolarite')->nullable();
             $table->boolean('accepte')->nullable();
             $table->foreignId('salle_id')->constrained()->onDelete('cascade');
-            $table->bigInteger('id_demandeur')->nullable();;
+            $table->bigInteger('id_demandeur')->nullable();
 
             $table->softDeletes();
             $table->timestamps();
