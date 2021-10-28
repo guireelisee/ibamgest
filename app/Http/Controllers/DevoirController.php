@@ -68,6 +68,11 @@ class DevoirController extends Controller
         ]);
 
 
+        foreach ($request->input('surveillant') as $id) {
+           $surveillant = Surveillant::where('id', $id)->get()->values();
+           $message = "Bonjour Mr/Mme ".$surveillant[0]->nom.". Nous vous informons que vous êtes programmé pour un devoir.\n-------------------------\nDate du devoir : ".date('d/m/Y', strtotime($request->date))."\nHeure du devoir : ".date('H:i', strtotime($request->date))."\n-------------------------\nMerci et bonne journée !";
+           SmsController::sendSms("IBAM-DEVOIR", $message, $surveillant[0]->phone);
+        }
         $devoir->surveillants()->sync($request->input('surveillant'));
         return redirect()->route('devoir.index')->with('success', 'Nouveau devoir enregistré.');
     }
