@@ -42,6 +42,38 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="card">
+
+
+                    <div class="card-body">
+                       <form action="{{ route('demande.print')}}" method="post">
+                        @csrf
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                    <label for="tel" class="floating-label">Date de début</label>
+                                    <input type="text" class="form-control" onblur="this.type='text'" onfocus="this.type='date'" name="date_debut" id="dateDebut">
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                    <label for="tel" class="floating-label">Date de fin</label>
+                                    <input type="text" class="form-control" onblur="this.type='text'" onfocus="this.type='date'" name="date_fin" id="dateFin">
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <button type="submit" id="submit" class="btn btn-primary">Imprimer</button>
+
+                                </div>
+                            </div>
+                       </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
                     @if ($message = Session::get('success'))
                         <div class="card-header">
                             <div class="alert alert-warning alert-dismissible fade show" role="alert">

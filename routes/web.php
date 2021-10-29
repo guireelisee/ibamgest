@@ -57,10 +57,12 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('demande-suppression', [DemandeController::class, 'destroy'])->name('demande.destroy');
 
+    Route::post('imprimer', [DemandeController::class, 'print'])->name('demande.print');
+
     Route::resource('fiche', FicheController::class);
 
     Route::get('fiche-auth-create', [FicheController::class, 'auth_create'])->name('fiche.auth.create');
-    
+
     Route::post('verifier-disponibilite', [FicheController::class, 'verifier_disponibilite'])->name('fiche.verifier.disponibilite');
 
 

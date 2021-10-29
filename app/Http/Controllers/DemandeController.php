@@ -44,6 +44,16 @@ class DemandeController extends Controller
 
     }
 
+
+    public function print(Request $request)
+    {
+        $demande = Demande::where('date_demande', '<=', $request->date_fin)
+                        ->where('date_demande', '>=', $request->date_debut)
+                                          ->get();
+        return view('Demande-views/print')->with('demandes', $demande);
+
+    }
+
     /**
      * Store a newly created resource in storage.
      *

@@ -3,6 +3,7 @@
 @section('css')
 <link rel="stylesheet" href="assets/css/plugins/dataTables.bootstrap4.min.css">
 <link rel="stylesheet" href="assets/css/plugins/select.bootstrap4.min.css">
+
 @endsection
 
 @section('title')
@@ -368,7 +369,7 @@
                                         <th>Scolarité</th>
                                         <th>Statut</th>
                                         <th>Disponibilité</th>
-                                        
+
 
                                     </tr>
                                 </tr>
@@ -406,7 +407,7 @@
                                         @endif
                                     </td>
                                     @endif
-                                    
+
                                         <td>
                                             @if($fiche->accepte === null && empty($fiche->scolarite))
                                             <form action="{{route('fiche.verifier.disponibilite')}}" method="post">
@@ -419,9 +420,9 @@
                                             </form>
                                             @endif
                                         </td>
-                                   
-                                   
-                                   
+
+
+
                                 </tr>
                                 @endforeach
                             </tbody>
