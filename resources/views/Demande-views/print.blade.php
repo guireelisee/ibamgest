@@ -72,5 +72,8 @@
 
 <script>
     window.print();
+    window.addEventListener('afterprint', (event) => {
+        window.history.back();
+    });
 
 </script>
