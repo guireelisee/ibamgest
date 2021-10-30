@@ -87,6 +87,7 @@ class RegisteredUserController extends Controller
 
     public function verifier_code(Request $request)
     {
+        // dd($request);
         if ($request->code_envoye == $request->code_saisie) {
             if ($request->avatar) {
             $filename = time() . '.' . $request->avatar->extension();
