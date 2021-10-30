@@ -16,7 +16,7 @@
         <div class="picture-container">
             <div class="picture">
                 <img src="{{Storage::url('avatars/default.png')}}" class="picture-src" id="wizardPicturePreview" title="">
-                <input type="file" id="wizard-picture" class="" name="avatar">
+                <input type="file" accept="image/*" id="wizard-picture" class="" name="avatar">
             </div>
             <h6 class="mt-1">Avatar</h6>
         </div>
