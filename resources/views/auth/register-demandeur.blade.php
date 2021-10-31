@@ -8,6 +8,14 @@
 @section('auth-content')
 
 <h3 class="mb-4 f-w-400">Inscription</h3>
+@if ($message = Session::get('error'))
+<div class="card-header">
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <h5>{{ $message }}</h5>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+</div>
+@endif
 <form method="POST" action="{{ route('user.inscription.save') }}" enctype="multipart/form-data">
     @csrf
 
@@ -89,7 +97,7 @@
     var oldInput = <?= json_encode(session()->getOldInput()); ?>;
     console.log(oldInput);
     if (!(oldInput.length === 0)) {
-        document.getElementById("role").value = oldInput['role'];
+        document.getElementById("firstname").value = oldInput['firstname'];
         document.getElementById("name").value = oldInput['name'];
         document.getElementById("email").value = oldInput['email'];
         document.getElementById("phone").value = oldInput['phone'];

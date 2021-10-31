@@ -18,13 +18,13 @@ class DemandeController extends Controller
     public function index()
     {
         $demandes = Demande::orderByDesc('date_demande')->get()->values();
-        return view('Demande-views/all')->with('demandes',$demandes);
+        return view('Demande-views/all')->with('demandes', $demandes);
     }
 
     public function auth_index()
     {
         $demandes = Demande::where('id_demandeur', Auth::user()->id)->orderByDesc('date_demande')->get()->values();
-        return view('Demande-views/user-all')->with('demandes',$demandes);
+        return view('Demande-views/user-all')->with('demandes', $demandes);
     }
 
     /**
@@ -35,23 +35,20 @@ class DemandeController extends Controller
     public function create()
     {
         return view('Demande-views/add');
-
     }
 
     public function auth_create()
     {
         return view('Demande-views/auth-add');
-
     }
 
 
     public function print(Request $request)
     {
         $demande = Demande::where('date_demande', '<=', $request->date_fin)
-                        ->where('date_demande', '>=', $request->date_debut)
-                                          ->get();
+            ->where('date_demande', '>=', $request->date_debut)
+            ->get();
         return view('Demande-views/print')->with('demandes', $demande);
-
     }
 
     /**
@@ -79,7 +76,7 @@ class DemandeController extends Controller
             "date_demande" => $request->dateD
         ]);
         return redirect()->route('demande.index')
-                        ->with('success','Demande ajoutée.');
+            ->with('success', 'Demande ajoutée.');
     }
 
     public function auth_store(Request $request)
@@ -98,7 +95,7 @@ class DemandeController extends Controller
 
         ]);
         return redirect()->route('demande.auth.index')
-                        ->with('success','Demande soumis.');
+            ->with('success', 'Demande soumise.');
     }
 
     /**
@@ -111,7 +108,6 @@ class DemandeController extends Controller
     {
         $demande = Demande::where('idDemande', $idDemande)->get();
         return view('Demande-views/edit')->with('demande', $demande);
-
     }
 
 
@@ -136,75 +132,54 @@ class DemandeController extends Controller
             "date_demande" => $request->dateD
         ]);
         return redirect()->route('demande.index')
-                        ->with('success','Demande mise à jour.');
+            ->with('success', 'Demande mise à jour.');
     }
 
     public function valider(Request $request)
     {
+        $request->validate([
+            'dateR' => 'required',
+            'dateA' => 'required',
+            'heureA' => 'required'
+        ]);
+
         $id = $request->idDemande;
         $demande = Demande::where('idDemande', $id);
         $demande->update([
-          "date_reponse" => Date::now(),
-          "date_audience" => $request->dateA,
-          "heure_audience" => $request->heureA,
-          "decision" => true
+            "date_reponse" => Date::now(),
+            "date_audience" => $request->dateA,
+            "heure_audience" => $request->heureA,
+            "decision" => true
         ]);
 
-        $apiKey="b5fb79ba-a89e-44e2-93e2-5b95ce2a631e";
-
-        $smsContent=[
-            "from"=>"IBAM-INFOS",
-            "to"=>["$request->tel"],
-            "text"=>"Bonjour ! Mr/Mme $request->nom. Votre demande d'audience auprès du Directeur a été acceptée et programmée pour le $request->dateA, à $request->heureA."
-        ];
-        $jsonContent = json_encode($smsContent);
+        $demande = $demande->get();
+        $tel = $demande[0]->tel;
+        $msg = "Bonjour ! Mr/Mme $request->nom. Votre demande d'audience aupres du Directeur a ete acceptee et programmee pour le $request->dateA, a $request->heureA.";
+        $verify = SmsController::sendSms("IBAM-INFOS", $msg, $tel, true);
 
 
-        $ch = curl_init("https://www.aqilas.com/api/v1/sms");
-        $header=array('Content-Type: application/json',
-            "X-AUTH-TOKEN: $apiKey");
-
-        curl_setopt($ch,CURLOPT_HTTPHEADER, $header);
-        curl_setopt($ch,CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch,CURLOPT_POST, 1);
-        curl_setopt($ch,CURLOPT_POSTFIELDS, $jsonContent);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-
-        $json_response = curl_exec($ch);
-
-        $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        $response = json_decode($json_response, true);
-        curl_close($ch);
-
-        if ( $status == 201 or $status == 200 ) {
+        if ($verify['status'] == 201 || $verify['status'] == 200) {
             return redirect()->route('demande.index')
-                        ->with('success','Demande validée !');
-        } else die("Error: {$response['message']} ");
-
-
-
-
-
-
+                ->with('success', 'Demande validée !');
+        } else die("Error: {$verify['response']['message']} ");
     }
 
     public function validateView($idDemande)
     {
         $demande = Demande::where('idDemande', $idDemande)->get();
-        return view('Demande-views/validate')->with('demande',$demande);
+        return view('Demande-views/validate')->with('demande', $demande);
     }
 
     public function rejetterView($idDemande)
     {
         $demande = Demande::where('idDemande', $idDemande)->get();
-        return view('Demande-views/rejet')->with('demande',$demande);
+        return view('Demande-views/rejet')->with('demande', $demande);
     }
 
     public function suppressionView($idDemande)
     {
         $demande = Demande::where('idDemande', $idDemande)->get();
-        return view('Demande-views/delete')->with('demande',$demande);
+        return view('Demande-views/delete')->with('demande', $demande);
     }
 
     public function rejetter(Request $request)
@@ -212,44 +187,18 @@ class DemandeController extends Controller
         $id = $request->idDemande;
         $demande = Demande::where('idDemande', $id);
         $demande->update([
-          "date_reponse" => Date::now(),
-          "decision" => false
+            "date_reponse" => Date::now(),
+            "decision" => false
         ]);
+        $demande = $demande->get();
+        $tel = $demande[0]->tel;
+        $msg = "Bonjour ! Mr/Mme $request->nom. Votre demande d'audience aupres du Directeur a ete rejettee.";
+        $verify = SmsController::sendSms("IBAM-INFOS", $msg, $tel, true);
 
-        $apiKey="b5fb79ba-a89e-44e2-93e2-5b95ce2a631e";
-
-        $smsContent=[
-            "from"=>"IBAM-INFOS",
-            "to"=>["$request->tel"],
-            "text"=>"Bonjour ! Mr/Mme $request->nom. Votre demande d'audience auprès du Directeur a été rejettée."
-        ];
-        $jsonContent = json_encode($smsContent);
-
-
-        $ch = curl_init("https://www.aqilas.com/api/v1/sms");
-        $header=array('Content-Type: application/json',
-            "X-AUTH-TOKEN: $apiKey");
-
-        curl_setopt($ch,CURLOPT_HTTPHEADER, $header);
-        curl_setopt($ch,CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch,CURLOPT_POST, 1);
-        curl_setopt($ch,CURLOPT_POSTFIELDS, $jsonContent);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-
-        $json_response = curl_exec($ch);
-
-        $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        $response = json_decode($json_response, true);
-        curl_close($ch);
-
-        if ( $status == 201 or $status == 200 ) {
+        if ($verify['status'] == 201 || $verify['status'] == 200) {
             return redirect()->route('demande.index')
-                        ->with('success','Demande rejetée.');
-        } else die("Error: {$response['message']} ");
-
-
-
+                ->with('success', 'Demande rejetée.');
+        } else die("Error: {$verify['response']['message']} ");
     }
 
     /**
@@ -266,11 +215,10 @@ class DemandeController extends Controller
 
         if (Auth::user()->role_id === 6) {
             return redirect()->route('demande.auth.index')
-                        ->with('success','Demande supprimée.');
+                ->with('success', 'Demande supprimée.');
         } else {
             return redirect()->route('demande.index')
-                        ->with('success','Demande supprimée.');
+                ->with('success', 'Demande supprimée.');
         }
-
     }
 }

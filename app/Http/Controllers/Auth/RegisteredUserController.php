@@ -127,16 +127,20 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        if ($request->avatar) {
+        if ($request->avatar !== null) {
             $filename = $request->phone . '.' . $request->avatar->extension();
             $request->avatar->storeAs('avatars', $filename, 'public');
         }
         $code = mt_rand(0, 9).''.mt_rand(0, 9).''.mt_rand(0, 9).''.mt_rand(0, 9);
 
-        if (SmsController::sendSms("IBAM-INFOS", "Code de validation : ".$code.". Saisissez le pour valider votre inscription", $request->phone)) {
+        $verify = SmsController::sendSms("IBAM-INFOS", "Code de validation : ".$code.".\nSaisissez-le pour valider votre inscription.", $request->phone);
+        if ($verify['status'] == 201 || $verify['status'] == 200) {
             return view("auth.confirm-code", ['code'=>$code, 'request'=>$request]);
         } else {
-            echo "Une erreur est survenue !";
+            $error = $verify['response']['message'];
+            return redirect()->route('user.inscription.index')
+                ->with('error', $error);
         }
+
     }
 }

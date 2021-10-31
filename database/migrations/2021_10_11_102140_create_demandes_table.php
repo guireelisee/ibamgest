@@ -19,7 +19,7 @@ class CreateDemandesTable extends Migration
             $table->string("prenomDemandeur");
             $table->string("tel");
             $table->string("service")->nullable();
-            $table->string("profession");
+            $table->string("profession")->nullable();
             $table->string("motif");
             $table->boolean("decision")->nullable();
             $table->date("date_demande");
