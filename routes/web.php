@@ -12,6 +12,7 @@ use App\Http\Controllers\ProfesseurController;
 use App\Http\Controllers\SalleController;
 use App\Http\Controllers\SurveillantController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AffectationCoursController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -120,6 +121,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('professeur', ProfesseurController::class);
 
     Route::resource('surveillant', SurveillantController::class);
+
+    Route::resource('affectation-cours', AffectationCoursController::class);
 
 });
 

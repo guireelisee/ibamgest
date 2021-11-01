@@ -99,7 +99,7 @@ class DevoirController extends Controller
         $niveaux = [
             'Licence I','Master I',
             'Licence II','Master II',
-            'Licence III','Master III',
+            'Licence III',
         ];
         $professeurs = Professeur::orderBy('nom')->get();
         $matieres = Matiere::orderBy('nom_matiere')->get();

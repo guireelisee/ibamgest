@@ -39,6 +39,15 @@
                         <a href="#" class="nav-link "><span class="pcoded-micon"><i class="feather icon-settings"></i></span><span class="pcoded-mtext">Paramètres</span></a>
                         <ul class="pcoded-submenu">
                             <li class="nav-item pcoded-hasmenu">
+                                <a href="#" class="nav-link "><span class="pcoded-micon"><i class="feather icon-settings"></i></span><span class="pcoded-mtext">Affectations</span></a>
+                                <ul class="pcoded-submenu">
+                                    <li><a href="{{ route('affectation-cours.index') }}">Liste des affectations</a></li>
+                                    <li><a href="{{ route('affectation-cours.create') }}">Nouvelle affectation</a></li>
+
+                                </ul>
+                            </li>
+
+                            <li class="nav-item pcoded-hasmenu">
                                 <a href="#" class="nav-link "><span class="pcoded-micon"><i class="feather icon-settings"></i></span><span class="pcoded-mtext">Filieres</span></a>
                                 <ul class="pcoded-submenu">
                                     <li><a href="{{ route('filiere.index') }}">Liste des filières</a></li>

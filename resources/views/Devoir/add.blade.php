@@ -105,7 +105,7 @@
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <select name="salle" id="salle" class="form-control js-example-responsive">
-                                            <option value="" disabled>--- SELECTIONNEZ UNE FILIERE ---</option>
+                                            <option value="" disabled>--- SELECTIONNEZ UNE SALLE ---</option>
                                             @foreach ($salles as $salle)
                                             <option value="{{$salle->id}}">{{$salle->nom}}</option>
                                             @endforeach
@@ -131,6 +131,12 @@
                                     <div class="form-group">
                                         <label class="floating-label" for="duree">Durée<span class="text-c-red">*</span></label>
                                         <input type="text" name="duree" class="form-control" id="duree">
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label class="floating-label" for="code">Code<span class="text-c-red">*</span></label>
+                                        <input type="text" name="code" class="form-control" id="code">
                                     </div>
                                 </div>
                             </div>
@@ -166,6 +172,7 @@
         document.getElementById("date").value = oldInput['date'];
         document.getElementById("surveillant").value = oldInput['surveillant'];
         document.getElementById("duree").value = oldInput['duree'];
+        document.getElementById("code").value = oldInput['code'];
     }
 
 
