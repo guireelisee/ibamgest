@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AffectationCours;
 use App\Models\Devoir;
 use App\Models\Filiere;
 use App\Models\Matiere;
@@ -30,12 +31,13 @@ class DevoirController extends Controller
     */
     public function create()
     {
-        $professeurs = Professeur::orderBy('nom')->get();
-        $matieres = Matiere::orderBy('nom_matiere')->get();
-        $filieres = Filiere::orderBy('nom_filiere')->get();
+        // $professeurs = Professeur::orderBy('nom')->get();
+        $affectations = AffectationCours::all();
+        // $matieres = Matiere::orderBy('nom_matiere')->get();
+        // $filieres = Filiere::orderBy('nom_filiere')->get();
         $salles = Salle::orderBy('nom')->get();
         $surveillants = Surveillant::orderBy('nom')->get();
-        return view('Devoir.add',compact('professeurs','matieres','filieres','salles', 'surveillants'));
+        return view('Devoir.add',compact('affectations','salles', 'surveillants'));
     }
 
     /**
@@ -47,21 +49,20 @@ class DevoirController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'professeur' => ['required'],
-            'filiere' => ['required'],
-            'niveau' => ['required'],
             'salle' => ['required'],
             'date' => ['required'],
             'duree' => ['required'],
             'surveillant' => ['required'],
-            'matiere' => ['required'],
         ]);
+
+        $affectation = AffectationCours::where('id', $request->affectation)->first();
+
         $devoir = Devoir::create([
-            'professeur_id' => $request->professeur,
-            'filiere_id' => $request->filiere,
-            'matiere_id' => $request->matiere,
+            'professeur_id' => $affectation->professeur_id,
+            'filiere_id' => $affectation->filiere_id,
+            'matiere_id' => $affectation->matiere_id,
             'salle_id' => $request->salle,
-            'niveau' => $request->niveau,
+            'niveau' => $affectation->niveau,
             'heure' => $request->heure,
             'duree' => $request->duree,
             'date' => $request->date,
@@ -101,12 +102,18 @@ class DevoirController extends Controller
             'Licence II','Master II',
             'Licence III',
         ];
+        $affectations = AffectationCours::all();
         $professeurs = Professeur::orderBy('nom')->get();
         $matieres = Matiere::orderBy('nom_matiere')->get();
         $filieres = Filiere::orderBy('nom_filiere')->get();
         $salles = Salle::orderBy('nom')->get();
         $surveillants = Surveillant::orderBy('nom')->get();
-        return view('Devoir.edit', compact('niveaux','devoir','professeurs', 'matieres', 'filieres', 'salles', 'surveillants'));
+        return view('Devoir.edit', compact('affectations','niveaux','devoir','professeurs', 'matieres', 'filieres', 'salles', 'surveillants'));
+    }
+
+    public function tracking(Devoir $devoir)
+    {
+        return view('Devoir.tracking', compact('devoir'));
     }
 
     /**
@@ -118,22 +125,22 @@ class DevoirController extends Controller
     */
     public function update(Request $request, Devoir $devoir)
     {
+        dd($request);
         $request->validate([
-            'professeur' => ['required'],
-            'filiere' => ['required'],
-            'niveau' => ['required'],
             'salle' => ['required'],
             'date' => ['required'],
             'duree' => ['required'],
             'surveillant' => ['required'],
-            'matiere' => ['required'],
         ]);
+
+        $affectation = AffectationCours::where('id', $request->affectation)->first();
+
         $devoir->update([
-            'professeur_id' => $request->professeur,
-            'filiere_id' => $request->filiere,
-            'matiere_id' => $request->matiere,
+            'professeur_id' => $affectation->professeur_id,
+            'filiere_id' => $affectation->filiere_id,
+            'matiere_id' => $affectation->matiere_id,
             'salle_id' => $request->salle,
-            'niveau' => $request->niveau,
+            'niveau' => $affectation->niveau,
             'heure' => $request->heure,
             'duree' => $request->duree,
             'date' => $request->date,

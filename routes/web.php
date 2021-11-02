@@ -69,6 +69,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('devoir', DevoirController::class);
 
+    Route::get('devoir/tracking/{devoir}', [DevoirController::class, 'tracking'])->name('devoir.tracking');
+
     Route::post('depot-sujet', [DevoirController::class, 'depot_sujet'])->name('devoir.depot-sujet');
 
     Route::post('prise-sujet', [DevoirController::class, 'prise_sujet'])->name('devoir.prise-sujet');

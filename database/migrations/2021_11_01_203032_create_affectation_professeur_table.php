@@ -15,7 +15,7 @@ class CreateAffectationProfesseurTable extends Migration
     {
         Schema::create('affectation_cours', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('professeur_id')->constrained()->onDelete('cascade')->nullable();
+            $table->foreignId('professeur_id')->constrained()->onDelete('cascade');
             $table->foreignId('matiere_id')->constrained()->onDelete('cascade');
             $table->foreignId('filiere_id')->constrained()->onDelete('cascade');
             $table->string('niveau', 100);

@@ -67,7 +67,7 @@ class AffectationCoursController extends Controller
     */
     public function show($id)
     {
-        //
+        return AffectationCours::where('id', $id)->first();
     }
 
     /**

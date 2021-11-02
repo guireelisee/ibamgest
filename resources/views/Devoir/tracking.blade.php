@@ -30,7 +30,7 @@
                         </div>
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('index') }}"><i class="feather icon-home"></i></a></li>
-                            <li class="breadcrumb-item"><a href="#">Modification</a></li>
+                            <li class="breadcrumb-item"><a href="#">Tracking de devoir</a></li>
                         </ul>
                     </div>
                 </div>
@@ -53,68 +53,218 @@
                     </div>
                     @endif
                     <div class="card-body">
-                        <form method="POST" action="{{ route('devoir.update',$devoir) }}">
-                            @csrf
-                            @method('PUT')
-                            @php
-                            date_default_timezone_set("Africa/Abidjan");
-                            $date = date("Y-m-d H:i", time());
-                            @endphp
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="form-group">
-                                        <select name="affectation" id="affectation" class="form-control js-example-responsive">
-                                            <option value="" disabled>--- SELECTIONNEZ UN COURS ---</option>
-                                            @foreach ($affectations as $affectation)
-                                            <option value="{{$affectation->id}}">{{$affectation->matiere->code_matiere .' - '. $affectation->matiere->nom_matiere.' | '. $affectation->filiere->nom_filiere.' '. $affectation->niveau.' | '. $affectation->professeur->titre.' '. $affectation->professeur->nom.' '. $affectation->professeur->prenom}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
+                        <div id="accordion">
+                            @if ($devoir->date_depot_sujet == null || $devoir->date_prise_sujet == null || $devoir->date_retour_copie == null || $devoir->date_prise_copie_professeur == null || $devoir->date_retour_copie_apres_correction == null || $devoir->date_prise_copie_etudiants == null)
+                            <div class="card">
+                                <div class="card-header" id="headingOne">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            Actions
+                                        </button>
+                                    </h5>
                                 </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
 
-                                        <select name="salle" id="salle" class="form-control js-example-basic-single">
-                                            <option disabled>--- SELECTIONNEZ UNE FILIERE ---</option>
-                                            <option value="{{$devoir->salle->id}}" selected>{{$devoir->salle->nom}}</option>
-                                            @foreach ($salles as $salle)
-                                            @if ($salle->id !== $devoir->salle->id)
-                                            <option value="{{$salle->id}}">{{$salle->nom}}</option>
-                                            @endif
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <select name="surveillant[]" id="surveillant" class="form-control js-example-responsive" multiple="multiple" data-placeholder="--- SELECTIONNEZ UN SURVEILLANT ---">
-                                            @foreach ($surveillants as $surveillant)
-                                            <option value="{{$surveillant->id}}">{{$surveillant->nom .' '.$surveillant->prenom}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label class="floating-label" for="date">Date et heure<span class="text-c-red">*</span></label>
-                                        <input type="text" name="date" class="form-control" id="date" onblur="this.type='text'" onfocus="this.type='datetime-local'" value="{{$devoir->date}}">
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label class="floating-label" for="duree">Durée<span class="text-c-red">*</span></label>
-                                        <input type="text" name="duree" class="form-control" id="duree" value="{{$devoir->duree}}">
+                                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                                    <div class="card-body">
+                                        @if ($devoir->date_depot_sujet == null)
+                                        <button type="button" data-toggle="modal" data-target="#modalDepotSujet" class="btn btn-success">Dépot du sujet</button>
+                                        @endif
+                                        @if ($devoir->date_depot_sujet != null && $devoir->date_prise_sujet == null)
+                                        <button type="button" data-toggle="modal" data-target="#modalPriseSujet" class="btn btn-success">Prise des sujets pour composition</button>
+                                        @endif
+                                        @if ($devoir->date_prise_sujet != null && $devoir->date_retour_copie == null)
+                                        <button type="button" data-toggle="modal" data-target="#modalRenvoiCopieApresCompo" class="btn btn-success">Renvoi des copies après composition</button>
+                                        @endif
+                                        @if ($devoir->date_retour_copie != null && $devoir->date_prise_copie_professeur == null)
+                                        <button type="button" data-toggle="modal" data-target="#modalPriseCopiePourCorrection" class="btn btn-success">Prise des copies pour correction</button>
+                                        @endif
+                                        @if ($devoir->date_prise_copie_professeur != null && $devoir->date_retour_copie_apres_correction == null)
+                                        <button type="button" data-toggle="modal" data-target="#modalRenvoiCopieApresCorrection" class="btn btn-success">Retour des copies après correction</button>
+                                        @endif
+                                        @if ($devoir->date_retour_copie_apres_correction != null && $devoir->date_prise_copie_etudiants == null)
+                                        <button type="button" data-toggle="modal" data-target="#modalPriseCopieEtudiants" class="btn btn-success">Prise des copies par les étudiants</button>
+                                        @endif
+
                                     </div>
                                 </div>
                             </div>
+                            @endif
 
-                        </form>
+                        </div>
+                        <div class="container">
+                            <h2>Tracking</h2>
+                            <div class="row">
+
+                                <div class="col-md-12 col-lg-12">
+                                    <div id="tracking-pre"></div>
+                                    <div id="tracking">
+                                        <div class="text-center tracking-status-intransit">
+                                            <p class="tracking-status text-tight">Mouvements liés au devoir</p>
+                                        </div>
+                                        <div class="tracking-list">
+
+
+                                            @if ($devoir->date_prise_copie_etudiants != null)
+                                            <div class="tracking-item tracklist-valide">
+                                                <div class="tracking-icon status-intransit">
+                                                    <img src="{{asset('assets/images/validation.png')}}" style="margin-left: -4px; margin-top: -2px" width="48px" alt="" srcset="">
+
+                                                    <!-- <i class="fas fa-circle"></i> -->
+                                                </div>
+                                                <div class="tracking-date">{{date('d/m/Y',strtotime($devoir->date_prise_copie_etudiants))}}<span>{{date('H:i',strtotime($devoir->date_prise_copie_etudiants))}}</span></div>
+                                                <div class="tracking-content">COPIES RETOURNEES AUX ETUDIANTS<span>Copies remis à : {{$devoir->copie_prise_par_etudiant}} </span></div>
+                                            </div>
+
+                                            @endif
+
+                                            @if ($devoir->date_retour_copie_apres_correction != null && $devoir->date_prise_copie_etudiants == null)
+                                            <div class="tracking-item tracklist-encours">
+                                                <div class="tracking-icon status-intransit">
+                                                    <img src="{{asset('assets/images/pending.png')}}" style="margin-left: -4px; margin-top: -2px" width="48px" alt="" srcset="">
+
+                                                    <!-- <i class="fas fa-circle"></i> -->
+                                                </div>
+                                                <div class="tracking-date">En attente</span></div>
+                                                <div class="tracking-content">COPIES RETOURNEES AUX ETUDIANTS<span>En attente</span></div>
+                                            </div>
+
+                                            @endif
+
+                                            @if ($devoir->date_retour_copie_apres_correction != null)
+                                            <div class="tracking-item tracklist-valide">
+                                                <div class="tracking-icon status-intransit">
+                                                    <img src="{{asset('assets/images/validation.png')}}" style="margin-left: -4px; margin-top: -2px" width="48px" alt="" srcset="">
+
+                                                    <!-- <i class="fas fa-circle"></i> -->
+                                                </div>
+                                                <div class="tracking-date">{{date('d/m/Y',strtotime($devoir->date_retour_copie_apres_correction))}}<span>{{date('H:i',strtotime($devoir->date_retour_copie_apres_correction))}}</span></div>
+                                                <div class="tracking-content">RETOUR DES COPIES APRES CORRECTION<span>Copies envoyées par : {{$devoir->copie_retourne_par}} </span></div>
+                                            </div>
+
+                                            @endif
+
+                                            @if ($devoir->date_prise_copie_professeur != null && $devoir->date_retour_copie_apres_correction == null)
+                                            <div class="tracking-item tracklist-encours">
+                                                <div class="tracking-icon status-intransit">
+                                                    <img src="{{asset('assets/images/pending.png')}}" style="margin-left: -4px; margin-top: -2px" width="48px" alt="" srcset="">
+
+                                                    <!-- <i class="fas fa-circle"></i> -->
+                                                </div>
+                                                <div class="tracking-date">En attente<span></span></div>
+                                                <div class="tracking-content">RETOUR DES COPIES APRES CORRECTION<span>En attente</span></div>
+                                            </div>
+
+                                            @endif
+
+                                            @if ($devoir->date_prise_copie_professeur != null)
+                                            <div class="tracking-item tracklist-valide">
+                                                <div class="tracking-icon status-intransit">
+                                                    <img src="{{asset('assets/images/validation.png')}}" style="margin-left: -4px; margin-top: -2px" width="48px" alt="" srcset="">
+
+                                                    <!-- <i class="fas fa-circle"></i> -->
+                                                </div>
+                                                <div class="tracking-date">{{date('d/m/Y',strtotime($devoir->date_prise_copie_professeur))}}<span>{{date('H:i',strtotime($devoir->date_prise_copie_professeur))}}</span></div>
+                                                <div class="tracking-content">COPIES PRISE POUR CORRECTION<span>Copies prise par : {{$devoir->copie_prise_par}} </span></div>
+                                            </div>
+
+                                            @endif
+
+                                            @if ($devoir->date_retour_copie != null && $devoir->date_prise_copie_professeur == null)
+                                            <div class="tracking-item tracklist-encours">
+                                                <div class="tracking-icon status-intransit">
+                                                    <img src="{{asset('assets/images/pending.png')}}" style="margin-left: -4px; margin-top: -2px" width="48px" alt="" srcset="">
+
+                                                    <!-- <i class="fas fa-circle"></i> -->
+                                                </div>
+                                                <div class="tracking-date">En attente</span></div>
+                                                <div class="tracking-content">COPIES PRISE POUR CORRECTION<span>En attente</span></div>
+                                            </div>
+
+                                            @endif
+
+                                            @if ($devoir->date_retour_copie != null)
+                                            <div class="tracking-item tracklist-valide">
+                                                <div class="tracking-icon status-intransit">
+                                                    <img src="{{asset('assets/images/validation.png')}}" style="margin-left: -4px; margin-top: -2px" width="48px" alt="" srcset="">
+
+                                                    <!-- <i class="fas fa-circle"></i> -->
+                                                </div>
+                                                <div class="tracking-date">{{date('d/m/Y',strtotime($devoir->date_retour_copie))}}<span>{{date('H:i',strtotime($devoir->date_retour_copie))}}</span></div>
+                                                <div class="tracking-content">COPIES RENVOYEES APRES COMPOSITION<span>Copies ramenées par : {{$devoir->copie_envoye_par}} </span></div>
+                                            </div>
+
+                                            @endif
+
+                                            @if ($devoir->date_prise_sujet != null && $devoir->date_retour_copie == null)
+                                            <div class="tracking-item tracklist-encours">
+                                                <div class="tracking-icon status-intransit">
+                                                    <img src="{{asset('assets/images/pending.png')}}" style="margin-left: -4px; margin-top: -2px" width="48px" alt="" srcset="">
+
+                                                    <!-- <i class="fas fa-circle"></i> -->
+                                                </div>
+                                                <div class="tracking-date">En attente</span></div>
+                                                <div class="tracking-content">COPIES RENVOYEES APRES COMPOSITION<span>En attente</span></div>
+                                            </div>
+
+                                            @endif
+
+                                            @if ($devoir->date_prise_sujet != null)
+                                            <div class="tracking-item tracklist-valide">
+                                                <div class="tracking-icon status-intransit">
+                                                    <img src="{{asset('assets/images/validation.png')}}" style="margin-left: -4px; margin-top: -2px" width="48px" alt="" srcset="">
+
+                                                    <!-- <i class="fas fa-circle"></i> -->
+                                                </div>
+                                                <div class="tracking-date">{{date('d/m/Y',strtotime($devoir->date_prise_sujet))}}<span>{{date('H:i',strtotime($devoir->date_prise_sujet))}}</span></div>
+                                                <div class="tracking-content">PRISE DES SUJETS POUR LA COMPOSITION<span>Sujets pris par : {{$devoir->sujet_pris_par}} </span></div>
+                                            </div>
+
+                                            @endif
+
+                                            @if ($devoir->date_depot_sujet != null && $devoir->date_prise_sujet == null)
+                                            <div class="tracking-item tracklist-encours">
+                                                <div class="tracking-icon status-intransit">
+
+                                                    <img src="{{asset('assets/images/pending.png')}}" style="margin-left: -4px; margin-top: -2px" width="48px" alt="" srcset="">
+
+                                                    <!-- <i class="fas fa-circle"></i> -->
+                                                </div>
+                                                <div class="tracking-date">En attente</span></div>
+                                                <div class="tracking-content">PRISE DES SUJETS POUR LA COMPOSITION<span>En attente</span></div>
+                                            </div>
+
+                                            @endif
+
+                                            @if ($devoir->date_depot_sujet != null)
+                                            <div class="tracking-item tracklist-valide">
+                                                <div class="tracking-icon status-intransit">
+
+                                                    <img src="{{asset('assets/images/validation.png')}}" style="margin-left: -4px; margin-top: -2px" width="48px" alt="" srcset="">
+
+                                                    <!-- <i class="fas fa-circle"></i> -->
+                                                </div>
+                                                <div class="tracking-date">{{date('d/m/Y',strtotime($devoir->date_depot_sujet))}}<span>{{date('H:i',strtotime($devoir->date_depot_sujet))}}</span></div>
+                                                <div class="tracking-content">SUJET DEPOSEE<span>Déposé par : {{$devoir->sujet_depose_par}} </span></div>
+                                            </div>
+
+                                            @endif
+
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="row float-right">
                             <div class="col-sm-12">
                                 <a name="" id="" class="btn btn-primary" href="{{ route('devoir.index') }}" role="button">Retour</a>
                                 <button type="submit" class="btn btn-success">Enregistrez</button>
                             </div>
                         </div>
+
+
                     </div>
                 </div>
             </div>
@@ -155,7 +305,7 @@
                         </div>
                     </div><br>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
                         <button type="submit" class="btn btn-primary">Enregistrer</button>
                     </div>
                 </form>
@@ -199,7 +349,7 @@
                         </div>
                     </div><br>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
                         <button type="submit" class="btn btn-primary">Enregistrer</button>
                     </div>
                 </form>
@@ -242,7 +392,7 @@
                         </div>
                     </div><br>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
                         <button type="submit" class="btn btn-primary">Enregistrer</button>
                     </div>
                 </form>
@@ -285,7 +435,7 @@
                         </div>
                     </div><br>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
                         <button type="submit" class="btn btn-primary">Enregistrer</button>
                     </div>
                 </form>
@@ -328,7 +478,7 @@
                         </div>
                     </div><br>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
                         <button type="submit" class="btn btn-primary">Enregistrer</button>
                     </div>
                 </form>
@@ -371,7 +521,7 @@
                         </div>
                     </div><br>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
                         <button type="submit" class="btn btn-primary">Enregistrer</button>
                     </div>
                 </form>
@@ -540,6 +690,10 @@
     var oldInput = <?= json_encode(session()->getOldInput()); ?>;
     console.log(oldInput);
     if (!(oldInput.length === 0)) {
+        document.getElementById("matiere").value = oldInput['matiere'];
+        document.getElementById("professeur").value = oldInput['professeur'];
+        document.getElementById("filiere").value = oldInput['filiere'];
+        document.getElementById("niveau").value = oldInput['niveau'];
         document.getElementById("salle").value = oldInput['salle'];
         document.getElementById("date").value = oldInput['date'];
         document.getElementById("surveillant").value = oldInput['surveillant'];

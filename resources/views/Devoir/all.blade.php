@@ -80,6 +80,8 @@
                                     </td>
                                     <td class="">
                                         <form action="{{ route('devoir.destroy', $devoir)}}" method="POST">
+                                            <a class="btn btn-secondary btn-sm" href="{{ route('devoir.tracking',$devoir) }}"><i class="fas fa-check"></i></a>
+
                                             <a class="btn btn-secondary btn-sm" href="{{ route('devoir.edit',$devoir) }}"><i class="fas fa-edit"></i></a>
                                             @csrf
                                             @method('DELETE')
