@@ -44,7 +44,7 @@ class RegisteredUserController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'phone' => ['required', 'string', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'role' => ['required']
+            'role' => ['required','exists:App\Models\Role,id']
         ]);
 
         if ($request->avatar) {
