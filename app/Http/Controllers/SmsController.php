@@ -12,7 +12,7 @@ class SmsController extends Controller
         if ($indicatif === null) {
             $smsContent = [
                 "from" => $sender_id,
-                "to" => ["+226.$to"],
+                "to" => ["+226$to"],
                 "text" => $message
             ];
         } else {
@@ -23,7 +23,6 @@ class SmsController extends Controller
             ];
         }
         $jsonContent = json_encode($smsContent);
-
 
         $ch = curl_init("https://www.aqilas.com/api/v1/sms");
         $header = array(
