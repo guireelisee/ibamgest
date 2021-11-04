@@ -7,6 +7,8 @@ use App\Http\Controllers\DevoirController;
 use App\Http\Controllers\FiliereController;
 
 use App\Http\Controllers\FicheController;
+use App\Http\Controllers\QrcodeController;
+
 use App\Http\Controllers\MatiereController;
 use App\Http\Controllers\ProfesseurController;
 use App\Http\Controllers\SalleController;
@@ -28,9 +30,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth'])->group(function () {
 
-    Route::get('/generate-barcode', function() {
+    Route::get('', function() {
 
     });
+    Route::get('/generate-barcode', [QrcodeController::class, 'index'])->name('qrcode.index');
+
 
 
     Route::get('/', [DashboardController::class, 'index'])->name('index');

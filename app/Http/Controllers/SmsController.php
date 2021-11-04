@@ -18,7 +18,7 @@ class SmsController extends Controller
         } else {
             $smsContent = [
                 "from" => $sender_id,
-                "to" => ["$to"],
+                "to" => ["+226$to"],
                 "text" => $message
             ];
         }
