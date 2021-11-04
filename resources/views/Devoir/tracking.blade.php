@@ -166,6 +166,8 @@
                                                 <div class="tracking-content">
                                                     RETOUR DES COPIES APRES CORRECTION
                                                     <span>Copies envoyées par : {{$devoir->copie_retourne_par}} </span>
+                                                    <span>Classeur / étagère : {{$devoir->classeur_copie_retourne}} </span>
+
                                                     <span>Enregistré par : {{$devoir->user_copie_retourne_par}} </span>
 
                                                 </div>
@@ -228,6 +230,8 @@
                                                 <div class="tracking-content">
                                                     COPIES RENVOYEES APRES COMPOSITION
                                                     <span>Copies ramenées par : {{$devoir->copie_envoye_par}} </span>
+                                                    <span>Classeur / étagère : {{$devoir->classeur_copie_envoye}} </span>
+
                                                     <span>Enregistré par : {{$devoir->user_copie_envoye_par}} </span>
 
                                                 </div>
@@ -457,6 +461,13 @@
                                 <input type="text" name="copie_envoye_par" class="form-control" id="par">
                             </div>
                         </div>
+
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label class="floating-label" for="par">Classeur / Etagère de destination<span class="text-c-red">*</span></label>
+                                <input type="text" name="classeur_copie_envoye" class="form-control" id="par">
+                            </div>
+                        </div>
                     </div><br>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -541,6 +552,13 @@
                             <div class="form-group">
                                 <label class="floating-label" for="par">Pris par<span class="text-c-red">*</span></label>
                                 <input type="text" name="copie_retourne_par" class="form-control" id="par">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label class="floating-label" for="par">Classeur / Etagère de destination<span class="text-c-red">*</span></label>
+                                <input type="text" name="classeur_copie_retourne" class="form-control" id="par">
                             </div>
                         </div>
                     </div><br>

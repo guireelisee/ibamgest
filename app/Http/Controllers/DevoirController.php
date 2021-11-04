@@ -201,7 +201,9 @@ class DevoirController extends Controller
             'date_retour_copie' => $request->date_retour_copie,
             'copie_envoye_par' => $request->copie_envoye_par,
             'user_copie_envoye_par' => Auth::user()->name." ". Auth::user()->firstname,
+            'classeur_copie_envoye' => $request->classeur_copie_envoye,
 
+            
         ]);
         return redirect()->route('devoir.index')->with('success', 'Modification du devoir réussie.');
     }
@@ -233,6 +235,8 @@ class DevoirController extends Controller
             'date_retour_copie_apres_correction' => $request->date_retour_copie_apres_correction,
             'copie_retourne_par' => $request->copie_retourne_par,
             'user_copie_retourne_par' => Auth::user()->name." ". Auth::user()->firstname,
+            'classeur_copies_retourne' => $request->classeur_copies_retourne,
+
 
         ]);
         return redirect()->route('devoir.index')->with('success', 'Modification du devoir réussie.');

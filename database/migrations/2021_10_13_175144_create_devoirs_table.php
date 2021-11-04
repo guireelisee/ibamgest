@@ -36,6 +36,8 @@ class CreateDevoirsTable extends Migration
             $table->dateTime('date_retour_copie')->nullable();
             $table->string('copie_envoye_par')->nullable();
             $table->string('user_copie_envoye_par')->nullable();
+            $table->string('classeur_copie_envoye')->nullable();
+
 
 
             $table->dateTime('date_prise_copie_professeur')->nullable();
@@ -46,6 +48,8 @@ class CreateDevoirsTable extends Migration
             $table->dateTime('date_retour_copie_apres_correction')->nullable();
             $table->string('copie_retourne_par')->nullable();
             $table->string('user_copie_retourne_par')->nullable();
+            $table->string('classeur_copies_retourne')->nullable();
+
 
 
             $table->dateTime('date_prise_copie_etudiants')->nullable();
