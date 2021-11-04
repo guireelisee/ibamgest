@@ -10,6 +10,7 @@ use App\Models\Professeur;
 use App\Models\Salle;
 use App\Models\Surveillant;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DevoirController extends Controller
 {
@@ -154,13 +155,23 @@ class DevoirController extends Controller
         $request->validate([
             'date_depot_sujet' => ['required'],
             'sujet_depose_par' => ['required'],
+            'qrcode' => ['required'],
         ]);
-        $devoir = Devoir::where('id', $request->id);
-        $devoir->update([
-            'date_depot_sujet' => $request->date_depot_sujet,
-            'sujet_depose_par' => $request->sujet_depose_par,
-        ]);
-        return redirect()->route('devoir.index')->with('success', 'Modification du devoir réussie.');
+        if (Devoir::where('qrcode', $request->qrcode)->get()->count() !== 0) {
+            return redirect()->route('devoir.tracking', [$request->id])->withErrors(['qrcodeError' => 'QrCode déjà utilisé']);
+
+        }else {
+            $devoir = Devoir::where('id', $request->id);
+            $devoir->update([
+                'date_depot_sujet' => $request->date_depot_sujet,
+                'sujet_depose_par' => $request->sujet_depose_par,
+                'user_sujet_depose_par' => Auth::user()->name." ". Auth::user()->firstname,
+                'qrcode' => $request->qrcode,
+
+            ]);
+            return redirect()->route('devoir.index')->with('success', 'Modification du devoir réussie.');
+        }
+
     }
 
     public function prise_sujet(Request $request)
@@ -173,6 +184,8 @@ class DevoirController extends Controller
         $devoir->update([
             'date_prise_sujet' => $request->date_prise_sujet,
             'sujet_pris_par' => $request->sujet_pris_par,
+            'user_sujet_pris_par' => Auth::user()->name." ". Auth::user()->firstname,
+
         ]);
         return redirect()->route('devoir.index')->with('success', 'Modification du devoir réussie.');
     }
@@ -187,6 +200,8 @@ class DevoirController extends Controller
         $devoir->update([
             'date_retour_copie' => $request->date_retour_copie,
             'copie_envoye_par' => $request->copie_envoye_par,
+            'user_copie_envoye_par' => Auth::user()->name." ". Auth::user()->firstname,
+
         ]);
         return redirect()->route('devoir.index')->with('success', 'Modification du devoir réussie.');
     }
@@ -201,6 +216,8 @@ class DevoirController extends Controller
         $devoir->update([
             'date_prise_copie_professeur' => $request->date_prise_copie_professeur,
             'copie_prise_par' => $request->copie_prise_par,
+            'user_copie_prise_par' => Auth::user()->name." ". Auth::user()->firstname,
+
         ]);
         return redirect()->route('devoir.index')->with('success', 'Modification du devoir réussie.');
     }
@@ -215,6 +232,8 @@ class DevoirController extends Controller
         $devoir->update([
             'date_retour_copie_apres_correction' => $request->date_retour_copie_apres_correction,
             'copie_retourne_par' => $request->copie_retourne_par,
+            'user_copie_retourne_par' => Auth::user()->name." ". Auth::user()->firstname,
+
         ]);
         return redirect()->route('devoir.index')->with('success', 'Modification du devoir réussie.');
     }
@@ -229,6 +248,8 @@ class DevoirController extends Controller
         $devoir->update([
             'date_prise_copie_etudiants' => $request->date_prise_copie_etudiants,
             'copie_prise_par_etudiant' => $request->copie_prise_par_etudiant,
+            'user_copie_prise_par_etudiant' => Auth::user()->name." ". Auth::user()->firstname,
+
         ]);
         return redirect()->route('devoir.index')->with('success', 'Modification du devoir réussie.');
     }

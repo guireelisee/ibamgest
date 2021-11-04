@@ -138,6 +138,9 @@
                                                             href="{{ route('demande.suppression.view', ['id'=>$demande->idDemande]) }}"
                                                             class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>
                                                     </a>
+
+
+
                                                 @endif
                                                 </td>
                                             </tr>

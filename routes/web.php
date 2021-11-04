@@ -35,6 +35,8 @@ Route::middleware(['auth'])->group(function () {
     });
     Route::get('/generate-barcode', [QrcodeController::class, 'index'])->name('qrcode.index');
 
+    Route::post('/track-barcode', [QrcodeController::class, 'tracking'])->name('qrcode.tracking');
+
 
 
     Route::get('/', [DashboardController::class, 'index'])->name('index');

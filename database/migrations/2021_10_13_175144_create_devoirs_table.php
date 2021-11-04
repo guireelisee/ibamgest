@@ -25,21 +25,37 @@ class CreateDevoirsTable extends Migration
 
             $table->dateTime('date_depot_sujet')->nullable();
             $table->string('sujet_depose_par')->nullable();
+            $table->string('user_sujet_depose_par')->nullable();
+
 
             $table->dateTime('date_prise_sujet')->nullable();
             $table->string('sujet_pris_par')->nullable();
+            $table->string('user_sujet_pris_par')->nullable();
+
 
             $table->dateTime('date_retour_copie')->nullable();
             $table->string('copie_envoye_par')->nullable();
+            $table->string('user_copie_envoye_par')->nullable();
+
 
             $table->dateTime('date_prise_copie_professeur')->nullable();
             $table->string('copie_prise_par')->nullable();
+            $table->string('user_copie_prise_par')->nullable();
+
 
             $table->dateTime('date_retour_copie_apres_correction')->nullable();
             $table->string('copie_retourne_par')->nullable();
+            $table->string('user_copie_retourne_par')->nullable();
+
 
             $table->dateTime('date_prise_copie_etudiants')->nullable();
             $table->string('copie_prise_par_etudiant')->nullable();
+            $table->string('copie_remis_aux_etudiant_par')->nullable();
+            $table->string('user_copie_prise_par_etudiant')->nullable();
+
+
+
+            $table->string('qrcode')->nullable();
 
             $table->softDeletes();
             $table->timestamps();

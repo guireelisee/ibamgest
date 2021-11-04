@@ -1,6 +1,5 @@
-@extends('layouts.master')
 
-@section('javascript')
+
 <script src="assets/js/plugins/sweetalert.min.js"></script>
 <script>
     $('.confirm-modal').click(function(event) {
@@ -20,4 +19,4 @@
         });
     });
 </script>
-@endsection
+

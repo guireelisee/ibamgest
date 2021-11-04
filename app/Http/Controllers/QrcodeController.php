@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Devoir;
 use App\Models\qrcode;
 use ArrayObject;
 use Illuminate\Http\Request;
@@ -64,42 +65,22 @@ class QrcodeController extends Controller
      * @param  \App\Models\qrcode  $qrcode
      * @return \Illuminate\Http\Response
      */
-    public function show(qrcode $qrcode)
+    public function tracking(Request $request)
     {
-        //
+        $request->validate([
+            'qrcode' => ['required']
+        ]);
+        $devoir = Devoir::where('qrcode', $request->qrcode)->get();
+        if ($devoir->count() !== 0)  {
+            return redirect()->route('devoir.tracking', [$devoir[0]->id]);
+
+        } else {
+            return redirect()->route('devoir.index')->withErrors(['devoirnotefound' => 'Aucun devoir avec ce qrcode !']);
+
+        }
+
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\qrcode  $qrcode
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(qrcode $qrcode)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\qrcode  $qrcode
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, qrcode $qrcode)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\qrcode  $qrcode
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(qrcode $qrcode)
-    {
-        //
-    }
 }

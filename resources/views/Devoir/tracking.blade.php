@@ -66,23 +66,43 @@
 
                                 <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                                     <div class="card-body">
+                                        <input type="hidden" id="currentStep" name="">
                                         @if ($devoir->date_depot_sujet == null)
                                         <button type="button" data-toggle="modal" data-target="#modalDepotSujet" class="btn btn-success">Dépot du sujet</button>
+                                        <script>
+                                            document.getElementById("currentStep").value = "#modalDepotSujet";
+                                        </script>
                                         @endif
                                         @if ($devoir->date_depot_sujet != null && $devoir->date_prise_sujet == null)
                                         <button type="button" data-toggle="modal" data-target="#modalPriseSujet" class="btn btn-success">Prise des sujets pour composition</button>
+                                        <script>
+                                            document.getElementById("currentStep").value = "#modalPriseSujet";
+                                        </script>
                                         @endif
                                         @if ($devoir->date_prise_sujet != null && $devoir->date_retour_copie == null)
                                         <button type="button" data-toggle="modal" data-target="#modalRenvoiCopieApresCompo" class="btn btn-success">Renvoi des copies après composition</button>
+                                        <script>
+                                            document.getElementById("currentStep").value = "#modalRenvoiCopieApresCompo";
+                                        </script>
                                         @endif
                                         @if ($devoir->date_retour_copie != null && $devoir->date_prise_copie_professeur == null)
                                         <button type="button" data-toggle="modal" data-target="#modalPriseCopiePourCorrection" class="btn btn-success">Prise des copies pour correction</button>
+                                        <script>
+                                            document.getElementById("currentStep").value = '#modalPriseCopiePourCorrection';
+
+                                        </script>
                                         @endif
                                         @if ($devoir->date_prise_copie_professeur != null && $devoir->date_retour_copie_apres_correction == null)
                                         <button type="button" data-toggle="modal" data-target="#modalRenvoiCopieApresCorrection" class="btn btn-success">Retour des copies après correction</button>
+                                        <script>
+                                            document.getElementById("currentStep").value = "#modalRenvoiCopieApresCorrection";
+                                        </script>
                                         @endif
                                         @if ($devoir->date_retour_copie_apres_correction != null && $devoir->date_prise_copie_etudiants == null)
                                         <button type="button" data-toggle="modal" data-target="#modalPriseCopieEtudiants" class="btn btn-success">Prise des copies par les étudiants</button>
+                                        <script>
+                                            document.getElementById("currentStep").value = "#modalPriseCopieEtudiants";
+                                        </script>
                                         @endif
 
                                     </div>
@@ -112,7 +132,12 @@
                                                     <!-- <i class="fas fa-circle"></i> -->
                                                 </div>
                                                 <div class="tracking-date">{{date('d/m/Y',strtotime($devoir->date_prise_copie_etudiants))}}<span>{{date('H:i',strtotime($devoir->date_prise_copie_etudiants))}}</span></div>
-                                                <div class="tracking-content">COPIES RETOURNEES AUX ETUDIANTS<span>Copies remis à : {{$devoir->copie_prise_par_etudiant}} </span></div>
+                                                <div class="tracking-content">
+                                                    COPIES RETOURNEES AUX ETUDIANTS
+                                                    <span>Copies remis à : {{$devoir->copie_prise_par_etudiant}} </span>                                                    <span>Enregistré par : {{$devoir->user_copie_retourne_par}} </span>
+                                                    <span>Enregistré par : {{$devoir->user_copie_prise_par_etudiant}} </span>
+
+                                                </div>
                                             </div>
 
                                             @endif
@@ -138,7 +163,12 @@
                                                     <!-- <i class="fas fa-circle"></i> -->
                                                 </div>
                                                 <div class="tracking-date">{{date('d/m/Y',strtotime($devoir->date_retour_copie_apres_correction))}}<span>{{date('H:i',strtotime($devoir->date_retour_copie_apres_correction))}}</span></div>
-                                                <div class="tracking-content">RETOUR DES COPIES APRES CORRECTION<span>Copies envoyées par : {{$devoir->copie_retourne_par}} </span></div>
+                                                <div class="tracking-content">
+                                                    RETOUR DES COPIES APRES CORRECTION
+                                                    <span>Copies envoyées par : {{$devoir->copie_retourne_par}} </span>
+                                                    <span>Enregistré par : {{$devoir->user_copie_retourne_par}} </span>
+
+                                                </div>
                                             </div>
 
                                             @endif
@@ -164,7 +194,12 @@
                                                     <!-- <i class="fas fa-circle"></i> -->
                                                 </div>
                                                 <div class="tracking-date">{{date('d/m/Y',strtotime($devoir->date_prise_copie_professeur))}}<span>{{date('H:i',strtotime($devoir->date_prise_copie_professeur))}}</span></div>
-                                                <div class="tracking-content">COPIES PRISE POUR CORRECTION<span>Copies prise par : {{$devoir->copie_prise_par}} </span></div>
+                                                <div class="tracking-content">
+                                                    COPIES PRISE POUR CORRECTION
+                                                    <span>Copies prise par : {{$devoir->copie_prise_par}} </span>
+                                                    <span>Enregistré par : {{$devoir->user_copie_prise_par}} </span>
+
+                                                </div>
                                             </div>
 
                                             @endif
@@ -190,7 +225,12 @@
                                                     <!-- <i class="fas fa-circle"></i> -->
                                                 </div>
                                                 <div class="tracking-date">{{date('d/m/Y',strtotime($devoir->date_retour_copie))}}<span>{{date('H:i',strtotime($devoir->date_retour_copie))}}</span></div>
-                                                <div class="tracking-content">COPIES RENVOYEES APRES COMPOSITION<span>Copies ramenées par : {{$devoir->copie_envoye_par}} </span></div>
+                                                <div class="tracking-content">
+                                                    COPIES RENVOYEES APRES COMPOSITION
+                                                    <span>Copies ramenées par : {{$devoir->copie_envoye_par}} </span>
+                                                    <span>Enregistré par : {{$devoir->user_copie_envoye_par}} </span>
+
+                                                </div>
                                             </div>
 
                                             @endif
@@ -216,7 +256,12 @@
                                                     <!-- <i class="fas fa-circle"></i> -->
                                                 </div>
                                                 <div class="tracking-date">{{date('d/m/Y',strtotime($devoir->date_prise_sujet))}}<span>{{date('H:i',strtotime($devoir->date_prise_sujet))}}</span></div>
-                                                <div class="tracking-content">PRISE DES SUJETS POUR LA COMPOSITION<span>Sujets pris par : {{$devoir->sujet_pris_par}} </span></div>
+                                                <div class="tracking-content">
+                                                    PRISE DES SUJETS POUR LA COMPOSITION
+                                                    <span>Sujets pris par : {{$devoir->sujet_pris_par}} </span>
+                                                    <span>Enregistré par : {{$devoir->user_sujet_pris_par}} </span>
+
+                                                </div>
                                             </div>
 
                                             @endif
@@ -244,7 +289,11 @@
                                                     <!-- <i class="fas fa-circle"></i> -->
                                                 </div>
                                                 <div class="tracking-date">{{date('d/m/Y',strtotime($devoir->date_depot_sujet))}}<span>{{date('H:i',strtotime($devoir->date_depot_sujet))}}</span></div>
-                                                <div class="tracking-content">SUJET DEPOSEE<span>Déposé par : {{$devoir->sujet_depose_par}} </span></div>
+                                                <div class="tracking-content">
+                                                    SUJET DEPOSEE<span>Déposé par : {{$devoir->sujet_depose_par}}</span>
+                                                    <span>Enregistré par : {{$devoir->user_sujet_depose_par}} </span>
+                                                
+                                                </div>
                                             </div>
 
                                             @endif
@@ -276,7 +325,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Dépot de sijet</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Dépot de sujet</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -297,10 +346,28 @@
                             </div>
                         </div>
 
-                        <div class="col-sm-12">
+                        <div class="col-sm-12" id="qrcode">
+                            <div class="form-group">
+                                <label class="floating-label" for="par">QrCode<span class="text-c-red">*</span></label>
+                                <input type="text" name="qrcode" class="form-control" id="qrcode">
+                            </div>
+                        </div>
+
+
+
+                        <div class="col-md-8"></div>
+                        <div class="col-md-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="depotSujet" id="depotSujet">
+                                <label class="form-check-label" for="depotSujet">
+                                  Par le professeur
+                                </label>
+                              </div>
+                        </div>
+                        <div class="col-sm-12" id="sujet_depose_par_bloc">
                             <div class="form-group">
                                 <label class="floating-label" for="par">Déposé par<span class="text-c-red">*</span></label>
-                                <input type="text" name="sujet_depose_par" class="form-control" id="par">
+                                <input type="text" name="sujet_depose_par" class="form-control" id="sujet_depose_par">
                             </div>
                         </div>
                     </div><br>
@@ -684,9 +751,29 @@
 @section('javascript')
 <!-- select2 Js -->
 <script src="{{ asset('assets/js/plugins/select2.full.min.js') }}"></script>
-<!-- form-select-custom Js -->
-<script src="{{ asset('assets/js/pages/form-select-custom.js') }}"></script>
+<script src="{{ asset('assets/js/plugins/select2.full.min.js') }}"></script>
+
+<script src="{{ asset('assets/js/pulgins/jquery.js') }}"></script>
 <script>
+    
+
+
+    var currentStep = document.getElementById("currentStep").value;
+    $(currentStep).modal("show")
+    var checkbox = document.querySelector("input[name=depotSujet]");
+
+    checkbox.addEventListener('change', function() {
+    if (this.checked) {
+        document.getElementById("sujet_depose_par_bloc").style.visibility = "hidden";
+        document.getElementById("sujet_depose_par").value = "Le professeur";
+    } else {
+            document.getElementById("sujet_depose_par_bloc").style.visibility = "visible";
+            document.getElementById("sujet_depose_par").value = "";
+            document.getElementById("sujet_depose_par").focus();
+
+        }
+    });
+
     var oldInput = <?= json_encode(session()->getOldInput()); ?>;
     console.log(oldInput);
     if (!(oldInput.length === 0)) {

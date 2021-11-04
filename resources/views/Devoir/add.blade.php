@@ -98,7 +98,7 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label class="floating-label" for="duree">Durée<span class="text-c-red">*</span></label>
-                                        <input type="text" name="duree" class="form-control" id="duree">
+                                        <input type="text" autocomplete="off" name="duree" class="form-control" id="duree">
                                     </div>
                                 </div>
                             </div>

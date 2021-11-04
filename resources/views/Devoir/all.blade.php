@@ -40,6 +40,19 @@
 
         <div class="col-sm-12">
             <div class="card">
+                @if ($errors->any())
+                    <div class="card-header">
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>Oups!</strong> Il y a un problème.<br><br>
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                        </div>
+                    </div>
+                    @endif
                 @if ($message = Session::get('success'))
                 <div class="card-header">
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -49,6 +62,15 @@
                 </div>
                 @endif
                 <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-11"></div>
+                        <div class="col-md-1">
+                            <button type="button"
+                                data-toggle="modal" data-target="#modalqr"
+                                class="btn btn-primary"><i class="fas fa-qrcode"></i>
+                            </button>
+                        </div>
+                    </div><br>
                     <div class="dt-responsive table-responsive">
                         <table id="scroll-fill" class="table table-striped table-bordered nowrap">
                             <thead>
@@ -96,14 +118,63 @@
                 </div>
             </div>
         </div>
-        @endsection
 
+        <div class="modal fade" id="modalqr" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Tracking par qrcode</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form name="qr" action="{{ route('qrcode.tracking') }}" method="post">
+                            @csrf
+                            <div class="row">
+
+
+                                <div class="col-sm-12" id="qrcode">
+                                    <div class="form-group">
+                                        <label class="floating-label" for="par">QrCode<span class="text-c-red">*</span></label>
+                                        <input type="text" autocomplete="off" name="qrcode" class="form-control" id="qrcode">
+                                    </div>
+                                </div>
+
+
+
+
+
+                            </div><br>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                <button type="submit" class="btn btn-primary">Tracker</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        @endsection
+        
         @section("javascript")
         @include('layouts.confirm-modal')
-        <script src="assets/js/plugins/jquery.dataTables.min.js"></script>
-        <script src="assets/js/plugins/dataTables.bootstrap4.min.js"></script>
-        <script src="assets/js/plugins/select.bootstrap4.min.js"></script>
-        <script src="assets/js/plugins/dataTables.select.min.js"></script>
-        <script src="assets/js/pages/data-autofill-custom.js"></script>
+
+                    <!-- datatable Js -->
+            <script src="assets/js/plugins/jquery.dataTables.min.js"></script>
+            <script src="assets/js/plugins/dataTables.bootstrap4.min.js"></>
+            <script src="assets/js/plugins/select.bootstrap4.min.js"></script>
+            <script src="assets/js/plugins/dataTables.select.min.js"></script>
+            <script src="assets/js/pages/data-autofill-custom.js"></script>
+
+            <script src="assets/js/plugins/bootstrap-notify.min.js"></script>
+            <script src="assets/js/pages/ac-notification.js"></script>
+            <script>
+                document.forms['qr'].reset();
+                
+
+
+            </script>
 
         @endsection()

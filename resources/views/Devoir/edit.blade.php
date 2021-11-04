@@ -187,14 +187,14 @@
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label class="floating-label" for="date_prise_sujet">Date et heure<span class="text-c-red">*</span></label>
-                                <input type="text" name="date_prise_sujet" class="form-control" id="date_prise_sujet" value="@php echo $date @endphp" onblur="this.type='text'" onfocus="this.type='datetime-local'">
+                                <input type="text" autocomplete="off" name="date_prise_sujet" class="form-control" id="date_prise_sujet" value="@php echo $date @endphp" onblur="this.type='text'" onfocus="this.type='datetime-local'">
                             </div>
                         </div>
 
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label class="floating-label" for="par">Pris par<span class="text-c-red">*</span></label>
-                                <input type="text" name="sujet_pris_par" class="form-control" id="par">
+                                <input type="text" autocomplete="off" name="sujet_pris_par" class="form-control" id="par">
                             </div>
                         </div>
                     </div><br>
@@ -237,7 +237,7 @@
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label class="floating-label" for="par">Renvoyé par<span class="text-c-red">*</span></label>
-                                <input type="text" name="copie_envoye_par" class="form-control" id="par">
+                                <input autocomplete="off" type="text" name="copie_envoye_par" class="form-control" id="par">
                             </div>
                         </div>
                     </div><br>
@@ -273,14 +273,14 @@
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label class="floating-label" for="date_retour_copie">Date et heure<span class="text-c-red">*</span></label>
-                                <input type="text" name="date_prise_copie_professeur" class="form-control" id="date_prise_copie_professeur" value="@php echo $date @endphp" onblur="this.type='text'" onfocus="this.type='datetime-local'">
+                                <input autocomplete="off" type="text" name="date_prise_copie_professeur" class="form-control" id="date_prise_copie_professeur" value="@php echo $date @endphp" onblur="this.type='text'" onfocus="this.type='datetime-local'">
                             </div>
                         </div>
 
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label class="floating-label" for="par">Pris par<span class="text-c-red">*</span></label>
-                                <input type="text" name="copie_prise_par" class="form-control" id="par">
+                                <input autocomplete="off" type="text" name="copie_prise_par" class="form-control" id="par">
                             </div>
                         </div>
                     </div><br>
@@ -323,7 +323,7 @@
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label class="floating-label" for="par">Pris par<span class="text-c-red">*</span></label>
-                                <input type="text" name="copie_retourne_par" class="form-control" id="par">
+                                <input autocomplete="off" type="text" name="copie_retourne_par" class="form-control" id="par">
                             </div>
                         </div>
                     </div><br>
@@ -366,7 +366,7 @@
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label class="floating-label" for="par">Pris par<span class="text-c-red">*</span></label>
-                                <input type="text" name="copie_prise_par_etudiant" class="form-control" id="par">
+                                <input autocomplete="off" type="text" name="copie_prise_par_etudiant" class="form-control" id="par">
                             </div>
                         </div>
                     </div><br>
