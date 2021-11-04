@@ -63,12 +63,8 @@
                 @endif
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-11"></div>
-                        <div class="col-md-1">
-                            <button type="button"
-                            data-toggle="modal" data-target="#modalqr"
-                            class="btn btn-primary" id="qrcode-button"><i class="fas fa-qrcode"></i>
-                        </button>
+                        <div class="col-md-12 text-right">
+                            <button type="button" data-toggle="modal" data-target="#modalqr" class="btn btn-primary" id="qrcode-button"><i class="fas fa-qrcode"></i></button>
                     </div>
                 </div><br>
                 <div class="dt-responsive table-responsive">
