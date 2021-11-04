@@ -3,7 +3,7 @@
         <a class="mobile-menu" id="mobile-collapse" href="#"><span></span></a>
         <a href="{{ route('index') }}" class="b-brand">
             <!-- ========   change your logo hear   ============ -->
-            <h4 class="text-white">IBAM<span style="color: red; font-size: 2rem">.</span>GEST</h4>
+            <h4 class="text-white">IBAM<span style="color: whitesmoke; font-size: 2rem">.</span>GEST</h4>
         </a>
         <a href="#" class="mob-toggler">
             <i class="feather icon-more-vertical"></i>

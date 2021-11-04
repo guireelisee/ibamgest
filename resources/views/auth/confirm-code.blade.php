@@ -10,7 +10,9 @@
 <h5 class="mb-4 f-w-400">Saisissez le code qui vous a été envoyé par SMS</h5>
 <form method="POST" onsubmit="onSubmit(event)" action="{{ route('user.inscription.verifier-code') }}" enctype="multipart/form-data">
     @csrf
-    <input type="hidden" name="avatar" value="{{$request->avatar}}">
+    @if (!empty($request->avatar))
+    <input type="hidden" name="avatar" value="{{$request->avatar->extension()}}">
+    @endif
     <input type="hidden" name="email" value="{{$request->email}}">
     <input type="hidden" name="name" value="{{$request->name}}">
     <input type="hidden" name="firstname" value="{{$request->firstname}}">
@@ -20,21 +22,21 @@
 
     <input type="hidden" name="code_envoye" value="{{$code}}" id="code-envoye">
     <input type="hidden" name="code_saisie" id="code-saisie">
-        <div class="row" style=" width: 100%; margin: auto;">
-            <div class="form-group">
-                <input name='code' style="width: 60px; margin-right: 7px" class="form-control code-input" required/>
-            </div>
-            <div class="form-group">
-                <input name='code' style="width: 60px; margin-right: 7px" class="form-control code-input" required/>
-            </div>
-            <div class="form-group">
-                <input name='code' style="width: 60px; margin-right: 7px" class="form-control code-input" required/>
-            </div>
-            <div class="form-group">
-                <input name='code' style="width: 60px; margin-right: 7px" class="form-control code-input" required/>
+    <div class="row" style=" width: 100%; margin: auto;">
+        <div class="form-group">
+            <input name='code' style="width: 60px; margin-right: 7px" class="form-control code-input" required/>
+        </div>
+        <div class="form-group">
+            <input name='code' style="width: 60px; margin-right: 7px" class="form-control code-input" required/>
+        </div>
+        <div class="form-group">
+            <input name='code' style="width: 60px; margin-right: 7px" class="form-control code-input" required/>
+        </div>
+        <div class="form-group">
+            <input name='code' style="width: 60px; margin-right: 7px" class="form-control code-input" required/>
         </div>
 
-      </div>
+    </div>
     <div class="float-left">
         <button type="submit" class="btn btn-primary mb-4">Verifier</button>
     </div>
@@ -43,11 +45,11 @@
 
 <style>
 
-.code-input{
-    border: 1px solid rgb(129, 129, 129);
-    box-shadow: 2px;
-    text-align: center;
-}
+    .code-input{
+        border: 1px solid rgb(129, 129, 129);
+        box-shadow: 2px;
+        text-align: center;
+    }
 
 
 </style>
@@ -60,34 +62,34 @@
 <script>
     const inputElements = [...document.querySelectorAll('input.code-input')]
 
-inputElements.forEach((ele,index)=>{
-  ele.addEventListener('keydown',(e)=>{
-    if(e.keyCode === 8 && e.target.value==='') inputElements[Math.max(0,index-1)].focus()
-  })
-  ele.addEventListener('input',(e)=>{
-    const [first,...rest] = e.target.value
-    e.target.value = first ?? ''
-    if(index!==inputElements.length-1 && first!==undefined) {
-      inputElements[index+1].focus()
-      inputElements[index+1].value = rest.join('')
-      inputElements[index+1].dispatchEvent(new Event('input'))
-    }
-  })
+    inputElements.forEach((ele,index)=>{
+        ele.addEventListener('keydown',(e)=>{
+            if(e.keyCode === 8 && e.target.value==='') inputElements[Math.max(0,index-1)].focus()
+        })
+        ele.addEventListener('input',(e)=>{
+            const [first,...rest] = e.target.value
+            e.target.value = first ?? ''
+            if(index!==inputElements.length-1 && first!==undefined) {
+                inputElements[index+1].focus()
+                inputElements[index+1].value = rest.join('')
+                inputElements[index+1].dispatchEvent(new Event('input'))
+            }
+        })
 
-})
+    })
 
 
-function onSubmit(e){
-  var code = '';
-  const inputElements = [...document.querySelectorAll('input.code-input')]
-  inputElements.forEach(element => {
-    code = code + '' +element.value;
-  });
-  const inputOfCode = document.querySelector('#code-saisie').value = code;
-  console.log(document.querySelector('#code-saisie').value)
+    function onSubmit(e){
+        var code = '';
+        const inputElements = [...document.querySelectorAll('input.code-input')]
+        inputElements.forEach(element => {
+            code = code + '' +element.value;
+        });
+        const inputOfCode = document.querySelector('#code-saisie').value = code;
+        console.log(document.querySelector('#code-saisie').value)
 
-  if (inputOfCode !== document.querySelector('#code-envoye').value) {
-    e.preventDefault();
+        if (inputOfCode !== document.querySelector('#code-envoye').value) {
+            e.preventDefault();
             swal({
                 title: 'Erreur',
                 text: 'Code invalide !',
@@ -95,10 +97,10 @@ function onSubmit(e){
                 buttons: true,
                 dangerMode: true,
             })
-  }
+        }
 
 
-}
+    }
     $(document).ready(function(){
         // Prepare the preview for profile picture
         $("#wizard-picture").change(function(){

@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
         User::create([
             'name' => 'Admin',
             'email' => 'admin@admin.com',
-            'phone' => '73916210',
+            'phone' => '00000000',
             'role_id' => 1,
             'email_verified_at' =>  now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
@@ -28,7 +28,7 @@ class UserSeeder extends Seeder
         User::create([
             'name' => 'Secretaire',
             'email' => 'secretaire@gmail.com',
-            'phone' => '66594866',
+            'phone' => '11111111',
             'role_id' => 2,
             'email_verified_at' =>  now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
@@ -38,7 +38,7 @@ class UserSeeder extends Seeder
         User::create([
             'name' => 'Secretaire Permanent',
             'email' => 'sp@gmail.com',
-            'phone' => '66594865',
+            'phone' => '22222222',
             'role_id' => 3,
             'email_verified_at' =>  now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
@@ -48,7 +48,7 @@ class UserSeeder extends Seeder
         User::create([
             'name' => 'Directeur',
             'email' => 'directeur@gmail.com',
-            'phone' => '66594864',
+            'phone' => '33333333',
             'role_id' => 4,
             'email_verified_at' =>  now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
@@ -58,7 +58,7 @@ class UserSeeder extends Seeder
         User::create([
             'name' => 'Scolarité',
             'email' => 'scolarite@gmail.com',
-            'phone' => '66594863',
+            'phone' => '44444444',
             'role_id' => 5,
             'email_verified_at' =>  now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',

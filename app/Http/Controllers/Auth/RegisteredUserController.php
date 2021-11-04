@@ -89,17 +89,15 @@ class RegisteredUserController extends Controller
     {
         if ($request->code_envoye == $request->code_saisie) {
             if ($request->avatar) {
-            $filename = time() . '.' . $request->avatar->extension();
-            $path = $request->avatar->storeAs('avatars', $filename, 'public');
-            $user = User::create([
-                'name' => $request->name,
-                'firstname' => $request->firstname,
-                'email' => $request->email,
-                'phone' => "+226".$request->phone,
-                'password' => Hash::make($request->password),
-                'role_id' => 6,
-                'avatar' => $path
-            ]);
+                $user = User::create([
+                    'name' => $request->name,
+                    'firstname' => $request->firstname,
+                    'email' => $request->email,
+                    'phone' => "+226".$request->phone,
+                    'password' => Hash::make($request->password),
+                    'role_id' => 6,
+                    'avatar' => 'avatars/'.$request->phone . '.' .$request->avatar
+                ]);
             } else {
                 $user = User::create([
                     'name' => $request->name,
@@ -128,12 +126,21 @@ class RegisteredUserController extends Controller
             'phone' => ['required', 'string', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
+
+        if ($request->avatar !== null) {
+            $filename = $request->phone . '.' . $request->avatar->extension();
+            $request->avatar->storeAs('avatars', $filename, 'public');
+        }
         $code = mt_rand(0, 9).''.mt_rand(0, 9).''.mt_rand(0, 9).''.mt_rand(0, 9);
 
-        if (SmsController::sendSms("IBAM-INFOS", "Code de validation : ".$code.". Saisissez le pour valider votre inscription", $request->phone)) {
+        $verify = SmsController::sendSms("IBAM-INFOS", "Code de validation : ".$code.".\nSaisissez-le pour valider votre inscription.", $request->phone);
+        if ($verify['status'] == 201 || $verify['status'] == 200) {
             return view("auth.confirm-code", ['code'=>$code, 'request'=>$request]);
         } else {
-            echo "Une erreur est survenue !";
+            $error = $verify['response']['message'];
+            return redirect()->route('user.inscription.index')
+                ->with('error', $error);
         }
+
     }
 }

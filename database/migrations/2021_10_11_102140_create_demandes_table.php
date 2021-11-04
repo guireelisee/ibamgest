@@ -18,15 +18,15 @@ class CreateDemandesTable extends Migration
             $table->string("nomDemandeur");
             $table->string("prenomDemandeur");
             $table->string("tel");
-            $table->string("service");
-            $table->string("profession");
+            $table->string("service")->nullable();
+            $table->string("profession")->nullable();
             $table->string("motif");
             $table->boolean("decision")->nullable();
             $table->date("date_demande");
             $table->date("date_reponse")->nullable();
             $table->date("date_audience")->nullable();
             $table->time("heure_audience")->nullable();
-            $table->bigInteger("id_demandeur");
+            $table->bigInteger("id_demandeur")->nullable();
 
             $table->timestamps();
         });

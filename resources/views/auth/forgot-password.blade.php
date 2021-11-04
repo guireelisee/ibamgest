@@ -12,7 +12,7 @@
     </div>
     <button class="btn btn-block btn-primary mb-4">Envoyez</button>
     @if (Route::has('login'))
-    <p class="mb-2 mt-4 text-muted">Voulez-vous vous connecter ? <a  href="{{ route('login') }}" class="f-w-400">Connexion</a></p>
+    <p class="mb-2 mt-4 text-muted text-center">Voulez-vous vous connecter ? <a  href="{{ route('login') }}" class="f-w-400">Connexion</a></p>
     @endif
 </form>
 

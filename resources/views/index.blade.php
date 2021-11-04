@@ -80,7 +80,7 @@
                     <div class="card statustic-card">
                         <div class="card-body text-center">
                             <h5 class="text-left">Devoirs</h5>
-                            <span class="d-block text-c-blue f-36">{{$audiences['all']}}</span>
+                            <span class="d-block text-c-blue f-36">{{$devoirs['all']}}</span>
                             <p class="m-b-0">Total</p>
                             <div class="progress">
                                 <div class="progress-bar bg-c-blue" style="width:56%"></div>
@@ -89,7 +89,7 @@
                         <div class="card-footer bg-c-blue border-0">
                             <h6 class="text-white m-b-0">
                                 <span class="float-left"> Programmés: {{$devoirs['all']}}</span>
-                                <span class="float-right"> Terminés: {{$audiences['valider']}}</span>
+                                <span class="float-right"> Terminés: </span>
                             </h6>
                         </div>
                     </div>

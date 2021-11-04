@@ -12,6 +12,7 @@ use App\Http\Controllers\ProfesseurController;
 use App\Http\Controllers\SalleController;
 use App\Http\Controllers\SurveillantController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AffectationCoursController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -73,6 +74,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('devoir', DevoirController::class);
 
+    Route::get('devoir/tracking/{devoir}', [DevoirController::class, 'tracking'])->name('devoir.tracking');
+
     Route::post('depot-sujet', [DevoirController::class, 'depot_sujet'])->name('devoir.depot-sujet');
 
     Route::post('prise-sujet', [DevoirController::class, 'prise_sujet'])->name('devoir.prise-sujet');
@@ -125,6 +128,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('professeur', ProfesseurController::class);
 
     Route::resource('surveillant', SurveillantController::class);
+
+    Route::resource('affectation-cours', AffectationCoursController::class);
 
 });
 

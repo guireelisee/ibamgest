@@ -6,7 +6,7 @@
 @endsection
 
 @section('title')
-| Gestion des devoirs
+| Affectation des cours
 @endsection
 
 @section('main-content')
@@ -27,11 +27,11 @@
                 <div class="row align-items-center">
                     <div class="col-md-12">
                         <div class="page-header-title">
-                            <h5 class="m-b-10">Gestion des devoirs</h5>
+                            <h5 class="m-b-10">Affectation des cours</h5>
                         </div>
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('index') }}"><i class="feather icon-home"></i></a></li>
-                            <li class="breadcrumb-item"><a href="#">Liste des devoirs</a></li>
+                            <li class="breadcrumb-item"><a href="#">Liste des affectations</a></li>
                         </ul>
                     </div>
                 </div>
@@ -53,39 +53,24 @@
                         <table id="scroll-fill" class="table table-striped table-bordered nowrap">
                             <thead>
                                 <tr>
-                                    <th scope="col">Matière</th>
-                                    <th scope="col">Professeur</th>
                                     <th scope="col">Classe</th>
-                                    <th scope="col">Salle</th>
-                                    <th scope="col">Date et heure</th>
-                                    <th scope="col">Durée</th>
-                                    <th scope="col">Surveillants</th>
+                                    <th scope="col">Matière</th>
+                                    <th scope="col">Professeur(s)</th>
                                     <th scope="col">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($devoirs as $devoir)
+                                @foreach ($affectations as $affectation)
                                 <tr>
-                                    <td>{{$devoir->matiere->nom_matiere}}</td>
-                                    <td>{{$devoir->professeur->titre . ' '.$devoir->professeur->nom.' '.$devoir->professeur->prenom}}</td>
-                                    <td>{{$devoir->filiere->nom_filiere . ' ' .$devoir->niveau}}</td>
-                                    <td>{{$devoir->salle->nom}}</td>
-                                    <td>{{date('d/m/Y à H:i',strtotime($devoir->date))}}</td>
-                                    <td>{{$devoir->duree}}</td>
-                                    <td>
-                                        @foreach ($devoir->surveillants as $surveillant)
-                                        {{$surveillant->nom . ' '. $surveillant->prenom}}
-                                        <br>
-                                        @endforeach
-                                    </td>
+                                    <td>{{$affectation->filiere->nom_filiere .' '.$affectation->niveau}}</td>
+                                    <td>{{$affectation->matiere->nom_matiere}}</td>
+                                    <td>{{$affectation->professeur->titre . ' ' .$affectation->professeur->nom .' '.$affectation->professeur->prenom}}</td>
                                     <td class="">
-                                        <form action="{{ route('devoir.destroy', $devoir)}}" method="POST">
-                                            <a class="btn btn-secondary btn-sm" href="{{ route('devoir.tracking',$devoir) }}"><i class="fas fa-check"></i></a>
-
-                                            <a class="btn btn-secondary btn-sm" href="{{ route('devoir.edit',$devoir) }}"><i class="fas fa-edit"></i></a>
+                                        <form action="{{ route('affectation-cours.destroy', $affectation)}}" method="POST">
+                                            <a class="btn btn-secondary btn-sm" href="{{ route('affectation-cours.edit',$affectation) }}"><i class="fas fa-edit"></i></a>
                                             @csrf
                                             @method('DELETE')
-                                            <button class="btn btn-danger btn-sm confirm-modal" type="submit" data-name="{{ $devoir->nom }}"><i class="fas fa-trash"></i></button>
+                                            <button class="btn btn-danger btn-sm confirm-modal" type="submit" data-name="{{ $affectation->id }}"><i class="fas fa-trash"></i></button>
                                         </form>
                                     </td>
                                 </tr>

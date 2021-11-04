@@ -58,31 +58,28 @@
                         <div class="container">
                             <form id="form" method="post" action="{{ route('demande.auth.store') }}">
                                 @csrf
+                                @php
+                                date_default_timezone_set("Africa/Abidjan");
+                                $date = date("Y-m-d", time());
+                                @endphp
                                 <div class="row">
-
-
-
-                                      <div class="col-md-12">
-                                          <div class="form-group">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
                                             <label for="dateD" class="floating-label">Date demande</label>
-                                            <input type="text" class="form-control" value="{{ old('dateD') }}"  onblur="this.type='text'" onfocus="this.type='date'" name="dateD" id="dateD">
-                                          </div>
-                                      </div>
-
-
-                                      <div class="col-md-12">
-                                          <div class="form-group">
+                                            <input type="text" class="form-control" value='@php echo $date @endphp' onblur="this.type='text'" onfocus="this.type='date'" name="dateD" id="dateD">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
                                             <label for="motif" class="floating-label">Motif</label>
                                             <textarea rows="5"  class="form-control" value="{{ old('motif') }}" name="motif" id="motif"></textarea>
-                                          </div>
-                                      </div>
-                                  </div>
-
-
-                              <div class="modal-footer">
-                                  <a type="button" href="{{ route('demande.index') }}" class="btn btn-secondary" data-dismiss="modal">Annuler</a>
-                                  <button type="submit" id="submit" class="btn btn-primary">Enregistrer</button>
-                              </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <a type="button" href="{{ route('demande.index') }}" class="btn btn-secondary" data-dismiss="modal">Annuler</a>
+                                    <button type="submit" id="submit" class="btn btn-primary">Enregistrer</button>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -91,10 +88,16 @@
         </div>
 
 
-@endsection
+        @endsection
 
-@section("javascript")
+        @section("javascript")
+        <script>
+            var oldInput = <?= json_encode(session()->getOldInput()); ?>;
+            console.log(oldInput);
+            if (!(oldInput.length === 0)) {
+                document.getElementById("dateD").value = oldInput['dateD'];
+            }
+        </script>
 
 
-
-@endsection()
+        @endsection()

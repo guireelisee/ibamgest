@@ -4,19 +4,25 @@ namespace App\Http\Controllers;
 
 class SmsController extends Controller
 {
-    public static function sendSms($sender_id,$message, $to)
+    public static function sendSms($sender_id, $message, $to, $indicatif=null)
     {
 
         $apiKey = "b5fb79ba-a89e-44e2-93e2-5b95ce2a631e";
-        $from = "$sender_id";
 
-        $smsContent = [
-            "from" => $from,
-            "to" => ["+226.$to"],
-            "text" => $message
-        ];
+        if ($indicatif === null) {
+            $smsContent = [
+                "from" => $sender_id,
+                "to" => ["+226$to"],
+                "text" => $message
+            ];
+        } else {
+            $smsContent = [
+                "from" => $sender_id,
+                "to" => ["$to"],
+                "text" => $message
+            ];
+        }
         $jsonContent = json_encode($smsContent);
-
 
         $ch = curl_init("https://www.aqilas.com/api/v1/sms");
         $header = array(
@@ -37,12 +43,10 @@ class SmsController extends Controller
         $response = json_decode($json_response, true);
         curl_close($ch);
 
-        return $status;
-        // if ($status == 201 or $status == 200) {
-        //     echo ("Message envoyé avec succès {$response['bulk_id']}");
-        // } else die("Error: {$response['message']} ");
-
-
+        return [
+            'status'=>$status,
+            'response'=>$response
+        ];
     }
 
 

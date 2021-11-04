@@ -160,7 +160,9 @@ return [
         'username'              => 'nom d\'utilisateur',
         'year'                  => 'année',
         'nom_exp'               => 'nom',
-        'prenom_exp'            => 'prénom',
+        'dateR'            => 'date de réponse',
+        'dateA'            => 'date d\'audience',
+        'heureA'            => 'heure d\'audience',
     ],
 
 ];

@@ -8,6 +8,14 @@
 @section('auth-content')
 
 <h3 class="mb-4 f-w-400">Inscription</h3>
+@if ($message = Session::get('error'))
+<div class="card-header">
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <h5>{{ $message }}</h5>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+</div>
+@endif
 <form method="POST" action="{{ route('user.inscription.save') }}" enctype="multipart/form-data">
     @csrf
 
@@ -16,7 +24,7 @@
         <div class="picture-container">
             <div class="picture">
                 <img src="{{Storage::url('avatars/default.png')}}" class="picture-src" id="wizardPicturePreview" title="">
-                <input type="file" id="wizard-picture" class="" name="avatar">
+                <input type="file" accept="image/*" id="wizard-picture" class="" name="avatar">
             </div>
             <h6 class="mt-1">Avatar</h6>
         </div>
@@ -59,7 +67,7 @@
         name="password_confirmation" />
     </div>
     <div class="float-right">
-        <a name="" id="" class="btn btn-danger mb-4 text-white" href="{{ route('user.index') }}" role="button">Retour</a>
+        <a name="" id="" class="btn btn-danger mb-4 text-white" href="{{ route('login') }}" role="button">Retour</a>
         <button class="btn btn-primary mb-4">S'inscrire</button>
     </div>
 
@@ -89,7 +97,7 @@
     var oldInput = <?= json_encode(session()->getOldInput()); ?>;
     console.log(oldInput);
     if (!(oldInput.length === 0)) {
-        document.getElementById("role").value = oldInput['role'];
+        document.getElementById("firstname").value = oldInput['firstname'];
         document.getElementById("name").value = oldInput['name'];
         document.getElementById("email").value = oldInput['email'];
         document.getElementById("phone").value = oldInput['phone'];
