@@ -27,6 +27,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth'])->group(function () {
 
+    Route::get('/generate-barcode', function() {
+
+    });
+
+
     Route::get('/', [DashboardController::class, 'index'])->name('index');
 
     Route::get('demande', [DemandeController::class, 'index'])->name('demande.index');

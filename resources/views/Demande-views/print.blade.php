@@ -17,7 +17,6 @@
                   <th>Date demande</th>
                   <th>Motif</th>
                   <th>Statut</th>
-
                 </tr>
                 </thead>
                 <tbody>
