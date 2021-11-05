@@ -10,7 +10,7 @@
 <script>
     window.print();
     window.addEventListener('afterprint', (event) => {
-       // window.history.back();
+       window.history.back();
     });
 
 </script>
