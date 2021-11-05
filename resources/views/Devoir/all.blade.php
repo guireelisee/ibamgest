@@ -64,6 +64,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-12 text-right">
+                            <a href="{{ route('qrcode.index') }}" class="btn btn-primary" target="_blank"><i class="fas fa-print"></i></a>
                             <button type="button" data-toggle="modal" data-target="#modalqr" class="btn btn-primary" id="qrcode-button"><i class="fas fa-qrcode"></i></button>
                     </div>
                 </div><br>
