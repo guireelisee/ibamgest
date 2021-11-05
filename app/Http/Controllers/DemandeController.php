@@ -155,7 +155,7 @@ class DemandeController extends Controller
         $demande = $demande->get();
         $tel = $demande[0]->tel;
         $msg = "Bonjour ! Mr/Mme $request->nom. Votre demande d'audience aupres du Directeur a ete acceptee et programmee pour le $request->dateA, a $request->heureA.";
-        $verify = SmsController::sendSms("IBAM-INFOS", $msg, $tel, true);
+        $verify = SmsController::sendSms("IBAM-INFOS", $msg, $tel);
 
 
         if ($verify['status'] == 201 || $verify['status'] == 200) {
@@ -193,7 +193,7 @@ class DemandeController extends Controller
         $demande = $demande->get();
         $tel = $demande[0]->tel;
         $msg = "Bonjour ! Mr/Mme $request->nom. Votre demande d'audience aupres du Directeur a ete rejettee.";
-        $verify = SmsController::sendSms("IBAM-INFOS", $msg, $tel, true);
+        $verify = SmsController::sendSms("IBAM-INFOS", $msg, $tel);
 
         if ($verify['status'] == 201 || $verify['status'] == 200) {
             return redirect()->route('demande.index')
