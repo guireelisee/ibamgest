@@ -95,6 +95,8 @@ class FicheController extends Controller
                 'salle_id' => $request->salle,
                 'motif' => $request->motif,
                 'date_arrivee' => $request->date_arrivee,
+                'date_debut_occupation' => $request->date_debut_occupation,
+                'date_fin_occupation' => $request->date_fin_occupation,
             ]);
             return redirect()->route('fiche.index')->with('success', 'Demande de salle enregistrée avec succès.');
         }
@@ -124,7 +126,7 @@ class FicheController extends Controller
             return redirect()->route('fiche.index')->with('warning','La salle est indisponible dans cette période !');
 
         }
-        
+
     }
 
     /**

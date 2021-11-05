@@ -86,6 +86,19 @@
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="form-group">
+                                        <label class="floating-label" for="prenom_exp">Motif</label>
+                                        <select name="salle" id="" class="form-control">
+                                            <option value="" disabled>--- SELECTIONNEZ UN MOTIF ---</option>
+                                            <option value="Pour une formation">Pour une formation</option>
+                                            <option value="Pour une conférence">Pour une conférence</option>
+                                            <option value="Pour un cours">Pour un cours</option>
+
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
                                         <label class="floating-label" for="motif">Motif</label>
                                         <input type="text" name="motif" class="form-control" id="motif">
                                     </div>
