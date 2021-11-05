@@ -74,6 +74,14 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="inputGroupPrepend">(+226)</span>
+                                        </div>
+                                        <input type="text" class="form-control mob_no" id="phone" name="phone" placeholder="Téléphone">
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
                                     <div class="form-group">
                                         <label class="floating-label" for="prenom_exp">Salle</label>
                                         <select name="salle" id="" class="form-control">
@@ -142,6 +150,7 @@
         document.getElementById("nom_exp").value = oldInput['nom_exp'];
         document.getElementById("prenom_exp").value = oldInput['prenom_exp'];
         document.getElementById("motif").value = oldInput['motif'];
+        document.getElementById("phone").value = oldInput['phone'];
     }
 
 

@@ -82,6 +82,14 @@
                                         <input type="text" name="prenom_exp" class="form-control" id="prenom_exp" value="{{$fiche->prenom_exp}}">
                                     </div>
                                 </div>
+                                <div class="col-sm-4">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="inputGroupPrepend">(+226)</span>
+                                        </div>
+                                        <input type="text" class="form-control mob_no" id="phone" name="phone" placeholder="Téléphone" value="{{$fiche->phone}}">
+                                    </div>
+                                </div>
                                 <div class="col-sm-4 mt-2">
                                     <div class="form-group">
                                         <select name="salle" id="salle" class="form-control js-example-basic-single">
@@ -206,24 +214,24 @@
                             @endcan
 
                             @can('scolarite')
-                                <div class="row">
-                                    <div class="col-sm-5">
-                                        <div class="form-group">
-                                            <select class="form-control" name="valide" id="valide">
-                                                <option disabled>--- SELECTIONNEZ UNE DECISION ---</option>
-                                                <option value="accorde">Salle accordée</option>
-                                                <option value="reffuse">Demande réjettée</option>
+                            <div class="row">
+                                <div class="col-sm-5">
+                                    <div class="form-group">
+                                        <select class="form-control" name="valide" id="valide">
+                                            <option disabled>--- SELECTIONNEZ UNE DECISION ---</option>
+                                            <option value="accorde">Salle accordée</option>
+                                            <option value="reffuse">Demande réjettée</option>
 
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-7">
-                                        <div class="form-group">
-                                            <label class="floating-label" for="scolarite">Décision de la directrice de la scolarité<span class="text-c-red">*</span></label>
-                                            <input type="text" name="scolarite" class="form-control" id="scolarite" value="{{$fiche->scolarite}}">
-                                        </div>
+                                        </select>
                                     </div>
                                 </div>
+                                <div class="col-sm-7">
+                                    <div class="form-group">
+                                        <label class="floating-label" for="scolarite">Décision de la directrice de la scolarité<span class="text-c-red">*</span></label>
+                                        <input type="text" name="scolarite" class="form-control" id="scolarite" value="{{$fiche->scolarite}}">
+                                    </div>
+                                </div>
+                            </div>
                             @endcan
 
 

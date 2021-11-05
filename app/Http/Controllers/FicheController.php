@@ -70,6 +70,7 @@ class FicheController extends Controller
                 'nom_exp' => Auth::user()->name,
                 'prenom_exp' => Auth::user()->firstname,
                 'id_demandeur' => Auth::user()->id,
+                'phone' => Auth::user()->phone,
                 'salle_id' => $request->salle,
                 'motif' => $request->motif,
                 'date_arrivee' => $request->date_arrivee,
@@ -84,6 +85,7 @@ class FicheController extends Controller
                 'nom_exp' => 'required',
                 'prenom_exp' => 'required',
                 'salle' => 'required',
+                'phone' => 'required',
                 'motif' => 'required',
                 'date_arrivee' => 'required',
                 'date_debut_occupation' => 'required',
@@ -94,6 +96,7 @@ class FicheController extends Controller
                 'prenom_exp' => $request->prenom_exp,
                 'salle_id' => $request->salle,
                 'motif' => $request->motif,
+                'phone' => $request->phone,
                 'date_arrivee' => $request->date_arrivee,
                 'date_debut_occupation' => $request->date_debut_occupation,
                 'date_fin_occupation' => $request->date_fin_occupation,
@@ -198,9 +201,9 @@ class FicheController extends Controller
             } else {
                 $valide = false;
             }
-            $statut = $fiche->accepte ? "Accordee" : "Rejette";
-            $message = "Bonjour, votre demande de la salle ". $fiche->salle->nom." a ete traitee.\Statut: ".$statut;
-            $verify = SmsController::sendSms("IBAM-SALLE", $message, User::where('role_id', 6)->first()->phone);
+            $statut = $valide ? "Accordee" : "Rejette";
+            $message = "Bonjour, votre demande de la salle ". $fiche->salle->nom." a ete traitee.\nStatut: ".$statut;
+            $verify = SmsController::sendSms("IBAM-SALLE", $message, $fiche->phone);
             if ($verify['status'] == 201 || $verify['status'] == 200) {
                 $fiche->update([
                     "accepte" => $valide,
