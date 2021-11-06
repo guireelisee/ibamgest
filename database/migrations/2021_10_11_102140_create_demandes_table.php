@@ -16,7 +16,7 @@ class CreateDemandesTable extends Migration
         Schema::create('demandes', function (Blueprint $table) {
             $table->id("idDemande");
             $table->string("nomDemandeur");
-            $table->string("prenomDemandeur");
+            $table->string("prenomDemandeur")->nullable();
             $table->string("tel");
             $table->string("service")->nullable();
             $table->string("profession")->nullable();

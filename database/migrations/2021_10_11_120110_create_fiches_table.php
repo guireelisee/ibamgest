@@ -21,7 +21,7 @@ class CreateFichesTable extends Migration
             $table->dateTime('date_fin_occupation')->nullable();
             $table->string('motif')->nullable();
             $table->string('nom_exp');
-            $table->string('prenom_exp');
+            $table->string('prenom_exp')->nullable();
             $table->string('sp')->nullable();
             $table->string('dir')->nullable();
             $table->string('scolarite')->nullable();

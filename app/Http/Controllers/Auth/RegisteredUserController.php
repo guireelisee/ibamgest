@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 
+use function PHPUnit\Framework\isNull;
+
 class RegisteredUserController extends Controller
 {
 
@@ -119,13 +121,21 @@ class RegisteredUserController extends Controller
 
     }
 
-    public function inscription_demandeur(Request $request)
+    public function inscription_demandeur(Request $request, User $user = null)
     {
-        $request->validate([
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'phone' => ['required', 'string', 'max:255', 'unique:users'],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
+        dd($user);
+        if (isNull($user)) {
+            $request->validate([
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                'phone' => ['required', 'string', 'max:255', 'unique:users'],
+                'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            ]);
+        } else {
+            $request->validate([
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $user->id],
+                'phone' => ['required', 'string', 'max:255', 'unique:users'],
+            ]);
+        }
 
         if ($request->avatar !== null) {
             $filename = $request->phone . '.' . $request->avatar->extension();

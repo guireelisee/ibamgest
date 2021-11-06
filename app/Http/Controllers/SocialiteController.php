@@ -28,40 +28,26 @@ class SocialiteController extends Controller
         if (in_array($provider, $this->providers)) {
             $data = Socialite::driver($request->provider)->user();
 
-            $user = $data->user;
-            # Social login - register
-            $email = $data->getEmail(); // L'adresse email
-            $name = $data->getName(); // le nom
+            $user = User::where("email", $data->getEmail())->first();
 
-            # 1. On récupère l'utilisateur à partir de l'adresse email
-            $user = User::where("email", $email)->first();
-
-            # 2. Si l'utilisateur existe
             if (isset($user)) {
-
-                // Mise à jour des informations de l'utilisateur
-                $user->name = $name;
+                $user->name = $data->getName();
                 $user->save();
-
-                # 3. Si l'utilisateur n'existe pas, on l'enregistre
+                event(new Registered($user));
+                Auth::login($user);
+                return redirect('/mes-demande');
             } else {
-
-                // Enregistrement de l'utilisateur
                 $user = User::create([
-                    'name' => $name,
-                    'email' => $email,
+                    'name' => $data->getName(),
+                    'email' => $data->getEmail(),
                     'password' => Hash::make('password'),
                     'avatar' => $data->getAvatar(),
                     'role_id' => 6,
                 ]);
+                return view('auth.register-demandeur-phone', compact('user'));
             }
-
-            event(new Registered($user));
-
-            Auth::login($user);
-            return redirect('/mes-demande');
-
         }
         abort(404);
     }
+
 }
