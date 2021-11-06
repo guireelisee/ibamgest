@@ -105,7 +105,7 @@ class RegisteredUserController extends Controller
                     'name' => $request->name,
                     'firstname' => $request->firstname,
                     'email' => $request->email,
-                    'phone' => $request->phone,
+                    'phone' => "+226".$request->phone,
                     'password' => Hash::make($request->password),
                     'role_id' => 6
                 ]);
@@ -128,7 +128,7 @@ class RegisteredUserController extends Controller
             'phone' => ['required', 'string', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
-        
+
         if ($request->avatar !== null) {
             $filename = $request->phone . '.' . $request->avatar->extension();
             $request->avatar->storeAs('avatars', $filename, 'public');
@@ -140,7 +140,7 @@ class RegisteredUserController extends Controller
             return view("auth.confirm-code", ['code'=>$code, 'request'=>$request]);
         } else {
             $error = $verify['response']['message'];
-            return redirect()->route('user.inscription.index')
+            return redirect()->route('demandeur.update')
             ->with('error', $error);
         }
 
