@@ -22,6 +22,7 @@
                 @csrf
                 <div class="card-body text-center">
                     <h4 class="mb-4">IBAM<span style="color: #4680ff; font-size: 3rem">.</span>GEST</h4>
+                    <input id="avatar" class="form-control" type="text" name="avatar" value="{{$user->avatar}}" hidden/>
                     <input id="name" class="form-control" type="text" name="name" value="{{$user->name}}" hidden/>
                     <input id="role" class="form-control" type="text" name="role" value="{{$user->role->id}}" hidden/>
                     <input id="password" class="form-control" type="password" name="password" value="{{$user->password}}" hidden/>
@@ -83,6 +84,7 @@
     var oldInput = <?= json_encode(session()->getOldInput()); ?>;
     console.log(oldInput);
     if (!(oldInput.length === 0)) {
+        document.getElementById("avatar").value = oldInput['avatar'];
         document.getElementById("role").value = oldInput['role'];
         document.getElementById("name").value = oldInput['name'];
         document.getElementById("email").value = oldInput['email'];
