@@ -149,7 +149,7 @@
                             </div>
                             @endcannot
 
-                            @can('secretaire_permanent')
+                            @can('secretaire_principal')
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <select class="form-control js-example-basic-single" name="sp">

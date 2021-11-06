@@ -35,8 +35,8 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('secretaire', function(User $user){
             return $user->role->name === 'Secretaire';
         });
-        Gate::define('secretaire_permanent', function(User $user){
-            return $user->role->name === 'Secretaire Permanent';
+        Gate::define('secretaire_principal', function(User $user){
+            return $user->role->name === 'Secretaire Principal';
         });
         Gate::define('scolarite', function(User $user){
             return $user->role->name === 'Scolarité';

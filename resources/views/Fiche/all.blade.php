@@ -211,7 +211,7 @@
         </div>
         @endcan
 
-        @can('secretaire_permanent')
+        @can('secretaire_principal')
         <div class="col-sm-12">
             <div class="card">
                 @if ($message = Session::get('success'))

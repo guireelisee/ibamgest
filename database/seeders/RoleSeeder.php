@@ -23,17 +23,17 @@ class RoleSeeder extends Seeder
         ]);
 
         Role::create([
-            'name' => 'Secretaire Permanent'
+            'name' => 'Secretaire Principal'
         ]);
 
         Role::create([
             'name' => 'Directeur'
         ]);
-        
+
         Role::create([
             'name' => 'Scolarité'
         ]);
-        
+
         Role::create([
             'name' => 'Demandeur'
         ]);
