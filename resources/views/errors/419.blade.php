@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-| Site en maintenance
+| Page expirée
 @endsection
 @section('main-content')
 <!-- [ offline-ui ] start -->
