@@ -22,10 +22,18 @@
                 @csrf
                 <div class="card-body text-center">
                     <h4 class="">IBAM<span style="color: #4680ff; font-size: 3rem">.</span>GEST</h4>
-                    <input id="name" class="form-control" type="text" name="name" value="{{$user->name}}" hidden/>
-                    <input id="role" class="form-control" type="text" name="role" value="{{$user->role->id}}" hidden/>
-                    <input id="password" class="form-control" type="password" name="password" value="{{$user->password}}" hidden/>
-                    <input id="email" class="form-control" type="email" name="email"  value="{{$user->email}}" hidden/>
+                    <div class="form-group mb-3">
+                        <label class="floating-label" for="name">Nom d'utilisateur</label>
+                        <input id="name" class="form-control" type="text" name="name" value="{{$user->name}}" readonly/>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="floating-label" for="name">Rôle</label>
+                        <input id="role" class="form-control" type="text" name="role" value="{{$user->role->id}}" readonly/>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="floating-label" for="name">Rôle</label>
+                        <input id="email" class="form-control" type="email" name="email" value="{{$user->email}}" readonly/>
+                    </div>
                     <!-- Phone -->
                     <div class="mb-3">
                         <div class="input-group">
@@ -49,8 +57,8 @@
                     </div>
 
                     <div class="mt-4">
-                        {{-- <a name="" id="" class="btn btn-danger mb-4 text-white" href="{{ route('user.index') }}" role="button">Retour</a> --}}
-                        <button type="submit" class="btn  btn-primary mb-4">Enregistrez</button>
+                        <a name="" id="" class="btn btn-danger mb-4 text-white" href="{{ route('index') }}" role="button">Retour</a>
+                        <button type="submit" class="btn  btn-primary mb-4">S'enregistrez</button>
                     </div>
                 </div>
             </form>
