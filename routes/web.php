@@ -149,4 +149,6 @@ Route::post('verifier-code', [RegisteredUserController::class, 'verifier_code'])
 
 Route::post('demandeur/update', [UserController::class,'updateData'])->name('demandeur.update');
 
+Route::get('demandeur/complete', [UserController::class,'completeData'])->name('demandeur.complete');
+
 require __DIR__.'/auth.php';

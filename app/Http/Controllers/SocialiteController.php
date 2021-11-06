@@ -39,8 +39,7 @@ class SocialiteController extends Controller
                 $user->email = $data->getEmail();
                 $user->avatar = $data->getAvatar();
                 $user->role_id = 6;
-                $roles = Role::all();
-                return view('auth.edit-demandeur', compact('user','roles'));
+                return redirect()->route('demandeur.complete',compact('user'));
             }
         } else {
             abort(404);

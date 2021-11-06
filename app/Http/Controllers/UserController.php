@@ -128,4 +128,12 @@ class UserController extends Controller
             ->with('error', $error);
         }
     }
+
+    public function completeData(Request $request)
+    {
+        return view('auth.edit-demandeur',[
+            'user'=> $request->session()->get('user'),
+            'roles' => Role::all()
+        ]);
+    }
 }
