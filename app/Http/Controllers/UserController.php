@@ -112,6 +112,7 @@ class UserController extends Controller
 
     public function updateData(Request $request, User $user)
     {
+        dd($request);
         $request->validate([
             'phone' => ['required', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
