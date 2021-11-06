@@ -26,7 +26,7 @@
                     <input id="role" class="form-control" type="text" name="role" value="{{$user->role->id}}" hidden/>
                     <input id="email" class="form-control" type="email" name="email"  value="{{$user->email}}" hidden/>
                     <!-- Avatar -->
-                    <div class="container">
+                    <div class="container mb-3">
                         <div class="picture-container">
                             <div class="picture">
                                 <img src="{{Storage::url($user->avatar)}}" class="picture-src" id="wizardPicturePreview" title="">
