@@ -42,7 +42,7 @@ class SocialiteController extends Controller
                     'role_id' => 6,
                 ]);
                 $roles = Role::all();
-                return view('auth.edit', compact('user','roles'));
+                return view('auth.edit-demandeur', compact('user','roles'));
             }
         } else {
             abort(404);

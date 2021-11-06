@@ -148,6 +148,6 @@ Route::get('inscription', [RegisteredUserController::class, 'inscription_demande
 Route::post('inscription', [RegisteredUserController::class, 'inscription_demandeur'])->name('user.inscription.save');
 Route::get('confirm-code', [RegisteredUserController::class, 'confirm_code_view'])->name('user.inscription.confirm-code-index');
 Route::post('verifier-code', [RegisteredUserController::class, 'verifier_code'])->name('user.inscription.verifier-code');
-
+Route::post('demandeur/update', [UserController::class,'update'])->name('demandeur.update');
 
 require __DIR__.'/auth.php';
