@@ -111,9 +111,7 @@ class RegisteredUserController extends Controller
                 ]);
             }
             event(new Registered($user));
-
             Auth::login($user);
-
             return redirect('/mes-demande');
         } else {
             return view('auth.register-demandeur');
