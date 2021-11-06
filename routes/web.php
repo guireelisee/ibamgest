@@ -32,6 +32,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('link', function () {
     Artisan::call('storage:link', []);
+    return redirect()->back();
 });
 
 Route::middleware(['auth'])->group(function () {
