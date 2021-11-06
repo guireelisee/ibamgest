@@ -10,7 +10,10 @@
         <label class="floating-label" for="email">Email</label>
         <input id="email" class="form-control" type="email" name="email"/>
     </div>
-    <button class="btn btn-block btn-primary mb-4">Envoyez</button>
+    <div class="text-center">
+        <a name="" id="" class="btn btn-danger mb-4 text-white" href="{{ route('login') }}" role="button">Retour</a>
+        <button class="btn btn-primary mb-4">Envoyez</button>
+    </div>
     @if (Route::has('login'))
     <p class="mb-2 mt-4 text-muted text-center">Voulez-vous vous connecter ? <a  href="{{ route('login') }}" class="f-w-400">Connexion</a></p>
     @endif

@@ -15,6 +15,7 @@ use App\Http\Controllers\SalleController;
 use App\Http\Controllers\SurveillantController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AffectationCoursController;
+use App\Http\Controllers\SocialiteController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -139,6 +140,8 @@ Route::middleware(['auth'])->group(function () {
 
 });
 
+Route::get('redirect/{provider}', [SocialiteController::class, 'redirect'])->name('socialite.redirect');
+Route::get('callback/{provider}', [SocialiteController::class, 'callback'])->name('socialite.callback');
 
 Route::resource('user', UserController::class)->middleware(['auth','admin']);
 Route::get('inscription', [RegisteredUserController::class, 'inscription_demandeur_index'])->name('user.inscription.index');

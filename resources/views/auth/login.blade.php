@@ -27,29 +27,28 @@
     <button class="btn btn-block btn-primary mb-4">Se connecter</button>
 
     <div class="text-center">
+        <div class="saprator my-4"><span>OU</span></div>
+        <a href="{{ route('socialite.redirect', 'facebook') }}" class="btn text-white bg-facebook mb-2 mr-2  wid-40 px-0 hei-40 rounded-circle" title="Connexion/Inscription avec Facebook" class="btn btn-link"  ><i class="fab fa-facebook-f"></i></a>
+        <button class="btn text-white bg-googleplus mb-2 mr-2 wid-40 px-0 hei-40 rounded-circle"><i class="fab fa-google-plus-g"></i></button>
+        <button class="btn text-white bg-twitter mb-2  wid-40 px-0 hei-40 rounded-circle"><i class="fab fa-twitter"></i></button>
         @if (Route::has('password.request'))
         <p class="mb-2 mt-4 text-muted">Mot de passe oublié ? <a  href="{{ route('password.request') }}" class="f-w-400">Réinitialiser</a></p>
         @endif
-        <div class="saprator my-4"><span>OU</span></div>
-        {{--
-            <button class="btn text-white bg-facebook mb-2 mr-2  wid-40 px-0 hei-40 rounded-circle"><i class="fab fa-facebook-f"></i></button>
-            <button class="btn text-white bg-googleplus mb-2 mr-2 wid-40 px-0 hei-40 rounded-circle"><i class="fab fa-google-plus-g"></i></button>
-            <button class="btn text-white bg-twitter mb-2  wid-40 px-0 hei-40 rounded-circle"><i class="fab fa-twitter"></i></button> --}}
-        </div>
-        <a  href="{{ route('user.inscription.index') }}" class="btn btn-block btn-primary mb-4 text-white">S'inscrire</a>
+        <p class="mb-2 mt-4 text-muted">Nouveau ? <a  href="{{ route('user.inscription.index') }}" class="f-w-400">Créer un compte</a></p>
+    </div>
 
-    </form>
+</form>
 
-    @endsection
+@endsection
 
-    @section('javascript')
-    <script>
-        var oldInput = <?= json_encode(session()->getOldInput()); ?>;
-        console.log(oldInput);
-        if (!(oldInput.length === 0)) {
-            document.getElementById("email").value = oldInput['email'];
-        }
+@section('javascript')
+<script>
+    var oldInput = <?= json_encode(session()->getOldInput()); ?>;
+    console.log(oldInput);
+    if (!(oldInput.length === 0)) {
+        document.getElementById("email").value = oldInput['email'];
+    }
 
 
-    </script>
-    @endsection
+</script>
+@endsection

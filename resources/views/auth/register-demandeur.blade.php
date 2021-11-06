@@ -66,7 +66,7 @@
         <input class="form-control" id="password_confirmation" type="password"
         name="password_confirmation" />
     </div>
-    <div class="float-right">
+    <div class="text-center">
         <a name="" id="" class="btn btn-danger mb-4 text-white" href="{{ route('login') }}" role="button">Retour</a>
         <button class="btn btn-primary mb-4">S'inscrire</button>
     </div>
