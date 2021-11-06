@@ -123,8 +123,7 @@ class RegisteredUserController extends Controller
 
     public function inscription_demandeur(Request $request, User $user = null)
     {
-        dd($user);
-        if (isNull($user)) {
+        if (is_null($user)) {
             $request->validate([
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
                 'phone' => ['required', 'string', 'max:255', 'unique:users'],
@@ -132,7 +131,6 @@ class RegisteredUserController extends Controller
             ]);
         } else {
             $request->validate([
-                'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $user->id],
                 'phone' => ['required', 'string', 'max:255', 'unique:users'],
             ]);
         }
