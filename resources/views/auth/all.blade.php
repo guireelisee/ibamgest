@@ -78,24 +78,25 @@
                         <div class="">
                             <h4 class="text-white">Actions</h4>
                             <a href="{{ route('user.edit', $user) }}" role="button">                                <button type="submit" class="btn waves-effect waves-light btn-secondary"><i class="feather icon-edit"></i>&nbsp;Editer</button>
-                            </a>                        </div>
+                            </a>
                         </div>
                     </div>
                 </div>
-                @endif
-                @endforeach
             </div>
-
+            @endif
+            @endforeach
         </div>
+
     </div>
+</div>
 
-    @endsection
+@endsection
 
-    @section("javascript")
-    <script src="assets/js/plugins/jquery.dataTables.min.js"></script>
-    <script src="assets/js/plugins/dataTables.bootstrap4.min.js"></script>
+@section("javascript")
+<script src="assets/js/plugins/jquery.dataTables.min.js"></script>
+<script src="assets/js/plugins/dataTables.bootstrap4.min.js"></script>
 
-    <script>
-        $('#user-list-table').DataTable();
-    </script>
-    @endsection()
+<script>
+    $('#user-list-table').DataTable();
+</script>
+@endsection()
