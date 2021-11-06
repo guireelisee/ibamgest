@@ -147,6 +147,6 @@ Route::get('confirm-code', [RegisteredUserController::class, 'confirm_code_view'
 
 Route::post('verifier-code', [RegisteredUserController::class, 'verifier_code'])->name('user.inscription.verifier-code');
 
-Route::put('demandeur/update', [UserController::class,'updateData'])->name('demandeur.update');
+Route::post('demandeur/update', [UserController::class,'updateData'])->name('demandeur.update');
 
 require __DIR__.'/auth.php';

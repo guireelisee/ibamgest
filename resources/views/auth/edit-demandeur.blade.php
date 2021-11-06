@@ -20,7 +20,6 @@
             @endif
             <form method="POST" action="{{ route('demandeur.update',$user) }}" enctype="multipart/form-data">
                 @csrf
-                @method("PUT")
                 <div class="card-body text-center">
                     <h4 class="">IBAM<span style="color: #4680ff; font-size: 3rem">.</span>GEST</h4>
                     <input id="name" class="form-control" type="text" name="name" value="{{$user->name}}" hidden/>

@@ -34,13 +34,11 @@ class SocialiteController extends Controller
                 Auth::login($user);
                 return redirect('/mes-demande');
             } else {
-                $user = User::create([
-                    'name' => $data->getName(),
-                    'email' => $data->getEmail(),
-                    'password' => Hash::make('password'),
-                    'avatar' => $data->getAvatar(),
-                    'role_id' => 6,
-                ]);
+                $user = new User();
+                $user->name = $data->getName();
+                $user->email = $data->getEmail();
+                $user->avatar = $data->getAvatar();
+                $user->role_id = 6;
                 $roles = Role::all();
                 return view('auth.edit-demandeur', compact('user','roles'));
             }
