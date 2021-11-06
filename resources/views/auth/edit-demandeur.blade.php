@@ -22,11 +22,19 @@
                 @csrf
                 <div class="card-body text-center">
                     <h4 class="mb-4">IBAM<span style="color: #4680ff; font-size: 3rem">.</span>GEST</h4>
-                    <input id="avatar" class="form-control" type="text" name="avatar" value="{{$user->avatar}}" hidden/>
                     <input id="name" class="form-control" type="text" name="name" value="{{$user->name}}" hidden/>
                     <input id="role" class="form-control" type="text" name="role" value="{{$user->role->id}}" hidden/>
-                    <input id="password" class="form-control" type="password" name="password" value="{{$user->password}}" hidden/>
                     <input id="email" class="form-control" type="email" name="email"  value="{{$user->email}}" hidden/>
+                    <!-- Avatar -->
+                    <div class="container">
+                        <div class="picture-container">
+                            <div class="picture">
+                                <img src="{{Storage::url($user->avatar)}}" class="picture-src" id="wizardPicturePreview" title="">
+                                <input type="file" id="wizard-picture" class="" name="avatar">
+                            </div>
+                            <h6 class="mt-1">Avatar</h6>
+                        </div>
+                    </div>
                     <!-- Phone -->
                     <div class="mb-3">
                         <div class="input-group">

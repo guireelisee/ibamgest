@@ -38,7 +38,6 @@ class SocialiteController extends Controller
                 $user = new User();
                 $user->name = $data->getName();
                 $user->email = $data->getEmail();
-                $user->avatar = $data->getAvatar();
                 $user->role_id = 6;
                 Session::put(['user' => $user]);
                 return redirect()->route('demandeur.complete');
