@@ -11,10 +11,10 @@ use Illuminate\Support\Facades\Http;
 class DemandeController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    * Display a listing of the resource.
+    *
+    * @return \Illuminate\Http\Response
+    */
     public function index()
     {
         $demandes = Demande::orderByDesc('date_demande')->get()->values();
@@ -28,10 +28,10 @@ class DemandeController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    * Show the form for creating a new resource.
+    *
+    * @return \Illuminate\Http\Response
+    */
     public function create()
     {
         return view('Demande-views/add');
@@ -46,17 +46,17 @@ class DemandeController extends Controller
     public function print(Request $request)
     {
         $demande = Demande::where('date_demande', '<=', $request->date_fin)
-            ->where('date_demande', '>=', $request->date_debut)
-            ->get();
+        ->where('date_demande', '>=', $request->date_debut)
+        ->get();
         return view('Demande-views/print')->with('demandes', $demande);
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    * Store a newly created resource in storage.
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @return \Illuminate\Http\Response
+    */
     public function store(Request $request)
     {
         $request->validate([
@@ -76,7 +76,7 @@ class DemandeController extends Controller
             "date_demande" => $request->dateD
         ]);
         return redirect()->route('demande.index')
-            ->with('success', 'Demande ajoutée.');
+        ->with('success', 'Demande ajoutée.');
     }
 
     public function auth_store(Request $request)
@@ -95,15 +95,15 @@ class DemandeController extends Controller
 
         ]);
         return redirect()->route('demande.auth.index')
-            ->with('success', 'Demande soumise.');
+        ->with('success', 'Demande soumise.');
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Demande  $demande
-     * @return \Illuminate\Http\Response
-     */
+    * Display the specified resource.
+    *
+    * @param  \App\Models\Demande  $demande
+    * @return \Illuminate\Http\Response
+    */
     public function show($idDemande)
     {
         $demande = Demande::where('idDemande', $idDemande)->get();
@@ -132,7 +132,7 @@ class DemandeController extends Controller
             "date_demande" => $request->dateD
         ]);
         return redirect()->route('demande.index')
-            ->with('success', 'Demande mise à jour.');
+        ->with('success', 'Demande mise à jour.');
     }
 
     public function valider(Request $request)
@@ -144,23 +144,21 @@ class DemandeController extends Controller
         ]);
 
         $id = $request->idDemande;
-        $demande = Demande::where('idDemande', $id);
-        $demande->update([
-            "date_reponse" => Date::now(),
-            "date_audience" => $request->dateA,
-            "heure_audience" => $request->heureA,
-            "decision" => true
-        ]);
-
-        $demande = $demande->get();
-        $tel = $demande[0]->tel;
+        $demande = Demande::where('idDemande', $id)->first();
+        $tel = $demande->tel;
         $msg = "Bonjour ! Mr/Mme $request->nom. Votre demande d'audience aupres du Directeur a ete acceptee et programmee pour le $request->dateA, a $request->heureA.";
         $verify = SmsController::sendSms("IBAM-INFOS", $msg, $tel);
 
-
         if ($verify['status'] == 201 || $verify['status'] == 200) {
+            $demande->update([
+                "date_reponse" => Date::now(),
+                "date_audience" => $request->dateA,
+                "heure_audience" => $request->heureA,
+                "decision" => true
+            ]);
+
             return redirect()->route('demande.index')
-                ->with('success', 'Demande validée !');
+            ->with('success', 'Demande validée !');
         } else die("Error: {$verify['response']['message']} ");
     }
 
@@ -185,28 +183,27 @@ class DemandeController extends Controller
     public function rejetter(Request $request)
     {
         $id = $request->idDemande;
-        $demande = Demande::where('idDemande', $id);
-        $demande->update([
-            "date_reponse" => Date::now(),
-            "decision" => false
-        ]);
-        $demande = $demande->get();
-        $tel = $demande[0]->tel;
+        $demande = Demande::where('idDemande', $id)->first();
+        $tel = $demande->tel;
         $msg = "Bonjour ! Mr/Mme $request->nom. Votre demande d'audience aupres du Directeur a ete rejettee.";
         $verify = SmsController::sendSms("IBAM-INFOS", $msg, $tel);
 
         if ($verify['status'] == 201 || $verify['status'] == 200) {
+            $demande->update([
+                "date_reponse" => Date::now(),
+                "decision" => false
+            ]);
             return redirect()->route('demande.index')
-                ->with('success', 'Demande rejetée.');
+            ->with('success', 'Demande rejetée.');
         } else die("Error: {$verify['response']['message']} ");
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    * Remove the specified resource from storage.
+    *
+    * @param  int  $id
+    * @return \Illuminate\Http\Response
+    */
     public function destroy(Request $request)
     {
         $id = $request->idDemande;
@@ -215,10 +212,10 @@ class DemandeController extends Controller
 
         if (Auth::user()->role_id === 6) {
             return redirect()->route('demande.auth.index')
-                ->with('success', 'Demande supprimée.');
+            ->with('success', 'Demande supprimée.');
         } else {
             return redirect()->route('demande.index')
-                ->with('success', 'Demande supprimée.');
+            ->with('success', 'Demande supprimée.');
         }
     }
 }
