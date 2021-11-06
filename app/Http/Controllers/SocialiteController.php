@@ -59,6 +59,7 @@ class SocialiteController extends Controller
             event(new Registered($user));
 
             Auth::login($user);
+            return redirect('/mes-demande');
 
         }
         abort(404);
