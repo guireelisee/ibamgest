@@ -26,7 +26,6 @@ class SocialiteController extends Controller
 
     public function callback(Request $request)
     {
-        dd($request);
         $provider = $request->provider;
         if (in_array($provider, $this->providers)) {
             $data = Socialite::driver($request->provider)->user();
