@@ -12,6 +12,8 @@
     @csrf
     @if ($request->role !== 6 && !empty($request->avatar))
     <input type="hidden" name="avatar" value="{{$request->avatar->extension()}}">
+    @elseif ($request->role === 6)
+    <input type="hidden" name="avatar" value="{{$request->avatar}}">
     @endif
     <input type="hidden" name="email" value="{{$request->email}}">
     <input type="hidden" name="name" value="{{$request->name}}">
