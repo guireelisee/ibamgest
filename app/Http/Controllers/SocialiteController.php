@@ -49,7 +49,6 @@ class SocialiteController extends Controller
                 // Enregistrement de l'utilisateur
                 $user = User::create([
                     'name' => $name,
-                    'firstname'=>$data->getNickname(),
                     'email' => $email,
                     'password' => Hash::make('password'),
                     'avatar' => $data->getAvatar(),
