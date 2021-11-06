@@ -16,6 +16,7 @@ use App\Http\Controllers\SurveillantController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AffectationCoursController;
 use App\Http\Controllers\SocialiteController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,6 +29,10 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('link', function () {
+    Artisan::call('storage:link', []);
+});
 
 Route::middleware(['auth'])->group(function () {
 
