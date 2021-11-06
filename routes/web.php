@@ -16,7 +16,6 @@ use App\Http\Controllers\SurveillantController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AffectationCoursController;
 use App\Http\Controllers\SocialiteController;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 /*
