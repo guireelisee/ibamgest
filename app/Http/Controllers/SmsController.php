@@ -9,6 +9,7 @@ class SmsController extends Controller
         $apiKey = "b5fb79ba-a89e-44e2-93e2-5b95ce2a631e";
         $tel = "";
         $numberBegin = [0,5,6,7]; // Debut des numéros au BF
+        $to = str_replace(" ", "", "$to");
         if (strlen($to) >= 8 && strlen($to) <= 13) {
             if ($to[0] === "+" && $to[1] === "2" && $to[2] === "2" && $to[3] === "6") {
                 // Exemple : +22673916210
@@ -47,7 +48,7 @@ class SmsController extends Controller
                 'response' => ['message' => "Le nuuméro $to est invalide. Veuillez le modifier."]
             ];
         }
-        
+
         $smsContent = [
             "from" => $sender_id,
             "to" => [$tel],
