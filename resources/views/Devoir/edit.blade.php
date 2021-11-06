@@ -96,13 +96,13 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label class="floating-label" for="date">Date et heure<span class="text-c-red">*</span></label>
+                                        <label class="floating-label" for="date">Date et heure<span class="text-c-red">&nbsp*</span></label>
                                         <input type="text" name="date" class="form-control" id="date" onblur="this.type='text'" onfocus="this.type='datetime-local'" value="{{$devoir->date}}">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label class="floating-label" for="duree">Durée<span class="text-c-red">*</span></label>
+                                        <label class="floating-label" for="duree">Durée<span class="text-c-red">&nbsp*</span></label>
                                         <input type="text" name="duree" class="form-control" id="duree" value="{{$devoir->duree}}">
                                     </div>
                                 </div>
@@ -142,14 +142,14 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <label class="floating-label" for="date_depot_sujet">Date et heure<span class="text-c-red">*</span></label>
+                                <label class="floating-label" for="date_depot_sujet">Date et heure<span class="text-c-red">&nbsp*</span></label>
                                 <input type="text" name="date_depot_sujet" class="form-control" id="date_depot_sujet" value="@php echo $date @endphp" onblur="this.type='text'" onfocus="this.type='datetime-local'">
                             </div>
                         </div>
 
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <label class="floating-label" for="par">Déposé par<span class="text-c-red">*</span></label>
+                                <label class="floating-label" for="par">Déposé par<span class="text-c-red">&nbsp*</span></label>
                                 <input type="text" name="sujet_depose_par" class="form-control" id="par">
                             </div>
                         </div>
@@ -186,14 +186,14 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <label class="floating-label" for="date_prise_sujet">Date et heure<span class="text-c-red">*</span></label>
+                                <label class="floating-label" for="date_prise_sujet">Date et heure<span class="text-c-red">&nbsp*</span></label>
                                 <input type="text" autocomplete="off" name="date_prise_sujet" class="form-control" id="date_prise_sujet" value="@php echo $date @endphp" onblur="this.type='text'" onfocus="this.type='datetime-local'">
                             </div>
                         </div>
 
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <label class="floating-label" for="par">Pris par<span class="text-c-red">*</span></label>
+                                <label class="floating-label" for="par">Pris par<span class="text-c-red">&nbsp*</span></label>
                                 <input type="text" autocomplete="off" name="sujet_pris_par" class="form-control" id="par">
                             </div>
                         </div>
@@ -229,14 +229,14 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <label class="floating-label" for="date_retour_copie">Date et heure<span class="text-c-red">*</span></label>
+                                <label class="floating-label" for="date_retour_copie">Date et heure<span class="text-c-red">&nbsp*</span></label>
                                 <input type="text" name="date_retour_copie" class="form-control" id="date_retour_copie" value="@php echo $date @endphp" onblur="this.type='text'" onfocus="this.type='datetime-local'">
                             </div>
                         </div>
 
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <label class="floating-label" for="par">Renvoyé par<span class="text-c-red">*</span></label>
+                                <label class="floating-label" for="par">Renvoyé par<span class="text-c-red">&nbsp*</span></label>
                                 <input autocomplete="off" type="text" name="copie_envoye_par" class="form-control" id="par">
                             </div>
                         </div>
@@ -272,14 +272,14 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <label class="floating-label" for="date_retour_copie">Date et heure<span class="text-c-red">*</span></label>
+                                <label class="floating-label" for="date_retour_copie">Date et heure<span class="text-c-red">&nbsp*</span></label>
                                 <input autocomplete="off" type="text" name="date_prise_copie_professeur" class="form-control" id="date_prise_copie_professeur" value="@php echo $date @endphp" onblur="this.type='text'" onfocus="this.type='datetime-local'">
                             </div>
                         </div>
 
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <label class="floating-label" for="par">Pris par<span class="text-c-red">*</span></label>
+                                <label class="floating-label" for="par">Pris par<span class="text-c-red">&nbsp*</span></label>
                                 <input autocomplete="off" type="text" name="copie_prise_par" class="form-control" id="par">
                             </div>
                         </div>
@@ -315,14 +315,14 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <label class="floating-label" for="date_retour_copie_apres_correction">Date et heure<span class="text-c-red">*</span></label>
+                                <label class="floating-label" for="date_retour_copie_apres_correction">Date et heure<span class="text-c-red">&nbsp*</span></label>
                                 <input type="text" name="date_retour_copie_apres_correction" class="form-control" id="date_retour_copie_apres_correction" value="@php echo $date @endphp" onblur="this.type='text'" onfocus="this.type='datetime-local'">
                             </div>
                         </div>
 
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <label class="floating-label" for="par">Pris par<span class="text-c-red">*</span></label>
+                                <label class="floating-label" for="par">Pris par<span class="text-c-red">&nbsp*</span></label>
                                 <input autocomplete="off" type="text" name="copie_retourne_par" class="form-control" id="par">
                             </div>
                         </div>
@@ -358,14 +358,14 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <label class="floating-label" for="date_prise_copie_etudiants">Date et heure<span class="text-c-red">*</span></label>
+                                <label class="floating-label" for="date_prise_copie_etudiants">Date et heure<span class="text-c-red">&nbsp*</span></label>
                                 <input type="text" name="date_prise_copie_etudiants" class="form-control" id="date_retour_copie_apres_correction" value="@php echo $date @endphp" onblur="this.type='text'" onfocus="this.type='datetime-local'">
                             </div>
                         </div>
 
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <label class="floating-label" for="par">Pris par<span class="text-c-red">*</span></label>
+                                <label class="floating-label" for="par">Pris par<span class="text-c-red">&nbsp*</span></label>
                                 <input autocomplete="off" type="text" name="copie_prise_par_etudiant" class="form-control" id="par">
                             </div>
                         </div>

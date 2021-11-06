@@ -131,7 +131,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label class="floating-label" for="par">QrCode<span class="text-c-red">*</span></label>
+                                    <label class="floating-label" for="par">QrCode<span class="text-c-red">&nbsp*</span></label>
                                     <input type="text" autocomplete="off" name="qrcode" class="form-control" id="qrcode">
                                 </div>
                             </div>

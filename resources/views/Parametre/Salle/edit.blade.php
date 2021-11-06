@@ -54,13 +54,13 @@
                             <div class="row">
                                 <div class="col-sm-4">
                                     <div class="form-group">
-                                        <label class="floating-label" for="nom">Nom de la salle<span class="text-c-red">*</span></label>
+                                        <label class="floating-label" for="nom">Nom de la salle<span class="text-c-red">&nbsp*</span></label>
                                         <input type="text" name="nom" class="form-control" id="nom" value="{{$salle->nom}}">
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="form-group">
-                                        <label class="floating-label" for="place">Nombre de places<span class="text-c-red">*</span></label>
+                                        <label class="floating-label" for="place">Nombre de places<span class="text-c-red">&nbsp*</span></label>
                                         <input type="number" name="place" class="form-control" id="place" min="0" value="{{$salle->place}}">
                                     </div>
                                 </div>

@@ -91,13 +91,13 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label class="floating-label" for="date">Date et heure<span class="text-c-red">*</span></label>
+                                        <label class="floating-label" for="date">Date et heure<span class="text-c-red">&nbsp*</span></label>
                                         <input type="text" name="date" class="form-control" id="date" value="@php echo $date @endphp" onblur="this.type='text'" onfocus="this.type='datetime-local'">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label class="floating-label" for="duree">Durée<span class="text-c-red">*</span></label>
+                                        <label class="floating-label" for="duree">Durée<span class="text-c-red">&nbsp*</span></label>
                                         <input type="text" autocomplete="off" name="duree" class="form-control" id="duree">
                                     </div>
                                 </div>

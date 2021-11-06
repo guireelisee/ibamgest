@@ -53,7 +53,7 @@
                             <div class="row">
                                 <div class="col-sm-4">
                                     <div class="form-group">
-                                        <label class="floating-label" for="civilite">Civilité<span class="text-c-red">*</span></label>
+                                        <label class="floating-label" for="civilite">Civilité<span class="text-c-red">&nbsp*</span></label>
                                         <select name="civilite" id="civilite" class="form-control">
                                             <option value="" disabled>--- SELECTIONNEZ UNE CIVILITÉ ---</option>
                                             <option value="Mr">Monsieur</option>
@@ -64,25 +64,25 @@
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="form-group">
-                                        <label class="floating-label" for="nom">Nom<span class="text-c-red">*</span></label>
+                                        <label class="floating-label" for="nom">Nom<span class="text-c-red">&nbsp*</span></label>
                                         <input type="text" name="nom" class="form-control" id="nom">
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="form-group">
-                                        <label class="floating-label" for="prenom">Prénom(s)<span class="text-c-red">*</span></label>
+                                        <label class="floating-label" for="prenom">Prénom(s)<span class="text-c-red">&nbsp*</span></label>
                                         <input type="text" name="prenom" class="form-control" id="prenom">
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="form-group">
-                                        <label class="floating-label" for="matricule">Matricule<span class="text-c-red">*</span></label>
+                                        <label class="floating-label" for="matricule">Matricule<span class="text-c-red">&nbsp*</span></label>
                                         <input type="text" name="matricule" class="form-control" id="matricule">
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="form-group">
-                                        <label class="floating-label" for="titre">Titre<span class="text-c-red">*</span></label>
+                                        <label class="floating-label" for="titre">Titre<span class="text-c-red">&nbsp*</span></label>
                                         <input type="text" name="titre" class="form-control" id="titre">
                                     </div>
                                 </div>
@@ -96,7 +96,7 @@
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="form-group">
-                                        <label class="floating-label" for="email">Email<span class="text-c-red">*</span></label>
+                                        <label class="floating-label" for="email">Email<span class="text-c-red">&nbsp*</span></label>
                                         <input type="email" name="email" class="form-control" id="email">
                                     </div>
                                 </div>
