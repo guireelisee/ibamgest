@@ -2,7 +2,7 @@
 @extends('layouts.master')
 
 @section('title')
-| Edition
+| Complément d'informations
 @endsection
 
 @section('main-content')
@@ -21,17 +21,13 @@
             <form method="POST" action="{{ route('demandeur.update',$user) }}" enctype="multipart/form-data">
                 @csrf
                 <div class="card-body text-center">
-                    <h4 class="">IBAM<span style="color: #4680ff; font-size: 3rem">.</span>GEST</h4>
+                    <h4 class="mt-2">IBAM<span style="color: #4680ff; font-size: 3rem">.</span>GEST</h4>
                     <div class="form-group mb-3">
                         <label class="floating-label" for="name">Nom d'utilisateur</label>
                         <input id="name" class="form-control" type="text" name="name" value="{{$user->name}}" readonly/>
                     </div>
                     <div class="form-group mb-3">
-                        <label class="floating-label" for="name">Rôle</label>
-                        <input id="role" class="form-control" type="text" name="role" value="{{$user->role->id}}" readonly/>
-                    </div>
-                    <div class="form-group mb-3">
-                        <label class="floating-label" for="name">Rôle</label>
+                        <label class="floating-label" for="name">Email</label>
                         <input id="email" class="form-control" type="email" name="email" value="{{$user->email}}" readonly/>
                     </div>
                     <!-- Phone -->

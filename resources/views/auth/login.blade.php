@@ -28,13 +28,12 @@
 
     <div class="text-center">
         <div class="saprator my-4"><span>OU</span></div>
-        <a href="{{ route('socialite.redirect', 'facebook') }}" class="btn text-white bg-facebook mb-2 mr-2  wid-40 px-0 hei-40 rounded-circle" title="Connexion/Inscription avec Facebook" class="btn btn-link"  ><i class="fab fa-facebook-f"></i></a>
-        <a href="{{ route('socialite.redirect', 'google') }}" class="btn text-white bg-googleplus mb-2 mr-2 wid-40 px-0 hei-40 rounded-circle" title="Connexion/Inscription avec Google" class="btn btn-link"  ><i class="fab fa-google-plus-g"></i></a>
-        <button class="btn text-white bg-twitter mb-2  wid-40 px-0 hei-40 rounded-circle"><i class="fab fa-twitter"></i></button>
+        {{-- <a href="{{ route('socialite.redirect', 'facebook') }}" class="btn text-white bg-facebook mb-2 mr-2  wid-40 px-0 hei-40 rounded-circle" title="Connexion/Inscription avec Facebook" class="btn btn-link"  ><i class="fab fa-facebook-f"></i></a> --}}
+        <a href="{{ route('socialite.redirect', 'google') }}" class="btn text-white bg-googleplus mb-2 mr-2 wid-40 px-0 hei-40 rounded-circle" title="Connexion avec Google" class="btn btn-link"  ><i class="fab fa-google-plus-g"></i></a>
         @if (Route::has('password.request'))
-        <p class="mb-2 mt-4 text-muted">Mot de passe oublié ? <a  href="{{ route('password.request') }}" class="f-w-400">Réinitialiser</a></p>
+        <p class="mb-2 mt-2 text-muted">Mot de passe oublié ? <a  href="{{ route('password.request') }}" class="f-w-400">Réinitialiser</a></p>
         @endif
-        <p class="mb-2 mt-4 text-muted">Nouveau ? <a  href="{{ route('user.inscription.index') }}" class="f-w-400">Créer un compte</a></p>
+        <p class="mb-2 mt-2 text-muted">Nouveau ? <a  href="{{ route('user.inscription.index') }}" class="f-w-400">Créer un compte</a></p>
     </div>
 
 </form>

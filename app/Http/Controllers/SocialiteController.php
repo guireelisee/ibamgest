@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class SocialiteController extends Controller
 {
@@ -39,7 +40,8 @@ class SocialiteController extends Controller
                 $user->email = $data->getEmail();
                 $user->avatar = $data->getAvatar();
                 $user->role_id = 6;
-                return redirect()->route('demandeur.complete')->with(['user'=>$user]);
+                Session::put(['user' => $user]);
+                return redirect()->route('demandeur.complete');
             }
         } else {
             abort(404);
