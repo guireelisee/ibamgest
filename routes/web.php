@@ -30,8 +30,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Artisan::call('storage:link');
-
 Route::middleware(['auth'])->group(function () {
 
     Route::get('/generate-barcode', [QrcodeController::class, 'index'])->name('qrcode.index');
