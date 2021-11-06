@@ -121,20 +121,14 @@ class RegisteredUserController extends Controller
 
     }
 
-    public function inscription_demandeur(Request $request, User $user = null)
+    public function inscription_demandeur(Request $request)
     {
-        if (is_null($user)) {
-            $request->validate([
-                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-                'phone' => ['required', 'string', 'max:255', 'unique:users'],
-                'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            ]);
-        } else {
-            $request->validate([
-                'phone' => ['required', 'string', 'max:255', 'unique:users'],
-            ]);
-        }
-
+        $request->validate([
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'phone' => ['required', 'string', 'max:255', 'unique:users'],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ]);
+        
         if ($request->avatar !== null) {
             $filename = $request->phone . '.' . $request->avatar->extension();
             $request->avatar->storeAs('avatars', $filename, 'public');
@@ -147,7 +141,7 @@ class RegisteredUserController extends Controller
         } else {
             $error = $verify['response']['message'];
             return redirect()->route('user.inscription.index')
-                ->with('error', $error);
+            ->with('error', $error);
         }
 
     }

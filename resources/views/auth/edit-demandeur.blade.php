@@ -22,6 +22,7 @@
                 @csrf
                 @method("PUT")
                 <div class="card-body text-center">
+                    <h4 class="">IBAM<span style="color: #4680ff; font-size: 3rem">.</span>GEST</h4>
                     <input id="name" class="form-control" type="text" name="name" value="{{$user->name}}" hidden/>
                     <input id="role" class="form-control" type="text" name="role" value="{{$user->role->id}}" hidden/>
                     <input id="password" class="form-control" type="password" name="password" value="{{$user->password}}" hidden/>

@@ -31,14 +31,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth'])->group(function () {
 
-    Route::get('', function() {
-
-    });
     Route::get('/generate-barcode', [QrcodeController::class, 'index'])->name('qrcode.index');
 
     Route::post('/track-barcode', [QrcodeController::class, 'tracking'])->name('qrcode.tracking');
-
-
 
     Route::get('/', [DashboardController::class, 'index'])->name('index');
 
@@ -47,8 +42,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('mes-demande', [DemandeController::class, 'auth_index'])->name('demande.auth.index');
 
     Route::post('mes-demande', [DemandeController::class, 'auth_store'])->name('demande.auth.store');
-    Route::get('demande-auth-create', [DemandeController::class, 'auth_create'])->name('demande.auth.create');
 
+    Route::get('demande-auth-create', [DemandeController::class, 'auth_create'])->name('demande.auth.create');
 
     Route::get('demande-create', [DemandeController::class, 'create'])->name('demande.create');
 
@@ -77,7 +72,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('fiche-auth-create', [FicheController::class, 'auth_create'])->name('fiche.auth.create');
 
     Route::post('verifier-disponibilite', [FicheController::class, 'verifier_disponibilite'])->name('fiche.verifier.disponibilite');
-
 
     Route::resource('devoir', DevoirController::class);
 
@@ -115,7 +109,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('filiere-suppression', [FiliereController::class, 'destroy'])->name('filiere.destroy');
 
-
     Route::get('matiere', [MatiereController::class, 'index'])->name('matiere.index');
 
     Route::get('matiere-create', [MatiereController::class, 'create'])->name('matiere.create');
@@ -141,13 +134,19 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::get('redirect/{provider}', [SocialiteController::class, 'redirect'])->name('socialite.redirect');
+
 Route::get('callback/{provider}', [SocialiteController::class, 'callback'])->name('socialite.callback');
 
 Route::resource('user', UserController::class)->middleware(['auth','admin']);
+
 Route::get('inscription', [RegisteredUserController::class, 'inscription_demandeur_index'])->name('user.inscription.index');
+
 Route::post('inscription', [RegisteredUserController::class, 'inscription_demandeur'])->name('user.inscription.save');
+
 Route::get('confirm-code', [RegisteredUserController::class, 'confirm_code_view'])->name('user.inscription.confirm-code-index');
+
 Route::post('verifier-code', [RegisteredUserController::class, 'verifier_code'])->name('user.inscription.verifier-code');
-Route::post('demandeur/update', [UserController::class,'update'])->name('demandeur.update');
+
+Route::put('demandeur/update', [UserController::class,'update'])->name('demandeur.update');
 
 require __DIR__.'/auth.php';
