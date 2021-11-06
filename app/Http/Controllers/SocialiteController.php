@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
+use App\Http\Controllers\User;
+
 
 class SocialiteController extends Controller
 {
@@ -31,7 +33,7 @@ class SocialiteController extends Controller
             $name = $data->getName(); // le nom
 
             # 1. On récupère l'utilisateur à partir de l'adresse email
-            $user = User::where("email", $email)->first();
+            $user = UserController::where("email", $email)->first();
 
             # 2. Si l'utilisateur existe
             if (isset($user)) {
