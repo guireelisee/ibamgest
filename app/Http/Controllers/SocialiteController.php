@@ -39,7 +39,7 @@ class SocialiteController extends Controller
                 $user->email = $data->getEmail();
                 $user->avatar = $data->getAvatar();
                 $user->role_id = 6;
-                return redirect()->route('demandeur.complete',compact('user'));
+                return redirect()->route('demandeur.complete')->with(['user'=>$user]);
             }
         } else {
             abort(404);

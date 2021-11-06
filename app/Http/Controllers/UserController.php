@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rules;
 
 class UserController extends Controller
@@ -130,7 +131,7 @@ class UserController extends Controller
     public function completeData(Request $request)
     {
         return view('auth.edit-demandeur',[
-            'user'=> $request->session()->get('user'),
+            'user' => Session::get('user'),
             'roles' => Role::all()
         ]);
     }
