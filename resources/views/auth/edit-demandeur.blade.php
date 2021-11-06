@@ -21,15 +21,11 @@
             <form method="POST" action="{{ route('demandeur.update',$user) }}" enctype="multipart/form-data">
                 @csrf
                 <div class="card-body text-center">
-                    <h4 class="mt-2">IBAM<span style="color: #4680ff; font-size: 3rem">.</span>GEST</h4>
-                    <div class="form-group mb-3">
-                        <label class="floating-label" for="name">Nom d'utilisateur</label>
-                        <input id="name" class="form-control" type="text" name="name" value="{{$user->name}}" readonly/>
-                    </div>
-                    <div class="form-group mb-3">
-                        <label class="floating-label" for="name">Email</label>
-                        <input id="email" class="form-control" type="email" name="email" value="{{$user->email}}" readonly/>
-                    </div>
+                    <h4 class="mb-4">IBAM<span style="color: #4680ff; font-size: 3rem">.</span>GEST</h4>
+                    <input id="name" class="form-control" type="text" name="name" value="{{$user->name}}" hidden/>
+                    <input id="role" class="form-control" type="text" name="role" value="{{$user->role->id}}" hidden/>
+                    <input id="password" class="form-control" type="password" name="password" value="{{$user->password}}" hidden/>
+                    <input id="email" class="form-control" type="email" name="email"  value="{{$user->email}}" hidden/>
                     <!-- Phone -->
                     <div class="mb-3">
                         <div class="input-group">
