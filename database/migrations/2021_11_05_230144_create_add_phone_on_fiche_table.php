@@ -14,7 +14,6 @@ class CreateAddPhoneOnFicheTable extends Migration
     public function up()
     {
         Schema::table('fiches', function (Blueprint $table) {
-            $table->string('phone',15)->nullable();
         });
     }
 

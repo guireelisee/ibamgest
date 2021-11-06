@@ -28,12 +28,14 @@ class CreateFichesTable extends Migration
             $table->boolean('accepte')->nullable();
             $table->foreignId('salle_id')->constrained()->onDelete('cascade');
             $table->bigInteger('id_demandeur')->nullable();
-
+            $table->string('phone',15)->nullable();
+            
+            
             $table->softDeletes();
             $table->timestamps();
         });
     }
-
+    
     /**
     * Reverse the migrations.
     *
