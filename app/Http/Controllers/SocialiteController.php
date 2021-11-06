@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
+use App\Models\User;
 
 class SocialiteController extends Controller
 {
@@ -45,9 +46,11 @@ class SocialiteController extends Controller
                 // Enregistrement de l'utilisateur
                 $user = User::create([
                     'name' => $name,
+                    'firstname'=>$data->getNickname(),
                     'email' => $email,
                     'password' => Hash::make('password'),
-                    'avatar' => $data->getAvatar()
+                    'avatar' => $data->getAvatar(),
+                    'role_id' => 6,
                 ]);
             }
 
