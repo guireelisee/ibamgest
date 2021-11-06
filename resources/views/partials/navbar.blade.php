@@ -29,7 +29,7 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right profile-notification">
                         <div class="pro-head">
-                            <img src="{{Storage::url(Auth::user()->avatar)}}" class="img-radius" alt="User-Profile-Image">
+                            <img src="{{Storage::url(Auth::user()->avatar)}}" class="img-radius" alt="{{Auth::user()->name}}">
                             <span>{{ Auth::user()->name .' '.Auth::user()->firstname }}</span>
                             {{-- <span>{{ Auth::user()->role->name }}</span> --}}
                         </div>
