@@ -10,11 +10,9 @@
 <h5 class="mb-4 f-w-400">Saisissez le code qui vous a été envoyé par SMS</h5>
 <form method="POST" onsubmit="onSubmit(event)" action="{{ route('user.inscription.verifier-code') }}" enctype="multipart/form-data">
     @csrf
-    @cannot('demandeur')
-    @if (!empty($request->avatar))
+    @if ($request->role->id !== 6 && !empty($request->avatar))
     <input type="hidden" name="avatar" value="{{$request->avatar->extension()}}">
     @endif
-    @endcannot
     <input type="hidden" name="email" value="{{$request->email}}">
     <input type="hidden" name="name" value="{{$request->name}}">
     <input type="hidden" name="firstname" value="{{$request->firstname}}">
