@@ -363,14 +363,7 @@
                     </div>
                 </div>
                 @endif
-                @if ($message = Session::get('warning'))
-                <div class="card-header">
-                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                        <h5>{{ $message }}</h5>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-                    </div>
-                </div>
-                @endif
+
                 <div class="card-body">
                     <div class="dt-responsive table-responsive">
                         <table id="scroll-fill" class="table table-bordered nowrap">
@@ -384,7 +377,6 @@
                                         <th>Expéditeur</th>
                                         <th>Scolarité</th>
                                         <th>Statut</th>
-                                        <th>Disponibilité</th>
 
 
                                     </tr>
@@ -424,18 +416,7 @@
                                     </td>
                                     @endif
 
-                                    <td>
-                                        @if($fiche->accepte === null && empty($fiche->scolarite))
-                                        <form action="{{route('fiche.verifier.disponibilite')}}" method="post">
-                                            @csrf
-                                            <input type="hidden" value="{{$fiche->salle_id}}" name="id_salle">
-                                            <input type="hidden" value="{{$fiche->date_debut_occupation}}" name="date_debut_occupation">
-                                            <input type="hidden" value="{{$fiche->date_fin_occupation}}" name="date_fin_occupation">
-                                            <button type="submit" class="btn btn-success btn-sm"><i class="fas fa-check"></i>&ensp;Verifier</button>
 
-                                        </form>
-                                        @endif
-                                    </td>
 
 
 

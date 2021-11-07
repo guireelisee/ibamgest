@@ -47,6 +47,14 @@
                         </div>
                     </div>
                     @endif
+                    @if ($message = Session::get('error'))
+                    <div class="card-header">
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <h5>{{ $message }}</h5>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                        </div>
+                    </div>
+                    @endif
                     <div class="card-body">
                         <form method="POST" action="{{ route('fiche.store') }}">
                             @csrf

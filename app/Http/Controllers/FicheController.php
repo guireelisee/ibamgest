@@ -66,19 +66,23 @@ class FicheController extends Controller
 
             ]);
 
-            Fiche::create([
-                'nom_exp' => Auth::user()->name,
-                'prenom_exp' => Auth::user()->firstname,
-                'id_demandeur' => Auth::user()->id,
-                'phone' => Auth::user()->phone,
-                'salle_id' => $request->salle,
-                'motif' => $request->motif,
-                'date_arrivee' => $request->date_arrivee,
-                'date_debut_occupation' => $request->date_debut_occupation,
-                'date_fin_occupation' => $request->date_fin_occupation,
-            ]);
+            if ($this->verifier_disponibilite($request) === 0) {
+                return redirect()->route('fiche.auth.create')->with('error','La salle demandée est indisponible dans cette période !');
+            }else {
+                Fiche::create([
+                    'nom_exp' => Auth::user()->name,
+                    'prenom_exp' => Auth::user()->firstname,
+                    'id_demandeur' => Auth::user()->id,
+                    'phone' => Auth::user()->phone,
+                    'salle_id' => $request->salle,
+                    'motif' => $request->motif,
+                    'date_arrivee' => $request->date_arrivee,
+                    'date_debut_occupation' => $request->date_debut_occupation,
+                    'date_fin_occupation' => $request->date_fin_occupation,
+                ]);
 
-            return redirect()->route('fiche.index')->with('success', 'Demande de salle enregistrée avec succès.');
+                return redirect()->route('fiche.index')->with('success', 'Demande de salle enregistrée avec succès.');
+            }
 
         } else {
             $request->validate([
@@ -91,17 +95,23 @@ class FicheController extends Controller
                 'date_debut_occupation' => 'required',
                 'date_fin_occupation' => 'required',
             ]);
-            Fiche::create([
-                'nom_exp' => $request->nom_exp,
-                'prenom_exp' => $request->prenom_exp,
-                'salle_id' => $request->salle,
-                'motif' => $request->motif,
-                'phone' => $request->phone,
-                'date_arrivee' => $request->date_arrivee,
-                'date_debut_occupation' => $request->date_debut_occupation,
-                'date_fin_occupation' => $request->date_fin_occupation,
-            ]);
-            return redirect()->route('fiche.index')->with('success', 'Demande de salle enregistrée avec succès.');
+
+            if ($this->verifier_disponibilite($request) === 0) {
+                return redirect()->route('fiche.create')->with('error','La salle demandée est indisponible dans cette période !');
+            }else {
+                Fiche::create([
+                    'nom_exp' => $request->nom_exp,
+                    'prenom_exp' => $request->prenom_exp,
+                    'salle_id' => $request->salle,
+                    'motif' => $request->motif,
+                    'phone' => $request->phone,
+                    'date_arrivee' => $request->date_arrivee,
+                    'date_debut_occupation' => $request->date_debut_occupation,
+                    'date_fin_occupation' => $request->date_fin_occupation,
+                ]);
+                return redirect()->route('fiche.index')->with('success', 'Demande de salle enregistrée avec succès.');
+            }
+
         }
 
     }
@@ -119,14 +129,14 @@ class FicheController extends Controller
 
     public function verifier_disponibilite(Request $request)
     {
-        $id_salle = $request->id_salle;
+        $id_salle = $request->salle;
         $fiche = Fiche::where('accepte', '=', true)->where('salle_id', '=', $id_salle)
         ->where('date_fin_occupation', '>=', $request->date_debut_occupation)
         ->get();
         if ($fiche->count() === 0) {
-            return redirect()->route('fiche.index')->with('success','La salle est disponible dans cette période !');
+            return 1;
         } else {
-            return redirect()->route('fiche.index')->with('warning','La salle est indisponible dans cette période !');
+            return 0;
 
         }
 
